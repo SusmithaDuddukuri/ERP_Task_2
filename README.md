@@ -1,28 +1,38 @@
 # ForgeERP
 
-Small internal-style ERP demo: inventory, purchase orders, employees.
+Enterprise resource planning demo covering inventory, purchase orders, employees, and supporting domain engines.
 
 ## Features
 
-- Dashboard with KPIs (clickable) and low-stock list
-- Inventory receive / issue by warehouse + search/filter
-- Purchase order create → advance workflow → receive (updates stock)
-- Employee directory with add / edit / delete
+- Dashboard KPIs and low-stock alerts
+- Inventory receive / issue by warehouse
+- Purchase order create / advance / cancel (receipt updates stock)
+- Employee directory CRUD
+- Domain models, calculation engines, services, and UI widgets
 - Search, toasts, confirm dialogs, localStorage persistence
-- Mobile-friendly sidebar
 
-## Setup
+## Install
 
 ```bash
 npm install
+```
+
+Requires Node.js 18+.
+
+## Run
+
+```bash
 npm run dev
 ```
 
-Open the URL Vite prints (usually http://localhost:5173).
+Open the URL printed by Vite (typically http://localhost:5173).
 
-## Reset
+## Build
 
-Use **Reset demo data** at the bottom of the sidebar to restore seed data and clear local changes.
+```bash
+npm run build
+npm run preview
+```
 
 ## Test
 
@@ -30,6 +40,10 @@ Use **Reset demo data** at the bottom of the sidebar to restore seed data and cl
 npm test
 ```
 
-## Notes
+## Reset demo data
 
-Demo data is intentionally small and realistic. Changes are stored in the browser's localStorage only.
+Use **Reset demo data** at the bottom of the sidebar to restore seed data and clear local changes.
+
+## License
+
+Proprietary — see `LICENSE`.
