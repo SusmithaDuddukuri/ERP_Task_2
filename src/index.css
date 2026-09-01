@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply text-slate-200 font-sans antialiased;
+  background: #0c0f14;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0c0f14; }
+::-webkit-scrollbar-thumb { background: #2a3344; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #3b4659; }
+
+.panel {
+  background: #12161e;
+  border: 1px solid #1e2633;
+}
+
+.btn-primary {
+  @apply px-3.5 py-2 rounded-lg text-sm font-medium text-white transition-colors;
+  background: #e85d04;
+}
+.btn-primary:hover { background: #f48c06; }
+.btn-primary:active { background: #d00000; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-ghost {
+  @apply px-3 py-1.5 rounded-lg text-sm text-slate-300 border border-slate-700/80 bg-slate-800/50 transition-colors;
+}
+.btn-ghost:hover { @apply bg-slate-700/70 text-white border-slate-600; }
+.btn-ghost:active { @apply bg-slate-600; }
+
+.btn-danger {
+  @apply px-3 py-1.5 rounded-lg text-sm text-rose-300 border border-rose-900/60 bg-rose-950/40 transition-colors;
+}
+.btn-danger:hover { @apply bg-rose-900/50 text-rose-200; }
+
+.input-field {
+  @apply w-full rounded-lg bg-[#0a0d12] border border-slate-700 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500;
+}
+.input-field:focus {
+  outline: none;
+  border-color: #e85d04;
+  box-shadow: 0 0 0 2px rgba(232, 93, 4, 0.25);
+}
+
+.status-pill {
+  @apply text-[11px] px-2 py-0.5 rounded font-medium tracking-wide;
+}
+
+.nav-item {
+  @apply w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-slate-400 transition-colors;
+}
+.nav-item:hover { @apply bg-slate-800/80 text-slate-200; }
+.nav-item.active {
+  @apply bg-orange-950/50 text-orange-300 border border-orange-800/40;
+}
+
+.kpi-card {
+  @apply panel rounded-xl p-4 cursor-pointer transition-colors;
+}
+.kpi-card:hover { border-color: #334155; background: #161b25; }
+
+table.data-table th {
+  @apply text-left text-xs font-medium uppercase tracking-wider text-slate-500 px-3 py-2.5 bg-[#0e1219];
+}
+table.data-table td {
+  @apply px-3 py-2.5 border-t border-slate-800/80 text-sm;
+}
+table.data-table tr:hover td {
+  background: rgba(30, 38, 51, 0.4);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.fade-in { animation: fadeIn 0.2s ease both; }
+
+.modal-backdrop {
+  background: rgba(0, 0, 0, 0.65);
+}
