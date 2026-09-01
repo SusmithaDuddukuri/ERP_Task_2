@@ -1,14 +1,23 @@
 # ForgeERP
 
-Enterprise resource planning demo covering inventory, purchase orders, employees, and supporting domain engines.
+Multi-role ERP demo: admin & employee logins, products, inventory, purchase orders, shipping, employees.
+
+## Demo logins
+
+| Username   | Password   | Role     | Access                                      |
+|------------|------------|----------|---------------------------------------------|
+| `admin`    | `admin`    | Admin    | Full (products, HR, reset, all modules)     |
+| `employee` | `employee` | Employee | Dashboard, inventory, POs, shipping         |
+| `buyer`    | `buyer`    | Employee | Same as employee                            |
 
 ## Features
 
-- Dashboard KPIs and low-stock alerts
-- Inventory receive / issue by warehouse
-- Purchase order create / advance / cancel (receipt updates stock)
-- Employee directory CRUD
-- Domain models, calculation engines, services, and UI widgets
+- Role-based login and navigation
+- **Products** (admin): add / edit / delete
+- **Inventory**: receive / issue, warehouse filter, low-stock alerts
+- **Purchase orders**: create, edit (draft), advance workflow, cancel, receive → stock
+- **Shipping**: create, edit, advance (Pending → Picked → In Transit → Delivered), cancel
+- **Employees** (admin): add / edit / delete
 - Search, toasts, confirm dialogs, localStorage persistence
 
 ## Install
@@ -25,7 +34,7 @@ Requires Node.js 18+.
 npm run dev
 ```
 
-Open the URL printed by Vite (typically http://localhost:5173).
+Or: `npx vite` — then open http://localhost:3000/
 
 ## Build
 
@@ -40,9 +49,9 @@ npm run preview
 npm test
 ```
 
-## Reset demo data
+## Reset
 
-Use **Reset demo data** at the bottom of the sidebar to restore seed data and clear local changes.
+As **admin**, use **Reset demo data** in the sidebar (or clear site data for localhost).
 
 ## License
 
