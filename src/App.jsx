@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import {
   LayoutDashboard, Package, ShoppingCart, Users, Search, Menu, Bell, Plus,
   X, Warehouse, AlertTriangle, ChevronRight, Trash2, Pencil, Check, LogOut,
@@ -57,7 +57,7 @@ const NAV_GROUPS = [
   ]},
   { label: 'System', items: [
     { id: 'notifications', label: 'Notifications', icon: Bell, module: 'notifications' },
-    { id: 'admin', label: 'Administration', icon: Settings, module: 'dashboard' },
+    { id: 'admin', label: 'Administration', icon: Settings, module: 'admin' },
   ]},
 ];
 
@@ -177,6 +177,7 @@ function EmptyState({ message, actionLabel, onAction }) {
 export default function App() {
   const [user, setUser] = useState(() => loadSession());
   const [view, setView] = useState('dashboard');
+  const mainRef = useRef(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileNav, setMobileNav] = useState(false);
   const [query, setQuery] = useState('');
@@ -263,7 +264,11 @@ export default function App() {
   useEffect(() => { saveDoc(documents); }, [documents]);
   useEffect(() => { saveUsers(users); }, [users]);
   useEffect(() => { saveLh(loginHistory); }, [loginHistory]);
-  useEffect(() => { setMobileNav(false); }, [view]);
+  useEffect(() => {
+    setMobileNav(false);
+    if (mainRef.current) mainRef.current.scrollTop = 0;
+    window.scrollTo(0, 0);
+  }, [view]);
 
   // Ctrl+K command palette
   useEffect(() => {
@@ -368,12 +373,22 @@ export default function App() {
 
   const go = (id) => {
     const item = NAV_GROUPS.flatMap((g) => g.items).find((i) => i.id === id);
-    if (item && !canAccessModule(role, item.module) && !admin) {
+    if (item && !admin && !canAccessModule(role, item.module)) {
       toast('Access denied', 'Your role cannot open this module');
+      return;
+    }
+    // Administration is admin-only
+    if (id === 'admin' && !admin) {
+      toast('Access denied', 'Administration requires an administrator role');
       return;
     }
     setView(id);
     setQuery('');
+    // ensure content visible immediately
+    requestAnimationFrame(() => {
+      if (mainRef.current) mainRef.current.scrollTop = 0;
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    });
   };
 
   const receiveStock = (row, amount = 10) => {
@@ -648,7 +663,10 @@ export default function App() {
 
   const visibleNav = NAV_GROUPS.map((g) => ({
     ...g,
-    items: g.items.filter((i) => admin || canAccessModule(role, i.module)),
+    items: g.items.filter((i) => {
+      if (i.id === 'admin') return admin;
+      return admin || canAccessModule(role, i.module);
+    }),
   })).filter((g) => g.items.length);
 
   const SidebarContent = ({ compact }) => (
@@ -692,8 +710,8 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen flex text-slate-200">
-      <aside className={`hidden md:flex ${sidebarOpen ? 'w-56' : 'w-14'} shrink-0 border-r border-slate-800 bg-[#0e1219] flex-col transition-all duration-200`}>
+    <div className="h-screen min-h-0 flex text-slate-200 overflow-hidden">
+      <aside className={`hidden md:flex ${sidebarOpen ? 'w-56' : 'w-14'} shrink-0 border-r border-slate-800 bg-[#0e1219] flex-col transition-all duration-200 min-h-0 h-full`}>
         <SidebarContent compact={!sidebarOpen} />
       </aside>
       {mobileNav && (
@@ -705,7 +723,7 @@ export default function App() {
         </div>
       )}
 
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 min-h-0 overflow-hidden">
         <header className="h-14 border-b border-slate-800 flex items-center gap-2 px-3 bg-[#0e1219] sticky top-0 z-20">
           <button type="button" onClick={() => window.innerWidth < 768 ? setMobileNav((v) => !v) : setSidebarOpen((v) => !v)} className="p-2 rounded-lg hover:bg-slate-800 text-slate-400" aria-label="Menu">
             <Menu className="w-5 h-5" />
@@ -724,7 +742,7 @@ export default function App() {
           </button>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-4 md:p-5">
+        <main ref={mainRef} className="flex-1 min-h-0 overflow-y-auto p-4 md:p-5">
           {view === 'dashboard' && (
             <div className="space-y-5 fade-in">
               <div>
@@ -1224,6 +1242,21 @@ export default function App() {
               </div>
             </div>
           )}
+
+          {/* Fallback if view has no panel */}
+          {!['dashboard','executive','leads','opportunities','customers','suppliers','products','inventory','orders','shipping','projects','tickets','contracts','approvals','documents','hr','notifications','admin'].includes(view) && (
+            <div className="fade-in p-8 text-center">
+              <p className="text-slate-400">This section is not available.</p>
+              <button type="button" className="btn-primary mt-4" onClick={() => go('dashboard')}>Back to dashboard</button>
+            </div>
+          )}
+          {view === 'admin' && !admin && (
+            <div className="fade-in p-8 text-center">
+              <p className="text-slate-400">Administration requires an administrator role.</p>
+              <button type="button" className="btn-primary mt-4" onClick={() => go('dashboard')}>Back to dashboard</button>
+            </div>
+          )}
+
         </main>
       </div>
 

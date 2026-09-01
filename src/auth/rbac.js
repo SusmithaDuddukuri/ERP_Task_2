@@ -5,6 +5,7 @@ import { ROLES } from '../data/seed.js';
 const MODULE_ACCESS = {
   super_admin: ['*'],
   administrator: ['*'],
+  // admin UI is covered by * above
   manager: ['dashboard', 'crm', 'customers', 'products', 'inventory', 'orders', 'shipping', 'suppliers', 'projects', 'tickets', 'contracts', 'approvals', 'documents', 'notifications', 'hr', 'reports'],
   sales: ['dashboard', 'crm', 'customers', 'products', 'orders', 'notifications', 'documents'],
   procurement: ['dashboard', 'suppliers', 'orders', 'products', 'inventory', 'shipping', 'approvals', 'notifications', 'documents'],
