@@ -403,27 +403,27 @@ export default function App() {
             <Menu className="w-5 h-5" />
           </button>
 
-          <div className="flex-1 max-w-md relative">
-            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
+          <div className="flex-1 max-w-sm relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none z-10" />
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={
                 view === 'inventory'
-                  ? 'Search SKU or product…'
+                  ? 'SKU or product'
                   : view === 'orders'
-                  ? 'Search PO or supplier…'
+                  ? 'PO or supplier'
                   : view === 'hr'
-                  ? 'Search name or dept…'
-                  : 'Search…'
+                  ? 'Name or dept'
+                  : 'Search'
               }
-              className="input-field pl-8 pr-8 py-1.5"
+              className="w-full rounded-lg bg-[#0a0d12] border border-slate-700 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500 py-1.5 pl-10 pr-9"
             />
             {query && (
               <button
                 type="button"
                 onClick={() => setQuery('')}
-                className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white z-10"
                 aria-label="Clear search"
               >
                 <X className="w-3.5 h-3.5" />
