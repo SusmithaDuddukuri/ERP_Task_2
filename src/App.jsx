@@ -1,52 +1,68 @@
-import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import {
   LayoutDashboard, Package, ShoppingCart, Users, Search, Menu, Bell, Plus,
-  X, Warehouse, AlertTriangle, ChevronRight, Trash2, Pencil, Check,
-  LogOut, Truck, Box, Shield, User
+  X, Warehouse, AlertTriangle, ChevronRight, Trash2, Pencil, Check, LogOut,
+  Truck, Box, Shield, User, Building2, Handshake, FolderKanban, Headset,
+  FileText, CheckSquare, Settings, Globe, Command, Briefcase, Factory
 } from 'lucide-react';
 import {
   SEED_PRODUCTS, SEED_INVENTORY, SEED_SUPPLIERS, SEED_POS, SEED_EMPLOYEES,
-  SEED_USERS, SEED_SHIPMENTS, WAREHOUSES, PO_STATUS, SHIP_STATUS, DEPTS, CATEGORIES
+  SEED_USERS, SEED_SHIPMENTS, SEED_CUSTOMERS, SEED_LEADS, SEED_OPPORTUNITIES,
+  SEED_ACTIVITIES, SEED_PROJECTS, SEED_TASKS, SEED_TICKETS, SEED_CONTRACTS,
+  SEED_APPROVALS, SEED_NOTIFICATIONS, SEED_DOCUMENTS, SEED_LOGIN_HISTORY,
+  WAREHOUSES, PO_STATUS, SHIP_STATUS, DEPTS, CATEGORIES, LEAD_STATUS, OPP_STAGES,
+  TICKET_STATUS, PROJECT_STATUS, TASK_STATUS, CONTRACT_STATUS, APPROVAL_STATUS, ROLES
 } from './data/seed';
 import {
-  loadInv, saveInv, loadPo, savePo, loadEmp, saveEmp,
-  loadPrd, savePrd, loadShp, saveShp, loadSession, saveSession, clearSession, clearAllDemo
+  loadInv, saveInv, loadPo, savePo, loadEmp, saveEmp, loadPrd, savePrd,
+  loadShp, saveShp, loadCus, saveCus, loadSup, saveSup, loadLead, saveLead,
+  loadOpp, saveOpp, loadAct, saveAct, loadPrj, savePrj, loadTsk, saveTsk,
+  loadTkt, saveTkt, loadCtr, saveCtr, loadApr, saveApr, loadNtf, saveNtf,
+  loadDoc, saveDoc, loadUsers, saveUsers, loadLh, saveLh,
+  loadSession, saveSession, clearSession, clearAllData
 } from './utils/storage';
 import { formatMoney, formatDate, uid } from './utils/formatters';
 import { availableQty, adjustStock, lowStock } from './engine/inventoryEngine';
 import { nextPoStatus, advancePo, poTotal } from './engine/purchaseEngine';
+import { canAccessModule, canPerform, isAdminRole } from './auth/rbac';
 
-const ADMIN_NAV = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { id: 'products', label: 'Products', icon: Box },
-  { id: 'inventory', label: 'Inventory', icon: Package },
-  { id: 'orders', label: 'Purchase Orders', icon: ShoppingCart },
-  { id: 'shipping', label: 'Shipping', icon: Truck },
-  { id: 'hr', label: 'Employees', icon: Users },
+const NAV_GROUPS = [
+  { label: 'Overview', items: [
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, module: 'dashboard' },
+    { id: 'executive', label: 'Executive', icon: Briefcase, module: 'reports' },
+  ]},
+  { label: 'CRM & Sales', items: [
+    { id: 'leads', label: 'Leads', icon: Handshake, module: 'crm' },
+    { id: 'opportunities', label: 'Opportunities', icon: FolderKanban, module: 'crm' },
+    { id: 'customers', label: 'Customers', icon: Building2, module: 'customers' },
+  ]},
+  { label: 'Catalog & Stock', items: [
+    { id: 'products', label: 'Products', icon: Box, module: 'products' },
+    { id: 'inventory', label: 'Inventory', icon: Package, module: 'inventory' },
+  ]},
+  { label: 'Supply Chain', items: [
+    { id: 'orders', label: 'Purchase Orders', icon: ShoppingCart, module: 'orders' },
+    { id: 'suppliers', label: 'Suppliers', icon: Factory, module: 'suppliers' },
+    { id: 'shipping', label: 'Shipping', icon: Truck, module: 'shipping' },
+  ]},
+  { label: 'Operations', items: [
+    { id: 'projects', label: 'Projects', icon: FolderKanban, module: 'projects' },
+    { id: 'tickets', label: 'Service Desk', icon: Headset, module: 'tickets' },
+    { id: 'contracts', label: 'Contracts', icon: FileText, module: 'contracts' },
+    { id: 'approvals', label: 'Approvals', icon: CheckSquare, module: 'approvals' },
+    { id: 'documents', label: 'Documents', icon: FileText, module: 'documents' },
+  ]},
+  { label: 'People', items: [
+    { id: 'hr', label: 'Employees', icon: Users, module: 'hr' },
+  ]},
+  { label: 'System', items: [
+    { id: 'notifications', label: 'Notifications', icon: Bell, module: 'notifications' },
+    { id: 'admin', label: 'Administration', icon: Settings, module: 'dashboard' },
+  ]},
 ];
 
-const EMP_NAV = [
-  { id: 'dashboard', label: 'My Dashboard', icon: LayoutDashboard },
-  { id: 'inventory', label: 'Inventory', icon: Package },
-  { id: 'orders', label: 'Purchase Orders', icon: ShoppingCart },
-  { id: 'shipping', label: 'Shipping', icon: Truck },
-];
-
-const poColor = {
-  Draft: 'bg-slate-700/60 text-slate-300',
-  Submitted: 'bg-blue-900/50 text-blue-300',
-  Approved: 'bg-amber-900/40 text-amber-300',
-  Received: 'bg-emerald-900/40 text-emerald-300',
-  Cancelled: 'bg-rose-900/40 text-rose-300',
-};
-
-const shipColor = {
-  Pending: 'bg-slate-700/60 text-slate-300',
-  Picked: 'bg-blue-900/50 text-blue-300',
-  'In Transit': 'bg-amber-900/40 text-amber-300',
-  Delivered: 'bg-emerald-900/40 text-emerald-300',
-  Cancelled: 'bg-rose-900/40 text-rose-300',
-};
+const poColor = { Draft: 'bg-slate-700/60 text-slate-300', Submitted: 'bg-blue-900/50 text-blue-300', Approved: 'bg-amber-900/40 text-amber-300', Received: 'bg-emerald-900/40 text-emerald-300', Cancelled: 'bg-rose-900/40 text-rose-300' };
+const shipColor = { Pending: 'bg-slate-700/60 text-slate-300', Picked: 'bg-blue-900/50 text-blue-300', 'In Transit': 'bg-amber-900/40 text-amber-300', Delivered: 'bg-emerald-900/40 text-emerald-300', Cancelled: 'bg-rose-900/40 text-rose-300' };
 
 function Toast({ toasts, onDismiss }) {
   if (!toasts.length) return null;
@@ -58,9 +74,7 @@ function Toast({ toasts, onDismiss }) {
             <p className="text-sm font-medium text-white">{t.title}</p>
             {t.message && <p className="text-xs text-slate-400 mt-0.5 truncate">{t.message}</p>}
           </div>
-          <button type="button" onClick={() => onDismiss(t.id)} className="text-slate-500 hover:text-white shrink-0" aria-label="Dismiss">
-            <X className="w-4 h-4" />
-          </button>
+          <button type="button" onClick={() => onDismiss(t.id)} className="text-slate-500 hover:text-white shrink-0"><X className="w-4 h-4" /></button>
         </div>
       ))}
     </div>
@@ -74,21 +88,13 @@ function Modal({ open, onClose, title, children, wide }) {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [open, onClose]);
-
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop" onClick={onClose}>
-      <div
-        role="dialog"
-        aria-modal="true"
-        className={`relative panel rounded-xl w-full ${wide ? 'max-w-xl' : 'max-w-md'} max-h-[90vh] overflow-y-auto shadow-2xl fade-in`}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div role="dialog" aria-modal="true" className={`relative panel rounded-xl w-full ${wide ? 'max-w-xl' : 'max-w-md'} max-h-[90vh] overflow-y-auto shadow-2xl fade-in`} onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800">
           <h2 className="font-semibold text-white text-base">{title}</h2>
-          <button type="button" onClick={onClose} className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400" aria-label="Close">
-            <X className="w-4 h-4" />
-          </button>
+          <button type="button" onClick={onClose} className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400" aria-label="Close"><X className="w-4 h-4" /></button>
         </div>
         <div className="p-4">{children}</div>
       </div>
@@ -110,19 +116,21 @@ function ConfirmDialog({ open, title, message, onConfirm, onCancel }) {
 }
 
 function LoginScreen({ onLogin, toast }) {
-  const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('admin');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [remember, setRemember] = useState(true);
 
   const submit = (e) => {
     e.preventDefault();
-    const user = SEED_USERS.find(
-      (u) => u.username === username.trim().toLowerCase() && u.password === password
-    );
+    const users = loadUsers() || SEED_USERS;
+    const user = users.find((u) => u.username === username.trim().toLowerCase() && u.password === password && u.status !== 'Inactive');
     if (!user) {
-      toast('Login failed', 'Invalid username or password');
+      toast('Sign in failed', 'Invalid credentials or inactive account');
+      const lh = loadLh() || SEED_LOGIN_HISTORY;
+      saveLh([{ id: uid('lh'), username: username.trim(), at: new Date().toISOString(), success: false, ip: 'local' }, ...lh].slice(0, 50));
       return;
     }
-    onLogin(user);
+    onLogin(user, remember);
   };
 
   return (
@@ -132,27 +140,36 @@ function LoginScreen({ onLogin, toast }) {
           <div className="w-10 h-10 rounded-lg bg-orange-600 flex items-center justify-center font-bold text-white">F</div>
           <div>
             <div className="font-semibold text-white">ForgeERP</div>
-            <div className="text-xs text-slate-500">Sign in to continue</div>
+            <div className="text-xs text-slate-500">Enterprise Resource Planning</div>
           </div>
         </div>
         <form onSubmit={submit} className="space-y-3">
           <div>
             <label className="block text-xs text-slate-400 mb-1">Username</label>
-            <input className="input-field" value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="username" />
+            <input className="input-field" value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="username" autoFocus required />
           </div>
           <div>
             <label className="block text-xs text-slate-400 mb-1">Password</label>
-            <input type="password" className="input-field" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" />
+            <input type="password" className="input-field" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" required />
           </div>
-          <button type="submit" className="btn-primary w-full mt-2">Sign in</button>
+          <label className="flex items-center gap-2 text-xs text-slate-400 cursor-pointer">
+            <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="rounded border-slate-600" />
+            Remember me
+          </label>
+          <button type="submit" className="btn-primary w-full mt-1">Sign in</button>
         </form>
-        <div className="mt-5 pt-4 border-t border-slate-800 text-xs text-slate-500 space-y-1">
-          <p className="font-medium text-slate-400">Demo accounts</p>
-          <p><span className="text-orange-400">admin</span> / admin — full access</p>
-          <p><span className="text-orange-400">employee</span> / employee — limited</p>
-          <p><span className="text-orange-400">buyer</span> / buyer — limited</p>
-        </div>
       </div>
+    </div>
+  );
+}
+
+function EmptyState({ message, actionLabel, onAction }) {
+  return (
+    <div className="p-12 text-center">
+      <p className="text-sm text-slate-500 mb-3">{message}</p>
+      {actionLabel && onAction && (
+        <button type="button" onClick={onAction} className="btn-primary inline-flex items-center gap-1.5"><Plus className="w-4 h-4" /> {actionLabel}</button>
+      )}
     </div>
   );
 }
@@ -164,37 +181,115 @@ export default function App() {
   const [mobileNav, setMobileNav] = useState(false);
   const [query, setQuery] = useState('');
   const [toasts, setToasts] = useState([]);
+  const [cmdOpen, setCmdOpen] = useState(false);
+  const [cmdQuery, setCmdQuery] = useState('');
+  const [confirm, setConfirm] = useState(null);
+  const [ntfOpen, setNtfOpen] = useState(false);
+
   const [whFilter, setWhFilter] = useState('All');
   const [poFilter, setPoFilter] = useState('All');
   const [shipFilter, setShipFilter] = useState('All');
+  const [leadFilter, setLeadFilter] = useState('All');
+  const [ticketFilter, setTicketFilter] = useState('All');
 
-  const suppliers = SEED_SUPPLIERS;
+  // entity state
   const [products, setProducts] = useState(() => loadPrd() || SEED_PRODUCTS);
   const [inventory, setInventory] = useState(() => loadInv() || SEED_INVENTORY);
   const [purchaseOrders, setPurchaseOrders] = useState(() => loadPo() || SEED_POS);
   const [employees, setEmployees] = useState(() => loadEmp() || SEED_EMPLOYEES);
   const [shipments, setShipments] = useState(() => loadShp() || SEED_SHIPMENTS);
+  const [customers, setCustomers] = useState(() => loadCus() || SEED_CUSTOMERS);
+  const [suppliers, setSuppliers] = useState(() => loadSup() || SEED_SUPPLIERS);
+  const [leads, setLeads] = useState(() => loadLead() || SEED_LEADS);
+  const [opportunities, setOpportunities] = useState(() => loadOpp() || SEED_OPPORTUNITIES);
+  const [activities, setActivities] = useState(() => loadAct() || SEED_ACTIVITIES);
+  const [projects, setProjects] = useState(() => loadPrj() || SEED_PROJECTS);
+  const [tasks, setTasks] = useState(() => loadTsk() || SEED_TASKS);
+  const [tickets, setTickets] = useState(() => loadTkt() || SEED_TICKETS);
+  const [contracts, setContracts] = useState(() => loadCtr() || SEED_CONTRACTS);
+  const [approvals, setApprovals] = useState(() => loadApr() || SEED_APPROVALS);
+  const [notifications, setNotifications] = useState(() => loadNtf() || SEED_NOTIFICATIONS);
+  const [documents, setDocuments] = useState(() => loadDoc() || SEED_DOCUMENTS);
+  const [users, setUsers] = useState(() => loadUsers() || SEED_USERS);
+  const [loginHistory, setLoginHistory] = useState(() => loadLh() || SEED_LOGIN_HISTORY);
 
+  // modals
   const [poModal, setPoModal] = useState(null);
   const [empModal, setEmpModal] = useState(null);
   const [prdModal, setPrdModal] = useState(null);
   const [shipModal, setShipModal] = useState(null);
-  const [confirm, setConfirm] = useState(null);
+  const [cusModal, setCusModal] = useState(null);
+  const [supModal, setSupModal] = useState(null);
+  const [leadModal, setLeadModal] = useState(null);
+  const [oppModal, setOppModal] = useState(null);
+  const [tktModal, setTktModal] = useState(null);
+  const [prjModal, setPrjModal] = useState(null);
+  const [ctrModal, setCtrModal] = useState(null);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [pwdModal, setPwdModal] = useState(false);
+  const [pwdForm, setPwdForm] = useState({ current: '', next: '', confirm: '' });
 
   const [poForm, setPoForm] = useState({ supplierId: '', productId: '', qty: 10, unitCost: 10, notes: '' });
   const [empForm, setEmpForm] = useState({ name: '', department: 'Operations', role: '', email: '', status: 'Active' });
   const [prdForm, setPrdForm] = useState({ sku: '', name: '', category: 'Fasteners', unitCost: 1, price: 2, reorderAt: 10, active: true });
   const [shipForm, setShipForm] = useState({ poId: '', carrier: 'FedEx', tracking: '', status: 'Pending', shipDate: '', eta: '', destination: 'Main DC' });
+  const [cusForm, setCusForm] = useState({ name: '', company: '', email: '', phone: '', city: '', state: '', country: 'US', creditLimit: 10000, paymentTerms: 'Net 30', type: 'Wholesale', status: 'Active' });
+  const [supForm, setSupForm] = useState({ name: '', contact: '', email: '', phone: '', category: 'Components', rating: 4, status: 'Active', paymentTerms: 'Net 30' });
+  const [leadForm, setLeadForm] = useState({ name: '', company: '', email: '', phone: '', source: 'Website', industry: '', status: 'New', score: 50, value: 0, owner: '' });
+  const [oppForm, setOppForm] = useState({ name: '', customerId: '', stage: 'New', value: 0, probability: 20, closeDate: '', owner: '' });
+  const [tktForm, setTktForm] = useState({ subject: '', customerId: '', priority: 'Medium', status: 'Open', category: 'General' });
+  const [prjForm, setPrjForm] = useState({ name: '', status: 'Planning', budget: 0, start: '', end: '', owner: '' });
+  const [ctrForm, setCtrForm] = useState({ name: '', type: 'Customer', partyId: '', value: 0, start: '', end: '', renewal: '', status: 'Draft' });
 
-  const isAdmin = user?.role === 'admin';
-  const nav = isAdmin ? ADMIN_NAV : EMP_NAV;
+  const role = user?.role || 'viewer';
+  const admin = isAdminRole(role);
 
   useEffect(() => { saveInv(inventory); }, [inventory]);
   useEffect(() => { savePo(purchaseOrders); }, [purchaseOrders]);
   useEffect(() => { saveEmp(employees); }, [employees]);
   useEffect(() => { savePrd(products); }, [products]);
   useEffect(() => { saveShp(shipments); }, [shipments]);
+  useEffect(() => { saveCus(customers); }, [customers]);
+  useEffect(() => { saveSup(suppliers); }, [suppliers]);
+  useEffect(() => { saveLead(leads); }, [leads]);
+  useEffect(() => { saveOpp(opportunities); }, [opportunities]);
+  useEffect(() => { saveAct(activities); }, [activities]);
+  useEffect(() => { savePrj(projects); }, [projects]);
+  useEffect(() => { saveTsk(tasks); }, [tasks]);
+  useEffect(() => { saveTkt(tickets); }, [tickets]);
+  useEffect(() => { saveCtr(contracts); }, [contracts]);
+  useEffect(() => { saveApr(approvals); }, [approvals]);
+  useEffect(() => { saveNtf(notifications); }, [notifications]);
+  useEffect(() => { saveDoc(documents); }, [documents]);
+  useEffect(() => { saveUsers(users); }, [users]);
+  useEffect(() => { saveLh(loginHistory); }, [loginHistory]);
   useEffect(() => { setMobileNav(false); }, [view]);
+
+  // Ctrl+K command palette
+  useEffect(() => {
+    const onKey = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setCmdOpen(true);
+        setCmdQuery('');
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  // Session timeout 8h
+  useEffect(() => {
+    if (!user?.at) return;
+    const t = setInterval(() => {
+      if (Date.now() - (user.at || 0) > 8 * 60 * 60 * 1000) {
+        clearSession();
+        setUser(null);
+        toast('Session expired', 'Please sign in again');
+      }
+    }, 60000);
+    return () => clearInterval(t);
+  }, [user]);
 
   const toast = useCallback((title, message) => {
     const id = Date.now() + Math.random();
@@ -204,250 +299,286 @@ export default function App() {
 
   const productMap = useMemo(() => Object.fromEntries(products.map((p) => [p.id, p])), [products]);
   const supplierMap = useMemo(() => Object.fromEntries(suppliers.map((s) => [s.id, s])), [suppliers]);
+  const customerMap = useMemo(() => Object.fromEntries(customers.map((c) => [c.id, c])), [customers]);
 
   const low = useMemo(() => lowStock(inventory, products), [inventory, products]);
   const totalUnits = useMemo(() => inventory.reduce((s, r) => s + availableQty(r), 0), [inventory]);
   const openPos = useMemo(() => purchaseOrders.filter((p) => !['Received', 'Cancelled'].includes(p.status)).length, [purchaseOrders]);
   const openShips = useMemo(() => shipments.filter((s) => !['Delivered', 'Cancelled'].includes(s.status)).length, [shipments]);
+  const pendingApr = useMemo(() => approvals.filter((a) => a.status === 'Pending').length, [approvals]);
+  const unreadNtf = useMemo(() => notifications.filter((n) => !n.read).length, [notifications]);
+  const invValue = useMemo(() => inventory.reduce((s, r) => {
+    const p = productMap[r.productId];
+    return s + availableQty(r) * (p?.unitCost || 0);
+  }, 0), [inventory, productMap]);
 
+  const q = query.trim().toLowerCase();
   const filteredInv = useMemo(() => {
     let list = inventory;
     if (whFilter !== 'All') list = list.filter((r) => r.warehouse === whFilter);
-    if (query.trim()) {
-      const q = query.toLowerCase();
-      list = list.filter((r) => {
-        const p = productMap[r.productId];
-        return (p?.name || '').toLowerCase().includes(q) || (p?.sku || '').toLowerCase().includes(q) || r.warehouse.toLowerCase().includes(q);
-      });
-    }
+    if (q) list = list.filter((r) => {
+      const p = productMap[r.productId];
+      return (p?.name || '').toLowerCase().includes(q) || (p?.sku || '').toLowerCase().includes(q);
+    });
     return list;
-  }, [inventory, whFilter, query, productMap]);
-
+  }, [inventory, whFilter, q, productMap]);
   const filteredPos = useMemo(() => {
     let list = purchaseOrders;
     if (poFilter !== 'All') list = list.filter((p) => p.status === poFilter);
-    if (query.trim()) {
-      const q = query.toLowerCase();
-      list = list.filter((p) => (supplierMap[p.supplierId]?.name || '').toLowerCase().includes(q) || p.id.toLowerCase().includes(q));
-    }
+    if (q) list = list.filter((p) => (supplierMap[p.supplierId]?.name || '').toLowerCase().includes(q) || p.id.toLowerCase().includes(q));
     return list;
-  }, [purchaseOrders, poFilter, query, supplierMap]);
-
-  const filteredEmp = useMemo(() => {
-    if (!query.trim()) return employees;
-    const q = query.toLowerCase();
-    return employees.filter((e) => e.name.toLowerCase().includes(q) || e.department.toLowerCase().includes(q) || e.email.toLowerCase().includes(q) || e.role.toLowerCase().includes(q));
-  }, [employees, query]);
-
-  const filteredPrd = useMemo(() => {
-    if (!query.trim()) return products;
-    const q = query.toLowerCase();
-    return products.filter((p) => p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
-  }, [products, query]);
-
+  }, [purchaseOrders, poFilter, q, supplierMap]);
+  const filteredPrd = useMemo(() => !q ? products : products.filter((p) => p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q)), [products, q]);
+  const filteredEmp = useMemo(() => !q ? employees : employees.filter((e) => e.name.toLowerCase().includes(q) || e.email.toLowerCase().includes(q)), [employees, q]);
+  const filteredCus = useMemo(() => !q ? customers : customers.filter((c) => c.name.toLowerCase().includes(q) || (c.company || '').toLowerCase().includes(q) || (c.email || '').toLowerCase().includes(q)), [customers, q]);
+  const filteredSup = useMemo(() => !q ? suppliers : suppliers.filter((s) => s.name.toLowerCase().includes(q) || (s.contact || '').toLowerCase().includes(q)), [suppliers, q]);
+  const filteredLeads = useMemo(() => {
+    let list = leads;
+    if (leadFilter !== 'All') list = list.filter((l) => l.status === leadFilter);
+    if (q) list = list.filter((l) => l.name.toLowerCase().includes(q) || (l.company || '').toLowerCase().includes(q));
+    return list;
+  }, [leads, leadFilter, q]);
   const filteredShp = useMemo(() => {
     let list = shipments;
     if (shipFilter !== 'All') list = list.filter((s) => s.status === shipFilter);
-    if (query.trim()) {
-      const q = query.toLowerCase();
-      list = list.filter((s) => s.id.toLowerCase().includes(q) || (s.tracking || '').toLowerCase().includes(q) || (s.carrier || '').toLowerCase().includes(q));
-    }
+    if (q) list = list.filter((s) => s.id.toLowerCase().includes(q) || (s.tracking || '').toLowerCase().includes(q));
     return list;
-  }, [shipments, shipFilter, query]);
+  }, [shipments, shipFilter, q]);
+  const filteredTkt = useMemo(() => {
+    let list = tickets;
+    if (ticketFilter !== 'All') list = list.filter((t) => t.status === ticketFilter);
+    if (q) list = list.filter((t) => (t.subject || '').toLowerCase().includes(q) || t.id.toLowerCase().includes(q));
+    return list;
+  }, [tickets, ticketFilter, q]);
 
-  const handleLogin = (u) => {
-    const session = { id: u.id, username: u.username, name: u.name, role: u.role, email: u.email };
+  const handleLogin = (u, remember) => {
+    const session = { id: u.id, username: u.username, name: u.name, role: u.role, email: u.email, at: Date.now() };
     setUser(session);
-    saveSession(session);
+    if (remember) saveSession(session);
+    else saveSession(session);
+    setLoginHistory((h) => [{ id: uid('lh'), username: u.username, at: new Date().toISOString(), success: true, ip: 'local' }, ...h].slice(0, 50));
     setView('dashboard');
-    toast('Welcome', `${u.name} (${u.role})`);
+    toast('Welcome', u.name);
   };
-
   const handleLogout = () => {
     clearSession();
     setUser(null);
-    setView('dashboard');
-    toast('Signed out', 'See you later');
+    toast('Signed out', '');
+  };
+
+  const go = (id) => {
+    const item = NAV_GROUPS.flatMap((g) => g.items).find((i) => i.id === id);
+    if (item && !canAccessModule(role, item.module) && !admin) {
+      toast('Access denied', 'Your role cannot open this module');
+      return;
+    }
+    setView(id);
+    setQuery('');
   };
 
   const receiveStock = (row, amount = 10) => {
     setInventory((inv) => adjustStock(inv, row.id, amount));
-    toast('Stock received', `+${amount} · ${productMap[row.productId]?.name || row.productId}`);
+    toast('Stock received', `+${amount}`);
   };
-
   const issueStock = (row, amount = 5) => {
-    if (availableQty(row) < amount) {
-      toast('Not enough stock', `Only ${availableQty(row)} available`);
-      return;
-    }
+    if (availableQty(row) < amount) { toast('Insufficient stock', ''); return; }
     setInventory((inv) => adjustStock(inv, row.id, -amount));
-    toast('Stock issued', `−${amount} · ${productMap[row.productId]?.name || row.productId}`);
+    toast('Stock issued', `−${amount}`);
   };
 
-  // —— Products ——
-  const openNewPrd = () => {
-    setPrdForm({ sku: '', name: '', category: 'Fasteners', unitCost: 1, price: 2, reorderAt: 10, active: true });
-    setPrdModal('new');
-  };
+  // Product CRUD
   const savePrdForm = (e) => {
     e.preventDefault();
-    if (!prdForm.sku.trim() || !prdForm.name.trim()) {
-      toast('Validation', 'SKU and name are required');
-      return;
-    }
+    if (!prdForm.sku.trim() || !prdForm.name.trim()) { toast('Required', 'SKU and name required'); return; }
     if (prdModal === 'new') {
-      if (products.some((p) => p.sku.toLowerCase() === prdForm.sku.trim().toLowerCase())) {
-        toast('Duplicate SKU', 'That SKU already exists');
-        return;
-      }
+      if (products.some((p) => p.sku.toLowerCase() === prdForm.sku.trim().toLowerCase())) { toast('Duplicate SKU', ''); return; }
       const row = { id: uid('prd'), ...prdForm, sku: prdForm.sku.trim().toUpperCase(), unitCost: Number(prdForm.unitCost), price: Number(prdForm.price), reorderAt: Number(prdForm.reorderAt) };
       setProducts((p) => [row, ...p]);
-      // create inventory row at Main DC
       setInventory((inv) => [...inv, { id: uid('inv'), productId: row.id, warehouse: 'Main DC', qty: 0, reserved: 0 }]);
-      toast('Product added', row.name);
+      toast('Product created', row.name);
     } else {
       setProducts((p) => p.map((x) => x.id === prdModal.id ? { ...x, ...prdForm, unitCost: Number(prdForm.unitCost), price: Number(prdForm.price), reorderAt: Number(prdForm.reorderAt) } : x));
       toast('Product updated', prdForm.name);
     }
     setPrdModal(null);
   };
-  const deletePrd = (prd) => {
-    setConfirm({
-      title: 'Delete product?',
-      message: `Remove ${prd.name} (${prd.sku})? Related inventory rows stay but product link will be missing.`,
-      onConfirm: () => {
-        setProducts((p) => p.filter((x) => x.id !== prd.id));
-        toast('Product deleted', prd.sku);
-        setConfirm(null);
-      },
-    });
-  };
 
-  // —— POs ——
-  const openNewPo = () => {
-    setPoForm({ supplierId: suppliers[0]?.id || '', productId: products[0]?.id || '', qty: 10, unitCost: products[0]?.unitCost || 10, notes: '' });
-    setPoModal('new');
-  };
+  // PO
   const savePoForm = (e) => {
     e.preventDefault();
-    const qty = Number(poForm.qty);
-    const unitCost = Number(poForm.unitCost);
-    if (!poForm.supplierId || !qty || qty <= 0) {
-      toast('Check form', 'Supplier and positive qty required');
-      return;
-    }
+    const qty = Number(poForm.qty); const unitCost = Number(poForm.unitCost);
+    if (!poForm.supplierId || qty <= 0) { toast('Invalid form', ''); return; }
     if (poModal === 'new') {
-      const row = {
-        id: uid('po'),
-        supplierId: poForm.supplierId,
-        status: 'Draft',
-        total: qty * unitCost,
-        orderedAt: new Date().toISOString().slice(0, 10),
-        lines: [{ productId: poForm.productId, qty, unitCost }],
-        notes: poForm.notes || '',
-      };
+      const row = { id: uid('po'), supplierId: poForm.supplierId, status: 'Draft', total: qty * unitCost, orderedAt: new Date().toISOString().slice(0, 10), lines: [{ productId: poForm.productId, qty, unitCost }], notes: poForm.notes || '' };
       setPurchaseOrders((p) => [row, ...p]);
       toast('PO created', row.id);
     } else {
-      setPurchaseOrders((p) => p.map((x) => x.id === poModal.id
-        ? { ...x, supplierId: poForm.supplierId, total: qty * unitCost, lines: [{ productId: poForm.productId, qty, unitCost }], notes: poForm.notes || '' }
-        : x));
+      setPurchaseOrders((p) => p.map((x) => x.id === poModal.id ? { ...x, supplierId: poForm.supplierId, total: qty * unitCost, lines: [{ productId: poForm.productId, qty, unitCost }], notes: poForm.notes || '' } : x));
       toast('PO updated', poModal.id);
     }
     setPoModal(null);
   };
   const advancePoRow = (po) => {
-    if (['Received', 'Cancelled'].includes(po.status)) {
-      toast('Already closed', 'This PO cannot be advanced');
-      return;
-    }
+    if (['Received', 'Cancelled'].includes(po.status)) return;
     const next = advancePo(po);
-    setPurchaseOrders((p) => p.map((x) => (x.id === po.id ? next : x)));
+    setPurchaseOrders((p) => p.map((x) => x.id === po.id ? next : x));
     if (next.status === 'Received') {
       const line = (po.lines || [])[0];
       if (line) {
-        const invRow = inventory.find((r) => r.productId === line.productId && r.warehouse === 'Main DC') || inventory.find((r) => r.productId === line.productId);
+        const invRow = inventory.find((r) => r.productId === line.productId);
         if (invRow) setInventory((inv) => adjustStock(inv, invRow.id, line.qty || 0));
       }
       toast('PO received', 'Inventory updated');
-    } else {
-      toast('Status updated', `${po.status} → ${next.status}`);
-    }
-  };
-  const cancelPo = (id) => {
-    setConfirm({
-      title: 'Cancel purchase order?',
-      message: `Mark ${id} as Cancelled?`,
-      onConfirm: () => {
-        setPurchaseOrders((p) => p.map((x) => (x.id === id ? { ...x, status: 'Cancelled' } : x)));
-        toast('PO cancelled', id);
-        setConfirm(null);
-      },
-    });
+    } else toast('Status updated', `${po.status} → ${next.status}`);
   };
 
-  // —— Employees ——
-  const openNewEmp = () => {
-    if (!isAdmin) { toast('Access denied', 'Only admins can add employees'); return; }
-    setEmpForm({ name: '', department: 'Operations', role: '', email: '', status: 'Active' });
-    setEmpModal('new');
+  // Customer
+  const saveCusForm = (e) => {
+    e.preventDefault();
+    if (!cusForm.name.trim()) { toast('Name required', ''); return; }
+    if (cusModal === 'new') {
+      const row = { id: uid('cus'), ...cusForm, creditLimit: Number(cusForm.creditLimit), outstanding: 0 };
+      setCustomers((p) => [row, ...p]);
+      toast('Customer created', row.name);
+    } else {
+      setCustomers((p) => p.map((x) => x.id === cusModal.id ? { ...x, ...cusForm, creditLimit: Number(cusForm.creditLimit) } : x));
+      toast('Customer updated', cusForm.name);
+    }
+    setCusModal(null);
   };
+
+  // Supplier
+  const saveSupForm = (e) => {
+    e.preventDefault();
+    if (!supForm.name.trim()) { toast('Name required', ''); return; }
+    if (supModal === 'new') {
+      const row = { id: uid('sup'), ...supForm, rating: Number(supForm.rating) };
+      setSuppliers((p) => [row, ...p]);
+      toast('Supplier created', row.name);
+    } else {
+      setSuppliers((p) => p.map((x) => x.id === supModal.id ? { ...x, ...supForm, rating: Number(supForm.rating) } : x));
+      toast('Supplier updated', supForm.name);
+    }
+    setSupModal(null);
+  };
+
+  // Lead
+  const saveLeadForm = (e) => {
+    e.preventDefault();
+    if (!leadForm.name.trim()) { toast('Name required', ''); return; }
+    if (leadModal === 'new') {
+      const row = { id: uid('lead'), ...leadForm, score: Number(leadForm.score), value: Number(leadForm.value), createdAt: new Date().toISOString().slice(0, 10) };
+      setLeads((p) => [row, ...p]);
+      toast('Lead created', row.name);
+    } else {
+      setLeads((p) => p.map((x) => x.id === leadModal.id ? { ...x, ...leadForm, score: Number(leadForm.score), value: Number(leadForm.value) } : x));
+      toast('Lead updated', leadForm.name);
+    }
+    setLeadModal(null);
+  };
+  const convertLead = (lead) => {
+    const cus = { id: uid('cus'), name: lead.name, company: lead.company || lead.name, email: lead.email || '', phone: lead.phone || '', city: '', state: '', country: 'US', creditLimit: 10000, paymentTerms: 'Net 30', type: 'Prospect', status: 'Active', outstanding: 0 };
+    setCustomers((p) => [cus, ...p]);
+    setLeads((p) => p.map((x) => x.id === lead.id ? { ...x, status: 'Converted' } : x));
+    const opp = { id: uid('opp'), name: `${lead.company || lead.name} opportunity`, customerId: cus.id, stage: 'Qualified', value: lead.value || 0, probability: 40, closeDate: '', owner: lead.owner || user?.name };
+    setOpportunities((p) => [opp, ...p]);
+    toast('Lead converted', 'Customer and opportunity created');
+  };
+
+  // Opportunity stage
+  const moveOpp = (opp, stage) => {
+    setOpportunities((p) => p.map((x) => x.id === opp.id ? { ...x, stage } : x));
+    toast('Stage updated', stage);
+  };
+
+  // Ticket
+  const saveTktForm = (e) => {
+    e.preventDefault();
+    if (!tktForm.subject.trim()) { toast('Subject required', ''); return; }
+    if (tktModal === 'new') {
+      const row = { id: uid('tkt'), ...tktForm, createdAt: new Date().toISOString().slice(0, 10), assignee: user?.name };
+      setTickets((p) => [row, ...p]);
+      toast('Ticket created', row.id);
+    } else {
+      setTickets((p) => p.map((x) => x.id === tktModal.id ? { ...x, ...tktForm } : x));
+      toast('Ticket updated', tktModal.id);
+    }
+    setTktModal(null);
+  };
+  const advanceTicket = (t) => {
+    const flow = { Open: 'Assigned', Assigned: 'In Progress', 'In Progress': 'Resolved', Resolved: 'Closed' };
+    const next = flow[t.status];
+    if (!next) return;
+    setTickets((p) => p.map((x) => x.id === t.id ? { ...x, status: next } : x));
+    toast('Ticket updated', next);
+  };
+
+  // Project
+  const savePrjForm = (e) => {
+    e.preventDefault();
+    if (!prjForm.name.trim()) { toast('Name required', ''); return; }
+    if (prjModal === 'new') {
+      const row = { id: uid('prj'), ...prjForm, budget: Number(prjForm.budget) };
+      setProjects((p) => [row, ...p]);
+      toast('Project created', row.name);
+    } else {
+      setProjects((p) => p.map((x) => x.id === prjModal.id ? { ...x, ...prjForm, budget: Number(prjForm.budget) } : x));
+      toast('Project updated', prjForm.name);
+    }
+    setPrjModal(null);
+  };
+
+  // Contract
+  const saveCtrForm = (e) => {
+    e.preventDefault();
+    if (!ctrForm.name.trim()) { toast('Name required', ''); return; }
+    if (ctrModal === 'new') {
+      const row = { id: uid('ctr'), ...ctrForm, value: Number(ctrForm.value) };
+      setContracts((p) => [row, ...p]);
+      toast('Contract created', row.name);
+    } else {
+      setContracts((p) => p.map((x) => x.id === ctrModal.id ? { ...x, ...ctrForm, value: Number(ctrForm.value) } : x));
+      toast('Contract updated', ctrForm.name);
+    }
+    setCtrModal(null);
+  };
+
+  // Approvals
+  const decideApproval = (apr, status) => {
+    setApprovals((p) => p.map((x) => x.id === apr.id ? { ...x, status } : x));
+    toast(status === 'Approved' ? 'Approved' : 'Rejected', apr.title);
+  };
+
+  // Notifications
+  const markAllRead = () => setNotifications((p) => p.map((n) => ({ ...n, read: true })));
+  const markRead = (id) => setNotifications((p) => p.map((n) => n.id === id ? { ...n, read: true } : n));
+
+  // Emp
   const saveEmpForm = (e) => {
     e.preventDefault();
-    if (!empForm.name.trim()) { toast('Name required', 'Please enter a full name'); return; }
+    if (!empForm.name.trim()) { toast('Name required', ''); return; }
     if (empModal === 'new') {
-      const row = { id: uid('emp'), ...empForm, email: empForm.email || `${empForm.name.toLowerCase().replace(/\s+/g, '.')}@forge.local`, access: ['inventory'] };
+      const row = { id: uid('emp'), ...empForm, leaveBalance: 12 };
       setEmployees((p) => [row, ...p]);
       toast('Employee added', row.name);
     } else {
-      setEmployees((p) => p.map((x) => (x.id === empModal.id ? { ...x, ...empForm } : x)));
+      setEmployees((p) => p.map((x) => x.id === empModal.id ? { ...x, ...empForm } : x));
       toast('Employee updated', empForm.name);
     }
     setEmpModal(null);
   };
-  const deleteEmp = (emp) => {
-    if (!isAdmin) { toast('Access denied', 'Only admins can remove employees'); return; }
-    setConfirm({
-      title: 'Remove employee?',
-      message: `Delete ${emp.name}?`,
-      onConfirm: () => {
-        setEmployees((p) => p.filter((x) => x.id !== emp.id));
-        toast('Employee removed', emp.name);
-        setConfirm(null);
-      },
-    });
-  };
 
-  // —— Shipping ——
-  const openNewShip = () => {
-    const openPo = purchaseOrders.find((p) => p.status === 'Approved' || p.status === 'Received');
-    setShipForm({
-      poId: openPo?.id || purchaseOrders[0]?.id || '',
-      carrier: 'FedEx',
-      tracking: '',
-      status: 'Pending',
-      shipDate: new Date().toISOString().slice(0, 10),
-      eta: '',
-      destination: 'Main DC',
-    });
-    setShipModal('new');
-  };
+  // Shipping
   const saveShipForm = (e) => {
     e.preventDefault();
-    if (!shipForm.poId) { toast('Validation', 'Link a purchase order'); return; }
+    if (!shipForm.poId) { toast('Select a PO', ''); return; }
     const po = purchaseOrders.find((p) => p.id === shipForm.poId);
-    const lines = po?.lines || [];
     if (shipModal === 'new') {
-      const row = {
-        id: uid('shp'),
-        ...shipForm,
-        tracking: shipForm.tracking || `TRK-${Date.now().toString(36).toUpperCase()}`,
-        lines,
-      };
+      const row = { id: uid('shp'), ...shipForm, tracking: shipForm.tracking || `TRK-${Date.now().toString(36).toUpperCase()}`, lines: po?.lines || [] };
       setShipments((p) => [row, ...p]);
       toast('Shipment created', row.id);
     } else {
-      setShipments((p) => p.map((x) => (x.id === shipModal.id ? { ...x, ...shipForm } : x)));
+      setShipments((p) => p.map((x) => x.id === shipModal.id ? { ...x, ...shipForm } : x));
       toast('Shipment updated', shipModal.id);
     }
     setShipModal(null);
@@ -455,49 +586,56 @@ export default function App() {
   const advanceShip = (ship) => {
     const flow = { Pending: 'Picked', Picked: 'In Transit', 'In Transit': 'Delivered' };
     const next = flow[ship.status];
-    if (!next) { toast('Closed', 'Cannot advance this shipment'); return; }
-    setShipments((p) => p.map((x) => (x.id === ship.id ? { ...x, status: next } : x)));
-    toast('Shipment updated', `${ship.status} → ${next}`);
+    if (!next) return;
+    setShipments((p) => p.map((x) => x.id === ship.id ? { ...x, status: next } : x));
+    toast('Shipment updated', next);
   };
-  const cancelShip = (id) => {
+
+  const changePassword = (e) => {
+    e.preventDefault();
+    if (pwdForm.next.length < 6) { toast('Password too short', 'Use at least 6 characters'); return; }
+    if (pwdForm.next !== pwdForm.confirm) { toast('Mismatch', 'New passwords do not match'); return; }
+    const me = users.find((u) => u.id === user.id);
+    if (!me || me.password !== pwdForm.current) { toast('Incorrect password', ''); return; }
+    setUsers((p) => p.map((u) => u.id === user.id ? { ...u, password: pwdForm.next } : u));
+    setPwdModal(false);
+    setPwdForm({ current: '', next: '', confirm: '' });
+    toast('Password updated', '');
+  };
+
+  const resetData = () => {
+    if (!admin) { toast('Access denied', ''); return; }
     setConfirm({
-      title: 'Cancel shipment?',
-      message: `Mark ${id} as Cancelled?`,
+      title: 'Reset application data?',
+      message: 'This restores seed data and clears local changes. Continue?',
       onConfirm: () => {
-        setShipments((p) => p.map((x) => (x.id === id ? { ...x, status: 'Cancelled' } : x)));
-        toast('Shipment cancelled', id);
+        clearAllData();
+        setProducts(SEED_PRODUCTS); setInventory(SEED_INVENTORY); setPurchaseOrders(SEED_POS);
+        setEmployees(SEED_EMPLOYEES); setShipments(SEED_SHIPMENTS); setCustomers(SEED_CUSTOMERS);
+        setSuppliers(SEED_SUPPLIERS); setLeads(SEED_LEADS); setOpportunities(SEED_OPPORTUNITIES);
+        setActivities(SEED_ACTIVITIES); setProjects(SEED_PROJECTS); setTasks(SEED_TASKS);
+        setTickets(SEED_TICKETS); setContracts(SEED_CONTRACTS); setApprovals(SEED_APPROVALS);
+        setNotifications(SEED_NOTIFICATIONS); setDocuments(SEED_DOCUMENTS); setUsers(SEED_USERS);
+        setLoginHistory(SEED_LOGIN_HISTORY);
+        toast('Data restored', '');
         setConfirm(null);
       },
     });
   };
 
-  const resetDemo = () => {
-    if (!isAdmin) { toast('Access denied', 'Admin only'); return; }
-    setConfirm({
-      title: 'Reset demo data?',
-      message: 'Restores seed data and clears local changes.',
-      onConfirm: () => {
-        clearAllDemo();
-        setProducts(SEED_PRODUCTS);
-        setInventory(SEED_INVENTORY);
-        setPurchaseOrders(SEED_POS);
-        setEmployees(SEED_EMPLOYEES);
-        setShipments(SEED_SHIPMENTS);
-        toast('Demo reset', 'Seed data restored');
-        setConfirm(null);
-      },
-    });
-  };
-
-  const go = (id) => {
-    // employees cannot open products/hr
-    if (!isAdmin && (id === 'products' || id === 'hr')) {
-      toast('Access denied', 'Admin only');
-      return;
-    }
-    setView(id);
-    setQuery('');
-  };
+  const cmdActions = [
+    { label: 'Dashboard', action: () => go('dashboard') },
+    { label: 'Create customer', action: () => { go('customers'); setCusForm({ name: '', company: '', email: '', phone: '', city: '', state: '', country: 'US', creditLimit: 10000, paymentTerms: 'Net 30', type: 'Wholesale', status: 'Active' }); setCusModal('new'); } },
+    { label: 'Create purchase order', action: () => { go('orders'); setPoForm({ supplierId: suppliers[0]?.id || '', productId: products[0]?.id || '', qty: 10, unitCost: products[0]?.unitCost || 10, notes: '' }); setPoModal('new'); } },
+    { label: 'Create lead', action: () => { go('leads'); setLeadForm({ name: '', company: '', email: '', phone: '', source: 'Website', industry: '', status: 'New', score: 50, value: 0, owner: user?.name || '' }); setLeadModal('new'); } },
+    { label: 'Open inventory', action: () => go('inventory') },
+    { label: 'Open products', action: () => go('products') },
+    { label: 'Open approvals', action: () => go('approvals') },
+    { label: 'Open notifications', action: () => go('notifications') },
+    { label: 'Service desk', action: () => go('tickets') },
+    { label: 'Projects', action: () => go('projects') },
+  ];
+  const cmdFiltered = cmdActions.filter((a) => a.label.toLowerCase().includes(cmdQuery.toLowerCase()));
 
   if (!user) {
     return (
@@ -508,49 +646,46 @@ export default function App() {
     );
   }
 
+  const visibleNav = NAV_GROUPS.map((g) => ({
+    ...g,
+    items: g.items.filter((i) => admin || canAccessModule(role, i.module)),
+  })).filter((g) => g.items.length);
+
   const SidebarContent = ({ compact }) => (
     <>
       <div className="h-14 flex items-center gap-2.5 px-3 border-b border-slate-800 shrink-0">
-        <div className="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center font-bold text-sm text-white shrink-0">F</div>
+        <div className="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center font-bold text-sm text-white">F</div>
         {!compact && (
           <div className="min-w-0">
-            <div className="font-semibold text-white text-sm leading-tight">ForgeERP</div>
-            <div className="text-[10px] text-slate-500 flex items-center gap-1">
-              {isAdmin ? <Shield className="w-3 h-3" /> : <User className="w-3 h-3" />}
-              {isAdmin ? 'Admin' : 'Employee'}
-            </div>
+            <div className="font-semibold text-white text-sm">ForgeERP</div>
+            <div className="text-[10px] text-slate-500 truncate">{ROLES.find((r) => r.id === role)?.name || role}</div>
           </div>
         )}
       </div>
-      <nav className="flex-1 p-2 space-y-0.5 overflow-y-auto">
-        {nav.map((item) => {
-          const Icon = item.icon;
-          const active = view === item.id;
-          return (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => go(item.id)}
-              className={`nav-item ${active ? 'active' : ''} ${compact ? 'justify-center px-2' : ''}`}
-              title={item.label}
-            >
-              <Icon className="w-4 h-4 shrink-0" />
-              {!compact && <span>{item.label}</span>}
-            </button>
-          );
-        })}
+      <nav className="flex-1 p-2 space-y-3 overflow-y-auto">
+        {visibleNav.map((g) => (
+          <div key={g.label}>
+            {!compact && <div className="px-3 py-1 text-[10px] uppercase tracking-wider text-slate-600">{g.label}</div>}
+            <div className="space-y-0.5">
+              {g.items.map((item) => {
+                const Icon = item.icon;
+                const active = view === item.id;
+                return (
+                  <button key={item.id} type="button" onClick={() => go(item.id)} className={`nav-item ${active ? 'active' : ''} ${compact ? 'justify-center px-2' : ''}`} title={item.label}>
+                    <Icon className="w-4 h-4 shrink-0" />
+                    {!compact && <span>{item.label}</span>}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </nav>
       {!compact && (
         <div className="p-2 border-t border-slate-800 space-y-1">
-          <div className="px-3 py-1.5 text-xs text-slate-500 truncate">{user.name}</div>
-          {isAdmin && (
-            <button type="button" onClick={resetDemo} className="nav-item text-xs text-slate-500 hover:text-slate-300">
-              Reset demo data
-            </button>
-          )}
-          <button type="button" onClick={handleLogout} className="nav-item text-xs text-rose-400 hover:text-rose-300">
-            <LogOut className="w-3.5 h-3.5" /> Sign out
-          </button>
+          <button type="button" onClick={() => setProfileOpen(true)} className="nav-item text-xs"><User className="w-3.5 h-3.5" /> {user.name}</button>
+          {admin && <button type="button" onClick={resetData} className="nav-item text-xs text-slate-500">Reset data</button>}
+          <button type="button" onClick={handleLogout} className="nav-item text-xs text-rose-400"><LogOut className="w-3.5 h-3.5" /> Sign out</button>
         </div>
       )}
     </>
@@ -561,7 +696,6 @@ export default function App() {
       <aside className={`hidden md:flex ${sidebarOpen ? 'w-56' : 'w-14'} shrink-0 border-r border-slate-800 bg-[#0e1219] flex-col transition-all duration-200`}>
         <SidebarContent compact={!sidebarOpen} />
       </aside>
-
       {mobileNav && (
         <div className="fixed inset-0 z-40 md:hidden">
           <div className="absolute inset-0 bg-black/60" onClick={() => setMobileNav(false)} />
@@ -573,161 +707,231 @@ export default function App() {
 
       <div className="flex-1 flex flex-col min-w-0">
         <header className="h-14 border-b border-slate-800 flex items-center gap-2 px-3 bg-[#0e1219] sticky top-0 z-20">
-          <button
-            type="button"
-            onClick={() => {
-              if (window.innerWidth < 768) setMobileNav((v) => !v);
-              else setSidebarOpen((v) => !v);
-            }}
-            className="p-2 rounded-lg hover:bg-slate-800 text-slate-400"
-            aria-label="Toggle menu"
-          >
+          <button type="button" onClick={() => window.innerWidth < 768 ? setMobileNav((v) => !v) : setSidebarOpen((v) => !v)} className="p-2 rounded-lg hover:bg-slate-800 text-slate-400" aria-label="Menu">
             <Menu className="w-5 h-5" />
           </button>
-
           <div className="flex-1 max-w-sm relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none z-10" />
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search"
-              className="w-full rounded-lg bg-[#0a0d12] border border-slate-700 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500/40 focus:border-orange-500 py-1.5 pl-10 pr-9"
-            />
-            {query && (
-              <button type="button" onClick={() => setQuery('')} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white z-10" aria-label="Clear search">
-                <X className="w-3.5 h-3.5" />
-              </button>
-            )}
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search" className="w-full rounded-lg bg-[#0a0d12] border border-slate-700 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500/40 py-1.5 pl-10 pr-9" />
+            {query && <button type="button" onClick={() => setQuery('')} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white z-10"><X className="w-3.5 h-3.5" /></button>}
           </div>
-
-          <button
-            type="button"
-            onClick={() => toast('Alerts', low.length ? `${low.length} low-stock item(s)` : 'No low-stock alerts')}
-            className="p-2 rounded-lg hover:bg-slate-800 text-slate-400 relative"
-            aria-label="Notifications"
-          >
+          <button type="button" onClick={() => setCmdOpen(true)} className="hidden sm:flex items-center gap-1 px-2 py-1 rounded-lg border border-slate-700 text-xs text-slate-500 hover:text-white" title="Command palette (Ctrl+K)">
+            <Command className="w-3.5 h-3.5" /> Ctrl+K
+          </button>
+          <button type="button" onClick={() => setNtfOpen(true)} className="p-2 rounded-lg hover:bg-slate-800 text-slate-400 relative" aria-label="Notifications">
             <Bell className="w-5 h-5" />
-            {low.length > 0 && <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-orange-500" />}
+            {unreadNtf > 0 && <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-orange-500" />}
           </button>
         </header>
 
         <main className="flex-1 overflow-y-auto p-4 md:p-5">
-          {/* DASHBOARD */}
           {view === 'dashboard' && (
             <div className="space-y-5 fade-in">
               <div>
-                <h1 className="text-xl font-semibold text-white">{isAdmin ? 'Admin Dashboard' : 'My Dashboard'}</h1>
-                <p className="text-sm text-slate-500 mt-0.5">Signed in as {user.name}</p>
+                <h1 className="text-xl font-semibold text-white">Dashboard</h1>
+                <p className="text-sm text-slate-500 mt-0.5">{user.name} · {ROLES.find((r) => r.id === role)?.name}</p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                <button type="button" onClick={() => go('inventory')} className="kpi-card">
-                  <div className="flex justify-between items-start mb-1">
-                    <span className="text-xs text-slate-500 uppercase tracking-wide">Available units</span>
-                    <Warehouse className="w-4 h-4 text-orange-400" />
-                  </div>
-                  <p className="text-2xl font-semibold text-white tabular-nums">{totalUnits.toLocaleString()}</p>
-                </button>
-                <button type="button" onClick={() => go('orders')} className="kpi-card">
-                  <div className="flex justify-between items-start mb-1">
-                    <span className="text-xs text-slate-500 uppercase tracking-wide">Open POs</span>
-                    <ShoppingCart className="w-4 h-4 text-blue-400" />
-                  </div>
-                  <p className="text-2xl font-semibold text-white tabular-nums">{openPos}</p>
-                </button>
-                <button type="button" onClick={() => go('shipping')} className="kpi-card">
-                  <div className="flex justify-between items-start mb-1">
-                    <span className="text-xs text-slate-500 uppercase tracking-wide">Active shipments</span>
-                    <Truck className="w-4 h-4 text-indigo-400" />
-                  </div>
-                  <p className="text-2xl font-semibold text-white tabular-nums">{openShips}</p>
-                </button>
-                <button type="button" onClick={() => go('inventory')} className="kpi-card">
-                  <div className="flex justify-between items-start mb-1">
-                    <span className="text-xs text-slate-500 uppercase tracking-wide">Low stock</span>
-                    <AlertTriangle className="w-4 h-4 text-amber-400" />
-                  </div>
-                  <p className="text-2xl font-semibold text-white tabular-nums">{low.length}</p>
-                </button>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                {[
+                  { label: 'Available units', value: totalUnits.toLocaleString(), icon: Warehouse, go: 'inventory' },
+                  { label: 'Open POs', value: openPos, icon: ShoppingCart, go: 'orders' },
+                  { label: 'Shipments', value: openShips, icon: Truck, go: 'shipping' },
+                  { label: 'Pending approvals', value: pendingApr, icon: CheckSquare, go: 'approvals' },
+                ].map((k) => (
+                  <button key={k.label} type="button" onClick={() => go(k.go)} className="kpi-card">
+                    <div className="flex justify-between mb-1"><span className="text-xs text-slate-500 uppercase">{k.label}</span><k.icon className="w-4 h-4 text-orange-400" /></div>
+                    <p className="text-2xl font-semibold text-white tabular-nums">{k.value}</p>
+                  </button>
+                ))}
               </div>
-              <div className="flex flex-wrap gap-2">
-                {isAdmin && <button type="button" onClick={openNewPrd} className="btn-primary flex items-center gap-1.5"><Plus className="w-4 h-4" /> New product</button>}
-                <button type="button" onClick={openNewPo} className="btn-primary flex items-center gap-1.5"><Plus className="w-4 h-4" /> New PO</button>
-                <button type="button" onClick={openNewShip} className="btn-ghost">New shipment</button>
-                {isAdmin && <button type="button" onClick={openNewEmp} className="btn-ghost">Add employee</button>}
-              </div>
-              <div className="panel rounded-xl overflow-hidden">
-                <div className="px-4 py-3 border-b border-slate-800 flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-amber-400" />
-                  <h2 className="font-medium text-sm text-white">Low stock</h2>
-                </div>
-                {low.length === 0 ? (
-                  <p className="p-6 text-center text-sm text-slate-500">All items above reorder point.</p>
-                ) : (
-                  <ul className="divide-y divide-slate-800/80">
-                    {low.map((r) => {
-                      const p = productMap[r.productId];
-                      return (
-                        <li key={r.id} className="flex items-center justify-between gap-3 px-4 py-2.5 hover:bg-slate-800/30">
-                          <div className="min-w-0">
-                            <p className="text-sm text-white truncate">{p?.name || r.productId}</p>
-                            <p className="text-xs text-slate-500">{r.warehouse} · avail {availableQty(r)} / reorder {p?.reorderAt}</p>
-                          </div>
-                          <button type="button" onClick={() => receiveStock(r, 25)} className="btn-ghost text-xs shrink-0">Receive +25</button>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                <div className="panel rounded-xl overflow-hidden">
+                  <div className="px-4 py-3 border-b border-slate-800 flex items-center gap-2"><AlertTriangle className="w-4 h-4 text-amber-400" /><h2 className="text-sm font-medium text-white">Low stock</h2></div>
+                  {low.length === 0 ? <p className="p-6 text-center text-sm text-slate-500">All items above reorder point.</p> : (
+                    <ul className="divide-y divide-slate-800/80 max-h-64 overflow-y-auto">
+                      {low.map((r) => (
+                        <li key={r.id} className="flex items-center justify-between px-4 py-2.5">
+                          <div><p className="text-sm text-white">{productMap[r.productId]?.name || r.productId}</p><p className="text-xs text-slate-500">avail {availableQty(r)}</p></div>
+                          <button type="button" className="btn-ghost text-xs" onClick={() => receiveStock(r, 25)}>Receive +25</button>
                         </li>
-                      );
-                    })}
+                      ))}
+                    </ul>
+                  )}
+                </div>
+                <div className="panel rounded-xl overflow-hidden">
+                  <div className="px-4 py-3 border-b border-slate-800"><h2 className="text-sm font-medium text-white">Open opportunities</h2></div>
+                  <ul className="divide-y divide-slate-800/80 max-h-64 overflow-y-auto">
+                    {opportunities.filter((o) => !['Won', 'Lost'].includes(o.stage)).slice(0, 6).map((o) => (
+                      <li key={o.id} className="px-4 py-2.5 flex justify-between gap-2">
+                        <div><p className="text-sm text-white">{o.name}</p><p className="text-xs text-slate-500">{o.stage} · {formatMoney(o.value)}</p></div>
+                      </li>
+                    ))}
+                    {opportunities.filter((o) => !['Won', 'Lost'].includes(o.stage)).length === 0 && <li className="p-6 text-center text-sm text-slate-500">No open opportunities</li>}
                   </ul>
-                )}
+                </div>
               </div>
             </div>
           )}
 
-          {/* PRODUCTS (admin) */}
-          {view === 'products' && isAdmin && (
+          {view === 'executive' && (
+            <div className="space-y-5 fade-in">
+              <h1 className="text-xl font-semibold text-white">Executive overview</h1>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                <div className="kpi-card cursor-default"><p className="text-xs text-slate-500 uppercase">Inventory value</p><p className="text-2xl font-semibold text-white">{formatMoney(invValue)}</p></div>
+                <div className="kpi-card cursor-default"><p className="text-xs text-slate-500 uppercase">Customers</p><p className="text-2xl font-semibold text-white">{customers.length}</p></div>
+                <div className="kpi-card cursor-default"><p className="text-xs text-slate-500 uppercase">Open tickets</p><p className="text-2xl font-semibold text-white">{tickets.filter((t) => !['Resolved', 'Closed'].includes(t.status)).length}</p></div>
+                <div className="kpi-card cursor-default"><p className="text-xs text-slate-500 uppercase">Active projects</p><p className="text-2xl font-semibold text-white">{projects.filter((p) => p.status === 'Active').length}</p></div>
+              </div>
+              <div className="panel rounded-xl p-4">
+                <h2 className="text-sm font-medium text-white mb-2">Pipeline value</h2>
+                <p className="text-3xl font-semibold text-white">{formatMoney(opportunities.filter((o) => !['Won', 'Lost'].includes(o.stage)).reduce((s, o) => s + (o.value || 0) * ((o.probability || 0) / 100), 0))}</p>
+                <p className="text-xs text-slate-500 mt-1">Weighted by stage probability</p>
+              </div>
+            </div>
+          )}
+
+          {/* LEADS */}
+          {view === 'leads' && (
             <div className="space-y-4 fade-in">
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <h1 className="text-xl font-semibold text-white">Products</h1>
-                <button type="button" onClick={openNewPrd} className="btn-primary flex items-center gap-1.5"><Plus className="w-4 h-4" /> Add product</button>
+                <h1 className="text-xl font-semibold text-white">Leads</h1>
+                <div className="flex gap-2">
+                  <select value={leadFilter} onChange={(e) => setLeadFilter(e.target.value)} className="input-field w-auto py-1.5">
+                    <option value="All">All statuses</option>
+                    {LEAD_STATUS.map((s) => <option key={s}>{s}</option>)}
+                  </select>
+                  {canPerform(role, 'create') && <button type="button" className="btn-primary flex items-center gap-1.5" onClick={() => { setLeadForm({ name: '', company: '', email: '', phone: '', source: 'Website', industry: '', status: 'New', score: 50, value: 0, owner: user.name }); setLeadModal('new'); }}><Plus className="w-4 h-4" /> Add lead</button>}
+                </div>
+              </div>
+              <div className="space-y-2">
+                {filteredLeads.map((l) => (
+                  <div key={l.id} className="panel rounded-xl px-4 py-3 flex flex-wrap items-center gap-3">
+                    <div className="flex-1 min-w-[160px]"><p className="text-sm text-white font-medium">{l.name}</p><p className="text-xs text-slate-500">{l.company} · {l.source} · score {l.score}</p></div>
+                    <span className="text-sm tabular-nums">{formatMoney(l.value)}</span>
+                    <span className="status-pill bg-slate-700/60 text-slate-300">{l.status}</span>
+                    <div className="flex gap-1 ml-auto">
+                      {l.status !== 'Converted' && canPerform(role, 'edit') && <button type="button" className="btn-ghost text-xs py-1" onClick={() => convertLead(l)}>Convert</button>}
+                      {canPerform(role, 'edit') && <button type="button" className="btn-ghost text-xs py-1" onClick={() => { setLeadForm({ ...l }); setLeadModal(l); }}><Pencil className="w-3 h-3" /></button>}
+                      {canPerform(role, 'delete') && <button type="button" className="btn-danger text-xs py-1" onClick={() => setConfirm({ title: 'Delete lead?', message: l.name, onConfirm: () => { setLeads((p) => p.filter((x) => x.id !== l.id)); toast('Deleted', l.name); setConfirm(null); } })}><Trash2 className="w-3 h-3" /></button>}
+                    </div>
+                  </div>
+                ))}
+                {filteredLeads.length === 0 && <EmptyState message="No leads found" actionLabel="Add lead" onAction={() => { setLeadModal('new'); }} />}
+              </div>
+            </div>
+          )}
+
+          {/* OPPORTUNITIES KANBAN */}
+          {view === 'opportunities' && (
+            <div className="space-y-4 fade-in">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h1 className="text-xl font-semibold text-white">Opportunity pipeline</h1>
+                {canPerform(role, 'create') && <button type="button" className="btn-primary flex items-center gap-1.5" onClick={() => { setOppForm({ name: '', customerId: customers[0]?.id || '', stage: 'New', value: 0, probability: 20, closeDate: '', owner: user.name }); setOppModal('new'); }}><Plus className="w-4 h-4" /> Add opportunity</button>}
+              </div>
+              <div className="flex gap-3 overflow-x-auto pb-2">
+                {OPP_STAGES.map((stage) => (
+                  <div key={stage} className="panel rounded-xl min-w-[200px] flex-1">
+                    <div className="px-3 py-2 border-b border-slate-800 text-xs font-medium text-slate-400 uppercase">{stage}</div>
+                    <div className="p-2 space-y-2 min-h-[120px]">
+                      {opportunities.filter((o) => o.stage === stage).map((o) => (
+                        <div key={o.id} className="rounded-lg bg-slate-900/80 border border-slate-800 p-2.5">
+                          <p className="text-sm text-white">{o.name}</p>
+                          <p className="text-xs text-slate-500 mt-0.5">{formatMoney(o.value)} · {o.probability}%</p>
+                          <div className="flex flex-wrap gap-1 mt-2">
+                            {OPP_STAGES.filter((s) => s !== stage).slice(0, 3).map((s) => (
+                              <button key={s} type="button" className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 hover:text-white" onClick={() => moveOpp(o, s)}>{s}</button>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* CUSTOMERS */}
+          {view === 'customers' && (
+            <div className="space-y-4 fade-in">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h1 className="text-xl font-semibold text-white">Customers</h1>
+                {canPerform(role, 'create') && <button type="button" className="btn-primary flex items-center gap-1.5" onClick={() => { setCusForm({ name: '', company: '', email: '', phone: '', city: '', state: '', country: 'US', creditLimit: 10000, paymentTerms: 'Net 30', type: 'Wholesale', status: 'Active' }); setCusModal('new'); }}><Plus className="w-4 h-4" /> Add customer</button>}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+                {filteredCus.map((c) => (
+                  <div key={c.id} className="panel rounded-xl p-4">
+                    <p className="font-medium text-white">{c.name}</p>
+                    <p className="text-xs text-slate-400">{c.company}</p>
+                    <p className="text-xs text-slate-500 mt-2">{c.email} · {c.phone}</p>
+                    <p className="text-xs text-slate-500">{c.city}{c.state ? `, ${c.state}` : ''} · {c.paymentTerms}</p>
+                    <div className="flex justify-between items-center mt-3">
+                      <span className="text-xs text-slate-400">Outstanding {formatMoney(c.outstanding || 0)}</span>
+                      <div className="flex gap-1">
+                        {canPerform(role, 'edit') && <button type="button" className="btn-ghost text-xs py-1" onClick={() => { setCusForm({ ...c }); setCusModal(c); }}><Pencil className="w-3 h-3" /></button>}
+                        {canPerform(role, 'delete') && <button type="button" className="btn-danger text-xs py-1" onClick={() => setConfirm({ title: 'Delete customer?', message: c.name, onConfirm: () => { setCustomers((p) => p.filter((x) => x.id !== c.id)); toast('Deleted', c.name); setConfirm(null); } })}><Trash2 className="w-3 h-3" /></button>}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {filteredCus.length === 0 && <EmptyState message="No customers found" actionLabel="Add customer" onAction={() => setCusModal('new')} />}
+            </div>
+          )}
+
+          {/* SUPPLIERS */}
+          {view === 'suppliers' && (
+            <div className="space-y-4 fade-in">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h1 className="text-xl font-semibold text-white">Suppliers</h1>
+                {canPerform(role, 'create') && <button type="button" className="btn-primary flex items-center gap-1.5" onClick={() => { setSupForm({ name: '', contact: '', email: '', phone: '', category: 'Components', rating: 4, status: 'Active', paymentTerms: 'Net 30' }); setSupModal('new'); }}><Plus className="w-4 h-4" /> Add supplier</button>}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {filteredSup.map((s) => (
+                  <div key={s.id} className="panel rounded-xl p-4">
+                    <div className="flex justify-between"><p className="font-medium text-white">{s.name}</p><span className="text-xs text-amber-400">★ {s.rating}</span></div>
+                    <p className="text-xs text-slate-400 mt-1">{s.contact} · {s.category}</p>
+                    <p className="text-xs text-slate-500">{s.email || s.contact}</p>
+                    <div className="flex gap-1 mt-3">
+                      {canPerform(role, 'edit') && <button type="button" className="btn-ghost text-xs py-1" onClick={() => { setSupForm({ ...s }); setSupModal(s); }}><Pencil className="w-3 h-3" /></button>}
+                      {canPerform(role, 'delete') && <button type="button" className="btn-danger text-xs py-1" onClick={() => setConfirm({ title: 'Delete supplier?', message: s.name, onConfirm: () => { setSuppliers((p) => p.filter((x) => x.id !== s.id)); toast('Deleted', s.name); setConfirm(null); } })}><Trash2 className="w-3 h-3" /></button>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {filteredSup.length === 0 && <EmptyState message="No suppliers found" actionLabel="Add supplier" onAction={() => setSupModal('new')} />}
+            </div>
+          )}
+
+          {/* PRODUCTS */}
+          {view === 'products' && (
+            <div className="space-y-4 fade-in">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h1 className="text-xl font-semibold text-white">Product catalog</h1>
+                {canPerform(role, 'create') && <button type="button" className="btn-primary flex items-center gap-1.5" onClick={() => { setPrdForm({ sku: '', name: '', category: 'Fasteners', unitCost: 1, price: 2, reorderAt: 10, active: true }); setPrdModal('new'); }}><Plus className="w-4 h-4" /> Add product</button>}
               </div>
               <div className="panel rounded-xl overflow-hidden">
-                <div className="overflow-x-auto">
-                  <table className="w-full data-table">
-                    <thead>
-                      <tr>
-                        <th>SKU</th>
-                        <th>Name</th>
-                        <th className="hidden sm:table-cell">Category</th>
-                        <th className="text-right">Cost</th>
-                        <th className="text-right hidden sm:table-cell">Price</th>
-                        <th className="text-right">Reorder</th>
-                        <th className="text-right">Actions</th>
+                <table className="w-full data-table">
+                  <thead><tr><th>SKU</th><th>Name</th><th className="hidden sm:table-cell">Category</th><th className="text-right">Cost</th><th className="text-right">Price</th><th className="text-right">Actions</th></tr></thead>
+                  <tbody>
+                    {filteredPrd.map((p) => (
+                      <tr key={p.id}>
+                        <td className="font-mono text-xs text-slate-400">{p.sku}</td>
+                        <td className="text-white font-medium">{p.name}</td>
+                        <td className="hidden sm:table-cell text-slate-400">{p.category}</td>
+                        <td className="text-right tabular-nums">{formatMoney(p.unitCost)}</td>
+                        <td className="text-right tabular-nums">{formatMoney(p.price)}</td>
+                        <td className="text-right">
+                          <div className="inline-flex gap-1">
+                            {canPerform(role, 'edit') && <button type="button" className="btn-ghost text-xs py-1 px-2" onClick={() => { setPrdForm({ ...p }); setPrdModal(p); }}><Pencil className="w-3 h-3" /></button>}
+                            {canPerform(role, 'delete') && <button type="button" className="btn-danger text-xs py-1 px-2" onClick={() => setConfirm({ title: 'Delete product?', message: p.name, onConfirm: () => { setProducts((x) => x.filter((y) => y.id !== p.id)); toast('Deleted', p.sku); setConfirm(null); } })}><Trash2 className="w-3 h-3" /></button>}
+                          </div>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {filteredPrd.map((p) => (
-                        <tr key={p.id}>
-                          <td className="font-mono text-xs text-slate-400">{p.sku}</td>
-                          <td className="text-white font-medium">{p.name}</td>
-                          <td className="hidden sm:table-cell text-slate-400">{p.category}</td>
-                          <td className="text-right tabular-nums">{formatMoney(p.unitCost)}</td>
-                          <td className="text-right tabular-nums hidden sm:table-cell">{formatMoney(p.price)}</td>
-                          <td className="text-right tabular-nums">{p.reorderAt}</td>
-                          <td className="text-right">
-                            <div className="inline-flex gap-1">
-                              <button type="button" className="btn-ghost text-xs py-1 px-2" onClick={() => { setPrdForm({ sku: p.sku, name: p.name, category: p.category, unitCost: p.unitCost, price: p.price, reorderAt: p.reorderAt, active: p.active !== false }); setPrdModal(p); }}>
-                                <Pencil className="w-3 h-3" />
-                              </button>
-                              <button type="button" className="btn-danger text-xs py-1 px-2" onClick={() => deletePrd(p)}>
-                                <Trash2 className="w-3 h-3" />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                {filteredPrd.length === 0 && <p className="p-8 text-center text-sm text-slate-500">No products match.</p>}
+                    ))}
+                  </tbody>
+                </table>
+                {filteredPrd.length === 0 && <EmptyState message="No products found" actionLabel="Add product" onAction={() => setPrdModal('new')} />}
               </div>
             </div>
           )}
@@ -739,48 +943,29 @@ export default function App() {
                 <h1 className="text-xl font-semibold text-white">Inventory</h1>
                 <select value={whFilter} onChange={(e) => setWhFilter(e.target.value)} className="input-field w-auto py-1.5">
                   <option value="All">All warehouses</option>
-                  {WAREHOUSES.map((w) => <option key={w} value={w}>{w}</option>)}
+                  {WAREHOUSES.map((w) => <option key={w}>{w}</option>)}
                 </select>
               </div>
               <div className="panel rounded-xl overflow-hidden">
-                <div className="overflow-x-auto">
-                  <table className="w-full data-table">
-                    <thead>
-                      <tr>
-                        <th>Product</th>
-                        <th className="hidden sm:table-cell">Warehouse</th>
-                        <th className="text-right">On hand</th>
-                        <th className="text-right hidden sm:table-cell">Available</th>
-                        <th className="text-right">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {filteredInv.map((r) => {
-                        const p = productMap[r.productId];
-                        const avail = availableQty(r);
-                        const isLow = p && avail <= (p.reorderAt || 0);
-                        return (
-                          <tr key={r.id}>
-                            <td>
-                              <p className="font-medium text-white">{p?.name || r.productId}</p>
-                              <p className="text-xs text-slate-500 font-mono">{p?.sku}</p>
-                            </td>
-                            <td className="hidden sm:table-cell text-slate-400">{r.warehouse}</td>
-                            <td className="text-right tabular-nums">{r.qty}</td>
-                            <td className={`text-right tabular-nums hidden sm:table-cell ${isLow ? 'text-amber-400' : ''}`}>{avail}</td>
-                            <td className="text-right">
-                              <div className="inline-flex gap-1">
-                                <button type="button" onClick={() => receiveStock(r, 10)} className="btn-ghost text-xs py-1 px-2">+10</button>
-                                <button type="button" onClick={() => issueStock(r, 5)} className="btn-ghost text-xs py-1 px-2">−5</button>
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
-                {filteredInv.length === 0 && <p className="p-8 text-center text-sm text-slate-500">No rows match.</p>}
+                <table className="w-full data-table">
+                  <thead><tr><th>Product</th><th className="hidden sm:table-cell">Warehouse</th><th className="text-right">On hand</th><th className="text-right">Available</th><th className="text-right">Actions</th></tr></thead>
+                  <tbody>
+                    {filteredInv.map((r) => {
+                      const p = productMap[r.productId];
+                      const avail = availableQty(r);
+                      return (
+                        <tr key={r.id}>
+                          <td><p className="font-medium text-white">{p?.name || r.productId}</p><p className="text-xs font-mono text-slate-500">{p?.sku}</p></td>
+                          <td className="hidden sm:table-cell text-slate-400">{r.warehouse}</td>
+                          <td className="text-right tabular-nums">{r.qty}</td>
+                          <td className={`text-right tabular-nums ${p && avail <= p.reorderAt ? 'text-amber-400' : ''}`}>{avail}</td>
+                          <td className="text-right"><div className="inline-flex gap-1"><button type="button" className="btn-ghost text-xs py-1 px-2" onClick={() => receiveStock(r, 10)}>+10</button><button type="button" className="btn-ghost text-xs py-1 px-2" onClick={() => issueStock(r, 5)}>−5</button></div></td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+                {filteredInv.length === 0 && <EmptyState message="No inventory rows" />}
               </div>
             </div>
           )}
@@ -789,54 +974,31 @@ export default function App() {
           {view === 'orders' && (
             <div className="space-y-4 fade-in">
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <h1 className="text-xl font-semibold text-white">Purchase Orders</h1>
-                <div className="flex flex-wrap gap-2">
-                  <select value={poFilter} onChange={(e) => setPoFilter(e.target.value)} className="input-field w-auto py-1.5">
-                    <option value="All">All statuses</option>
-                    {PO_STATUS.map((s) => <option key={s} value={s}>{s}</option>)}
-                  </select>
-                  <button type="button" onClick={openNewPo} className="btn-primary flex items-center gap-1.5"><Plus className="w-4 h-4" /> New PO</button>
+                <h1 className="text-xl font-semibold text-white">Purchase orders</h1>
+                <div className="flex gap-2">
+                  <select value={poFilter} onChange={(e) => setPoFilter(e.target.value)} className="input-field w-auto py-1.5"><option value="All">All</option>{PO_STATUS.map((s) => <option key={s}>{s}</option>)}</select>
+                  {canPerform(role, 'create') && <button type="button" className="btn-primary flex items-center gap-1.5" onClick={() => { setPoForm({ supplierId: suppliers[0]?.id || '', productId: products[0]?.id || '', qty: 10, unitCost: products[0]?.unitCost || 10, notes: '' }); setPoModal('new'); }}><Plus className="w-4 h-4" /> New PO</button>}
                 </div>
               </div>
               <div className="space-y-2">
                 {filteredPos.map((po) => {
-                  const sup = supplierMap[po.supplierId];
                   const line = (po.lines || [])[0];
-                  const prod = line ? productMap[line.productId] : null;
-                  const canAdvance = !['Received', 'Cancelled'].includes(po.status);
-                  const next = nextPoStatus(po.status);
+                  const canAdv = !['Received', 'Cancelled'].includes(po.status);
                   return (
                     <div key={po.id} className="panel rounded-xl px-4 py-3 flex flex-wrap items-center gap-3">
-                      <div className="min-w-[90px]">
-                        <p className="text-sm font-mono text-white">{po.id}</p>
-                        <p className="text-xs text-slate-500">{formatDate(po.orderedAt)}</p>
-                      </div>
-                      <div className="flex-1 min-w-[140px]">
-                        <p className="text-sm text-white">{sup?.name || po.supplierId}</p>
-                        <p className="text-xs text-slate-500">{prod?.name || line?.productId} · qty {line?.qty}</p>
-                      </div>
-                      <span className="text-sm font-medium tabular-nums">{formatMoney(po.total ?? poTotal(po))}</span>
-                      <span className={`status-pill ${poColor[po.status] || 'bg-slate-700 text-slate-300'}`}>{po.status}</span>
-                      <div className="flex flex-wrap gap-1 ml-auto">
-                        {canAdvance && (
-                          <button type="button" onClick={() => advancePoRow(po)} className="btn-ghost text-xs py-1 flex items-center gap-1">
-                            Advance{next !== po.status && <><ChevronRight className="w-3 h-3" />{next}</>}
-                          </button>
-                        )}
-                        {po.status === 'Draft' && (
-                          <button type="button" onClick={() => {
-                            setPoForm({ supplierId: po.supplierId, productId: line?.productId || products[0]?.id, qty: line?.qty || 10, unitCost: line?.unitCost || 10, notes: po.notes || '' });
-                            setPoModal(po);
-                          }} className="btn-ghost text-xs py-1 flex items-center gap-1"><Pencil className="w-3 h-3" /> Edit</button>
-                        )}
-                        {canAdvance && (
-                          <button type="button" onClick={() => cancelPo(po.id)} className="btn-danger text-xs py-1">Cancel</button>
-                        )}
+                      <div className="min-w-[90px]"><p className="text-sm font-mono text-white">{po.id}</p><p className="text-xs text-slate-500">{formatDate(po.orderedAt)}</p></div>
+                      <div className="flex-1 min-w-[140px]"><p className="text-sm text-white">{supplierMap[po.supplierId]?.name}</p><p className="text-xs text-slate-500">{productMap[line?.productId]?.name} · qty {line?.qty}</p></div>
+                      <span className="text-sm font-medium">{formatMoney(po.total ?? poTotal(po))}</span>
+                      <span className={`status-pill ${poColor[po.status] || ''}`}>{po.status}</span>
+                      <div className="flex gap-1 ml-auto">
+                        {canAdv && canPerform(role, 'approve') && <button type="button" className="btn-ghost text-xs py-1" onClick={() => advancePoRow(po)}>Advance</button>}
+                        {po.status === 'Draft' && canPerform(role, 'edit') && <button type="button" className="btn-ghost text-xs py-1" onClick={() => { setPoForm({ supplierId: po.supplierId, productId: line?.productId, qty: line?.qty, unitCost: line?.unitCost, notes: po.notes || '' }); setPoModal(po); }}><Pencil className="w-3 h-3" /></button>}
+                        {canAdv && canPerform(role, 'edit') && <button type="button" className="btn-danger text-xs py-1" onClick={() => setConfirm({ title: 'Cancel PO?', message: po.id, onConfirm: () => { setPurchaseOrders((p) => p.map((x) => x.id === po.id ? { ...x, status: 'Cancelled' } : x)); toast('Cancelled', po.id); setConfirm(null); } })}>Cancel</button>}
                       </div>
                     </div>
                   );
                 })}
-                {filteredPos.length === 0 && <p className="text-center text-slate-500 py-12 text-sm">No purchase orders match.</p>}
+                {filteredPos.length === 0 && <EmptyState message="No purchase orders" actionLabel="New PO" onAction={() => setPoModal('new')} />}
               </div>
             </div>
           )}
@@ -846,252 +1008,433 @@ export default function App() {
             <div className="space-y-4 fade-in">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <h1 className="text-xl font-semibold text-white">Shipping</h1>
-                <div className="flex flex-wrap gap-2">
-                  <select value={shipFilter} onChange={(e) => setShipFilter(e.target.value)} className="input-field w-auto py-1.5">
-                    <option value="All">All statuses</option>
-                    {SHIP_STATUS.map((s) => <option key={s} value={s}>{s}</option>)}
-                  </select>
-                  <button type="button" onClick={openNewShip} className="btn-primary flex items-center gap-1.5"><Plus className="w-4 h-4" /> New shipment</button>
+                <div className="flex gap-2">
+                  <select value={shipFilter} onChange={(e) => setShipFilter(e.target.value)} className="input-field w-auto py-1.5"><option value="All">All</option>{SHIP_STATUS.map((s) => <option key={s}>{s}</option>)}</select>
+                  {canPerform(role, 'create') && <button type="button" className="btn-primary flex items-center gap-1.5" onClick={() => { setShipForm({ poId: purchaseOrders[0]?.id || '', carrier: 'FedEx', tracking: '', status: 'Pending', shipDate: new Date().toISOString().slice(0, 10), eta: '', destination: 'Main DC' }); setShipModal('new'); }}><Plus className="w-4 h-4" /> New shipment</button>}
                 </div>
               </div>
               <div className="space-y-2">
-                {filteredShp.map((ship) => {
-                  const canAdvance = !['Delivered', 'Cancelled'].includes(ship.status);
-                  return (
-                    <div key={ship.id} className="panel rounded-xl px-4 py-3 flex flex-wrap items-center gap-3">
-                      <div className="min-w-[90px]">
-                        <p className="text-sm font-mono text-white">{ship.id}</p>
-                        <p className="text-xs text-slate-500">PO {ship.poId}</p>
-                      </div>
-                      <div className="flex-1 min-w-[140px]">
-                        <p className="text-sm text-white">{ship.carrier} · {ship.tracking}</p>
-                        <p className="text-xs text-slate-500">
-                          {ship.destination} · ship {ship.shipDate || '—'} · ETA {ship.eta || '—'}
-                        </p>
-                      </div>
-                      <span className={`status-pill ${shipColor[ship.status] || 'bg-slate-700 text-slate-300'}`}>{ship.status}</span>
-                      <div className="flex flex-wrap gap-1 ml-auto">
-                        {canAdvance && (
-                          <button type="button" onClick={() => advanceShip(ship)} className="btn-ghost text-xs py-1">Advance</button>
-                        )}
-                        <button type="button" onClick={() => {
-                          setShipForm({ poId: ship.poId, carrier: ship.carrier, tracking: ship.tracking, status: ship.status, shipDate: ship.shipDate || '', eta: ship.eta || '', destination: ship.destination || 'Main DC' });
-                          setShipModal(ship);
-                        }} className="btn-ghost text-xs py-1 flex items-center gap-1"><Pencil className="w-3 h-3" /> Edit</button>
-                        {canAdvance && (
-                          <button type="button" onClick={() => cancelShip(ship.id)} className="btn-danger text-xs py-1">Cancel</button>
-                        )}
-                      </div>
+                {filteredShp.map((ship) => (
+                  <div key={ship.id} className="panel rounded-xl px-4 py-3 flex flex-wrap items-center gap-3">
+                    <div className="min-w-[90px]"><p className="text-sm font-mono text-white">{ship.id}</p><p className="text-xs text-slate-500">PO {ship.poId}</p></div>
+                    <div className="flex-1"><p className="text-sm text-white">{ship.carrier} · {ship.tracking}</p><p className="text-xs text-slate-500">{ship.destination} · ETA {ship.eta || '—'}</p></div>
+                    <span className={`status-pill ${shipColor[ship.status] || ''}`}>{ship.status}</span>
+                    <div className="flex gap-1 ml-auto">
+                      {!['Delivered', 'Cancelled'].includes(ship.status) && <button type="button" className="btn-ghost text-xs py-1" onClick={() => advanceShip(ship)}>Advance</button>}
+                      <button type="button" className="btn-ghost text-xs py-1" onClick={() => { setShipForm({ ...ship }); setShipModal(ship); }}><Pencil className="w-3 h-3" /></button>
                     </div>
-                  );
-                })}
-                {filteredShp.length === 0 && <p className="text-center text-slate-500 py-12 text-sm">No shipments match.</p>}
+                  </div>
+                ))}
+                {filteredShp.length === 0 && <EmptyState message="No shipments" actionLabel="New shipment" onAction={() => setShipModal('new')} />}
+              </div>
+            </div>
+          )}
+
+          {/* PROJECTS */}
+          {view === 'projects' && (
+            <div className="space-y-4 fade-in">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h1 className="text-xl font-semibold text-white">Projects</h1>
+                {canPerform(role, 'create') && <button type="button" className="btn-primary flex items-center gap-1.5" onClick={() => { setPrjForm({ name: '', status: 'Planning', budget: 0, start: '', end: '', owner: user.name }); setPrjModal('new'); }}><Plus className="w-4 h-4" /> New project</button>}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {projects.map((p) => (
+                  <div key={p.id} className="panel rounded-xl p-4">
+                    <div className="flex justify-between"><p className="font-medium text-white">{p.name}</p><span className="status-pill bg-slate-700/60 text-slate-300">{p.status}</span></div>
+                    <p className="text-xs text-slate-500 mt-1">Budget {formatMoney(p.budget)} · {p.owner}</p>
+                    <p className="text-xs text-slate-500">{p.start} → {p.end || '—'}</p>
+                    <div className="mt-2 space-y-1">
+                      {tasks.filter((t) => t.projectId === p.id).map((t) => (
+                        <div key={t.id} className="text-xs flex justify-between text-slate-400"><span>{t.title}</span><span>{t.status}</span></div>
+                      ))}
+                    </div>
+                    {canPerform(role, 'edit') && <button type="button" className="btn-ghost text-xs mt-3" onClick={() => { setPrjForm({ ...p }); setPrjModal(p); }}>Edit</button>}
+                  </div>
+                ))}
+              </div>
+              {projects.length === 0 && <EmptyState message="No projects" actionLabel="New project" onAction={() => setPrjModal('new')} />}
+            </div>
+          )}
+
+          {/* TICKETS */}
+          {view === 'tickets' && (
+            <div className="space-y-4 fade-in">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h1 className="text-xl font-semibold text-white">Service desk</h1>
+                <div className="flex gap-2">
+                  <select value={ticketFilter} onChange={(e) => setTicketFilter(e.target.value)} className="input-field w-auto py-1.5"><option value="All">All</option>{TICKET_STATUS.map((s) => <option key={s}>{s}</option>)}</select>
+                  {canPerform(role, 'create') && <button type="button" className="btn-primary flex items-center gap-1.5" onClick={() => { setTktForm({ subject: '', customerId: customers[0]?.id || '', priority: 'Medium', status: 'Open', category: 'General' }); setTktModal('new'); }}><Plus className="w-4 h-4" /> New ticket</button>}
+                </div>
+              </div>
+              <div className="space-y-2">
+                {filteredTkt.map((t) => (
+                  <div key={t.id} className="panel rounded-xl px-4 py-3 flex flex-wrap items-center gap-3">
+                    <div className="flex-1"><p className="text-sm text-white">{t.subject}</p><p className="text-xs text-slate-500">{t.id} · {customerMap[t.customerId]?.name || t.customerId} · {t.priority}</p></div>
+                    <span className="status-pill bg-slate-700/60 text-slate-300">{t.status}</span>
+                    <div className="flex gap-1">
+                      {!['Closed'].includes(t.status) && <button type="button" className="btn-ghost text-xs py-1" onClick={() => advanceTicket(t)}>Advance</button>}
+                      <button type="button" className="btn-ghost text-xs py-1" onClick={() => { setTktForm({ ...t }); setTktModal(t); }}><Pencil className="w-3 h-3" /></button>
+                    </div>
+                  </div>
+                ))}
+                {filteredTkt.length === 0 && <EmptyState message="No tickets" actionLabel="New ticket" onAction={() => setTktModal('new')} />}
+              </div>
+            </div>
+          )}
+
+          {/* CONTRACTS */}
+          {view === 'contracts' && (
+            <div className="space-y-4 fade-in">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h1 className="text-xl font-semibold text-white">Contracts</h1>
+                {canPerform(role, 'create') && <button type="button" className="btn-primary flex items-center gap-1.5" onClick={() => { setCtrForm({ name: '', type: 'Customer', partyId: customers[0]?.id || '', value: 0, start: '', end: '', renewal: '', status: 'Draft' }); setCtrModal('new'); }}><Plus className="w-4 h-4" /> New contract</button>}
+              </div>
+              <div className="space-y-2">
+                {contracts.map((c) => (
+                  <div key={c.id} className="panel rounded-xl px-4 py-3 flex flex-wrap items-center gap-3">
+                    <div className="flex-1"><p className="text-sm text-white">{c.name}</p><p className="text-xs text-slate-500">{c.type} · {c.start} → {c.end} · renewal {c.renewal || '—'}</p></div>
+                    <span className="text-sm">{formatMoney(c.value)}</span>
+                    <span className="status-pill bg-slate-700/60 text-slate-300">{c.status}</span>
+                    {canPerform(role, 'edit') && <button type="button" className="btn-ghost text-xs py-1" onClick={() => { setCtrForm({ ...c }); setCtrModal(c); }}><Pencil className="w-3 h-3" /></button>}
+                  </div>
+                ))}
+                {contracts.length === 0 && <EmptyState message="No contracts" actionLabel="New contract" onAction={() => setCtrModal('new')} />}
+              </div>
+            </div>
+          )}
+
+          {/* APPROVALS */}
+          {view === 'approvals' && (
+            <div className="space-y-4 fade-in">
+              <h1 className="text-xl font-semibold text-white">Approvals</h1>
+              <div className="space-y-2">
+                {approvals.map((a) => (
+                  <div key={a.id} className="panel rounded-xl px-4 py-3 flex flex-wrap items-center gap-3">
+                    <div className="flex-1"><p className="text-sm text-white">{a.title}</p><p className="text-xs text-slate-500">{a.type} · {a.requester} · due {a.due}</p></div>
+                    <span className="status-pill bg-slate-700/60 text-slate-300">{a.status}</span>
+                    {a.status === 'Pending' && canPerform(role, 'approve') && (
+                      <div className="flex gap-1">
+                        <button type="button" className="btn-primary text-xs py-1" onClick={() => decideApproval(a, 'Approved')}>Approve</button>
+                        <button type="button" className="btn-danger text-xs py-1" onClick={() => decideApproval(a, 'Rejected')}>Reject</button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+                {approvals.length === 0 && <EmptyState message="No approval requests" />}
+              </div>
+            </div>
+          )}
+
+          {/* DOCUMENTS */}
+          {view === 'documents' && (
+            <div className="space-y-4 fade-in">
+              <h1 className="text-xl font-semibold text-white">Documents</h1>
+              <div className="panel rounded-xl overflow-hidden">
+                <table className="w-full data-table">
+                  <thead><tr><th>Name</th><th>Category</th><th className="hidden sm:table-cell">Owner</th><th>Size</th><th>Uploaded</th></tr></thead>
+                  <tbody>
+                    {documents.map((d) => (
+                      <tr key={d.id}><td className="text-white">{d.name}</td><td className="text-slate-400">{d.category}</td><td className="hidden sm:table-cell text-slate-400">{d.owner}</td><td>{d.size}</td><td className="text-slate-500">{d.uploadedAt}</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+                {documents.length === 0 && <EmptyState message="No documents" />}
               </div>
             </div>
           )}
 
           {/* HR */}
-          {view === 'hr' && isAdmin && (
+          {view === 'hr' && (
             <div className="space-y-4 fade-in">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <h1 className="text-xl font-semibold text-white">Employees</h1>
-                <button type="button" onClick={openNewEmp} className="btn-primary flex items-center gap-1.5"><Plus className="w-4 h-4" /> Add employee</button>
+                {canPerform(role, 'create') && <button type="button" className="btn-primary flex items-center gap-1.5" onClick={() => { setEmpForm({ name: '', department: 'Operations', role: '', email: '', status: 'Active' }); setEmpModal('new'); }}><Plus className="w-4 h-4" /> Add employee</button>}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
                 {filteredEmp.map((e) => (
                   <div key={e.id} className="panel rounded-xl p-4">
-                    <div className="flex justify-between items-start gap-2 mb-2">
-                      <div className="min-w-0">
-                        <p className="font-medium text-white truncate">{e.name}</p>
-                        <p className="text-xs text-slate-400">{e.role} · {e.department}</p>
-                      </div>
-                      <span className={`text-[10px] uppercase font-medium shrink-0 ${e.status === 'Active' ? 'text-emerald-400' : 'text-amber-400'}`}>{e.status}</span>
-                    </div>
-                    <p className="text-xs text-slate-500 mb-3 truncate">{e.email}</p>
-                    <div className="flex gap-1.5">
-                      <button type="button" onClick={() => { setEmpForm({ name: e.name, department: e.department, role: e.role, email: e.email, status: e.status }); setEmpModal(e); }} className="btn-ghost text-xs py-1 flex items-center gap-1"><Pencil className="w-3 h-3" /> Edit</button>
-                      <button type="button" onClick={() => deleteEmp(e)} className="btn-danger text-xs py-1 flex items-center gap-1"><Trash2 className="w-3 h-3" /> Delete</button>
+                    <p className="font-medium text-white">{e.name}</p>
+                    <p className="text-xs text-slate-400">{e.role} · {e.department}</p>
+                    <p className="text-xs text-slate-500 mt-1">{e.email}</p>
+                    <p className="text-xs text-slate-500">Leave balance: {e.leaveBalance ?? '—'}</p>
+                    <div className="flex gap-1 mt-3">
+                      {canPerform(role, 'edit') && <button type="button" className="btn-ghost text-xs py-1" onClick={() => { setEmpForm({ ...e }); setEmpModal(e); }}><Pencil className="w-3 h-3" /></button>}
+                      {canPerform(role, 'delete') && <button type="button" className="btn-danger text-xs py-1" onClick={() => setConfirm({ title: 'Remove employee?', message: e.name, onConfirm: () => { setEmployees((p) => p.filter((x) => x.id !== e.id)); toast('Removed', e.name); setConfirm(null); } })}><Trash2 className="w-3 h-3" /></button>}
                     </div>
                   </div>
                 ))}
               </div>
-              {filteredEmp.length === 0 && <p className="text-center text-slate-500 py-12 text-sm">No employees match.</p>}
+            </div>
+          )}
+
+          {/* NOTIFICATIONS */}
+          {view === 'notifications' && (
+            <div className="space-y-4 fade-in">
+              <div className="flex items-center justify-between">
+                <h1 className="text-xl font-semibold text-white">Notifications</h1>
+                <button type="button" className="btn-ghost text-xs" onClick={markAllRead}>Mark all read</button>
+              </div>
+              <div className="space-y-2">
+                {notifications.map((n) => (
+                  <button key={n.id} type="button" onClick={() => markRead(n.id)} className={`panel rounded-xl px-4 py-3 text-left w-full ${n.read ? 'opacity-60' : 'border-l-2 border-l-orange-500'}`}>
+                    <p className="text-sm text-white">{n.title}</p>
+                    <p className="text-xs text-slate-500 mt-0.5">{n.body}</p>
+                    <p className="text-[10px] text-slate-600 mt-1">{n.category} · {n.priority}</p>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ADMIN */}
+          {view === 'admin' && admin && (
+            <div className="space-y-5 fade-in">
+              <h1 className="text-xl font-semibold text-white">Administration</h1>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                <div className="panel rounded-xl p-4">
+                  <h2 className="text-sm font-medium text-white mb-3">Roles</h2>
+                  <ul className="space-y-2">
+                    {ROLES.map((r) => (
+                      <li key={r.id} className="flex justify-between text-sm"><span className="text-slate-300">{r.name}</span><span className="text-xs text-slate-500">{(r.permissions || []).join(', ')}</span></li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="panel rounded-xl p-4">
+                  <h2 className="text-sm font-medium text-white mb-3">Users</h2>
+                  <ul className="space-y-2 max-h-64 overflow-y-auto">
+                    {users.map((u) => (
+                      <li key={u.id} className="flex justify-between text-sm gap-2">
+                        <span className="text-slate-300">{u.name} <span className="text-slate-500">(@{u.username})</span></span>
+                        <span className="text-xs text-slate-500">{u.role} · {u.status}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="panel rounded-xl p-4 lg:col-span-2">
+                  <h2 className="text-sm font-medium text-white mb-3">Login history</h2>
+                  <table className="w-full data-table text-sm">
+                    <thead><tr><th>User</th><th>Time</th><th>Result</th><th>IP</th></tr></thead>
+                    <tbody>
+                      {loginHistory.slice(0, 15).map((h) => (
+                        <tr key={h.id}><td>{h.username}</td><td className="text-slate-500">{h.at}</td><td className={h.success ? 'text-emerald-400' : 'text-rose-400'}>{h.success ? 'Success' : 'Failed'}</td><td className="text-slate-500">{h.ip}</td></tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           )}
         </main>
       </div>
 
-      {/* Product Modal */}
+      {/* Modals - compact forms */}
+      <Modal open={!!leadModal} onClose={() => setLeadModal(null)} title={leadModal === 'new' ? 'Add lead' : 'Edit lead'}>
+        <form onSubmit={saveLeadForm} className="space-y-3">
+          <input className="input-field" placeholder="Name" value={leadForm.name} onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })} required />
+          <input className="input-field" placeholder="Company" value={leadForm.company} onChange={(e) => setLeadForm({ ...leadForm, company: e.target.value })} />
+          <div className="grid grid-cols-2 gap-2">
+            <input className="input-field" placeholder="Email" value={leadForm.email} onChange={(e) => setLeadForm({ ...leadForm, email: e.target.value })} />
+            <input className="input-field" placeholder="Phone" value={leadForm.phone} onChange={(e) => setLeadForm({ ...leadForm, phone: e.target.value })} />
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <select className="input-field" value={leadForm.status} onChange={(e) => setLeadForm({ ...leadForm, status: e.target.value })}>{LEAD_STATUS.map((s) => <option key={s}>{s}</option>)}</select>
+            <input type="number" className="input-field" placeholder="Score" value={leadForm.score} onChange={(e) => setLeadForm({ ...leadForm, score: e.target.value })} />
+          </div>
+          <input type="number" className="input-field" placeholder="Expected value" value={leadForm.value} onChange={(e) => setLeadForm({ ...leadForm, value: e.target.value })} />
+          <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={() => setLeadModal(null)}>Cancel</button><button type="submit" className="btn-primary">Save</button></div>
+        </form>
+      </Modal>
+
+      <Modal open={!!cusModal} onClose={() => setCusModal(null)} title={cusModal === 'new' ? 'Add customer' : 'Edit customer'}>
+        <form onSubmit={saveCusForm} className="space-y-3">
+          <input className="input-field" placeholder="Name" value={cusForm.name} onChange={(e) => setCusForm({ ...cusForm, name: e.target.value })} required />
+          <input className="input-field" placeholder="Company" value={cusForm.company} onChange={(e) => setCusForm({ ...cusForm, company: e.target.value })} />
+          <div className="grid grid-cols-2 gap-2">
+            <input className="input-field" placeholder="Email" value={cusForm.email} onChange={(e) => setCusForm({ ...cusForm, email: e.target.value })} />
+            <input className="input-field" placeholder="Phone" value={cusForm.phone} onChange={(e) => setCusForm({ ...cusForm, phone: e.target.value })} />
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <input className="input-field" placeholder="City" value={cusForm.city} onChange={(e) => setCusForm({ ...cusForm, city: e.target.value })} />
+            <input className="input-field" placeholder="State" value={cusForm.state} onChange={(e) => setCusForm({ ...cusForm, state: e.target.value })} />
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <input type="number" className="input-field" placeholder="Credit limit" value={cusForm.creditLimit} onChange={(e) => setCusForm({ ...cusForm, creditLimit: e.target.value })} />
+            <select className="input-field" value={cusForm.paymentTerms} onChange={(e) => setCusForm({ ...cusForm, paymentTerms: e.target.value })}><option>Net 15</option><option>Net 30</option><option>Net 45</option><option>Due on receipt</option></select>
+          </div>
+          <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={() => setCusModal(null)}>Cancel</button><button type="submit" className="btn-primary">Save</button></div>
+        </form>
+      </Modal>
+
+      <Modal open={!!supModal} onClose={() => setSupModal(null)} title={supModal === 'new' ? 'Add supplier' : 'Edit supplier'}>
+        <form onSubmit={saveSupForm} className="space-y-3">
+          <input className="input-field" placeholder="Company name" value={supForm.name} onChange={(e) => setSupForm({ ...supForm, name: e.target.value })} required />
+          <input className="input-field" placeholder="Contact" value={supForm.contact} onChange={(e) => setSupForm({ ...supForm, contact: e.target.value })} />
+          <input className="input-field" placeholder="Email" value={supForm.email} onChange={(e) => setSupForm({ ...supForm, email: e.target.value })} />
+          <div className="grid grid-cols-2 gap-2">
+            <input className="input-field" placeholder="Category" value={supForm.category} onChange={(e) => setSupForm({ ...supForm, category: e.target.value })} />
+            <input type="number" min="1" max="5" step="0.1" className="input-field" placeholder="Rating" value={supForm.rating} onChange={(e) => setSupForm({ ...supForm, rating: e.target.value })} />
+          </div>
+          <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={() => setSupModal(null)}>Cancel</button><button type="submit" className="btn-primary">Save</button></div>
+        </form>
+      </Modal>
+
       <Modal open={!!prdModal} onClose={() => setPrdModal(null)} title={prdModal === 'new' ? 'Add product' : 'Edit product'}>
         <form onSubmit={savePrdForm} className="space-y-3">
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">SKU</label>
-              <input className="input-field" value={prdForm.sku} onChange={(e) => setPrdForm({ ...prdForm, sku: e.target.value })} disabled={prdModal !== 'new'} />
-            </div>
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Category</label>
-              <select className="input-field" value={prdForm.category} onChange={(e) => setPrdForm({ ...prdForm, category: e.target.value })}>
-                {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
-              </select>
-            </div>
+          <div className="grid grid-cols-2 gap-2">
+            <input className="input-field" placeholder="SKU" value={prdForm.sku} onChange={(e) => setPrdForm({ ...prdForm, sku: e.target.value })} disabled={prdModal !== 'new'} required />
+            <select className="input-field" value={prdForm.category} onChange={(e) => setPrdForm({ ...prdForm, category: e.target.value })}>{CATEGORIES.map((c) => <option key={c}>{c}</option>)}</select>
           </div>
-          <div>
-            <label className="block text-xs text-slate-400 mb-1">Name</label>
-            <input className="input-field" value={prdForm.name} onChange={(e) => setPrdForm({ ...prdForm, name: e.target.value })} />
+          <input className="input-field" placeholder="Name" value={prdForm.name} onChange={(e) => setPrdForm({ ...prdForm, name: e.target.value })} required />
+          <div className="grid grid-cols-3 gap-2">
+            <input type="number" step="0.01" className="input-field" placeholder="Cost" value={prdForm.unitCost} onChange={(e) => setPrdForm({ ...prdForm, unitCost: e.target.value })} />
+            <input type="number" step="0.01" className="input-field" placeholder="Price" value={prdForm.price} onChange={(e) => setPrdForm({ ...prdForm, price: e.target.value })} />
+            <input type="number" className="input-field" placeholder="Reorder" value={prdForm.reorderAt} onChange={(e) => setPrdForm({ ...prdForm, reorderAt: e.target.value })} />
           </div>
-          <div className="grid grid-cols-3 gap-3">
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Unit cost</label>
-              <input type="number" step="0.01" min="0" className="input-field" value={prdForm.unitCost} onChange={(e) => setPrdForm({ ...prdForm, unitCost: e.target.value })} />
-            </div>
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Price</label>
-              <input type="number" step="0.01" min="0" className="input-field" value={prdForm.price} onChange={(e) => setPrdForm({ ...prdForm, price: e.target.value })} />
-            </div>
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Reorder at</label>
-              <input type="number" min="0" className="input-field" value={prdForm.reorderAt} onChange={(e) => setPrdForm({ ...prdForm, reorderAt: e.target.value })} />
-            </div>
-          </div>
-          <div className="flex justify-end gap-2 pt-1">
-            <button type="button" onClick={() => setPrdModal(null)} className="btn-ghost">Cancel</button>
-            <button type="submit" className="btn-primary flex items-center gap-1"><Check className="w-3.5 h-3.5" /> Save</button>
-          </div>
+          <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={() => setPrdModal(null)}>Cancel</button><button type="submit" className="btn-primary">Save</button></div>
         </form>
       </Modal>
 
-      {/* PO Modal */}
-      <Modal open={!!poModal} onClose={() => setPoModal(null)} title={poModal === 'new' ? 'New purchase order' : 'Edit purchase order'}>
+      <Modal open={!!poModal} onClose={() => setPoModal(null)} title={poModal === 'new' ? 'New purchase order' : 'Edit PO'}>
         <form onSubmit={savePoForm} className="space-y-3">
-          <div>
-            <label className="block text-xs text-slate-400 mb-1">Supplier</label>
-            <select className="input-field" value={poForm.supplierId} onChange={(e) => setPoForm({ ...poForm, supplierId: e.target.value })}>
-              {suppliers.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
-            </select>
+          <select className="input-field" value={poForm.supplierId} onChange={(e) => setPoForm({ ...poForm, supplierId: e.target.value })}>{suppliers.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}</select>
+          <select className="input-field" value={poForm.productId} onChange={(e) => { const p = productMap[e.target.value]; setPoForm({ ...poForm, productId: e.target.value, unitCost: p?.unitCost ?? poForm.unitCost }); }}>{products.map((p) => <option key={p.id} value={p.id}>{p.sku} — {p.name}</option>)}</select>
+          <div className="grid grid-cols-2 gap-2">
+            <input type="number" min="1" className="input-field" value={poForm.qty} onChange={(e) => setPoForm({ ...poForm, qty: e.target.value })} />
+            <input type="number" step="0.01" className="input-field" value={poForm.unitCost} onChange={(e) => setPoForm({ ...poForm, unitCost: e.target.value })} />
           </div>
-          <div>
-            <label className="block text-xs text-slate-400 mb-1">Product</label>
-            <select className="input-field" value={poForm.productId} onChange={(e) => {
-              const p = productMap[e.target.value];
-              setPoForm({ ...poForm, productId: e.target.value, unitCost: p?.unitCost ?? poForm.unitCost });
-            }}>
-              {products.map((p) => <option key={p.id} value={p.id}>{p.sku} — {p.name}</option>)}
-            </select>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Qty</label>
-              <input type="number" min="1" className="input-field" value={poForm.qty} onChange={(e) => setPoForm({ ...poForm, qty: e.target.value })} />
-            </div>
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Unit cost</label>
-              <input type="number" step="0.01" min="0" className="input-field" value={poForm.unitCost} onChange={(e) => setPoForm({ ...poForm, unitCost: e.target.value })} />
-            </div>
-          </div>
-          <div>
-            <label className="block text-xs text-slate-400 mb-1">Notes</label>
-            <input className="input-field" value={poForm.notes} onChange={(e) => setPoForm({ ...poForm, notes: e.target.value })} placeholder="Optional" />
-          </div>
-          <p className="text-xs text-slate-500">Line total: {formatMoney((Number(poForm.qty) || 0) * (Number(poForm.unitCost) || 0))}</p>
-          <div className="flex justify-end gap-2 pt-1">
-            <button type="button" onClick={() => setPoModal(null)} className="btn-ghost">Cancel</button>
-            <button type="submit" className="btn-primary flex items-center gap-1"><Check className="w-3.5 h-3.5" /> Save</button>
-          </div>
+          <p className="text-xs text-slate-500">Total {formatMoney((Number(poForm.qty) || 0) * (Number(poForm.unitCost) || 0))}</p>
+          <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={() => setPoModal(null)}>Cancel</button><button type="submit" className="btn-primary">Save</button></div>
         </form>
       </Modal>
 
-      {/* Employee Modal */}
-      <Modal open={!!empModal} onClose={() => setEmpModal(null)} title={empModal === 'new' ? 'Add employee' : 'Edit employee'}>
-        <form onSubmit={saveEmpForm} className="space-y-3">
-          <div>
-            <label className="block text-xs text-slate-400 mb-1">Name</label>
-            <input className="input-field" value={empForm.name} onChange={(e) => setEmpForm({ ...empForm, name: e.target.value })} autoFocus />
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Department</label>
-              <select className="input-field" value={empForm.department} onChange={(e) => setEmpForm({ ...empForm, department: e.target.value })}>
-                {DEPTS.map((d) => <option key={d} value={d}>{d}</option>)}
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Role</label>
-              <input className="input-field" value={empForm.role} onChange={(e) => setEmpForm({ ...empForm, role: e.target.value })} />
-            </div>
-          </div>
-          <div>
-            <label className="block text-xs text-slate-400 mb-1">Email</label>
-            <input type="email" className="input-field" value={empForm.email} onChange={(e) => setEmpForm({ ...empForm, email: e.target.value })} />
-          </div>
-          <div>
-            <label className="block text-xs text-slate-400 mb-1">Status</label>
-            <select className="input-field" value={empForm.status} onChange={(e) => setEmpForm({ ...empForm, status: e.target.value })}>
-              <option value="Active">Active</option>
-              <option value="On Leave">On Leave</option>
-            </select>
-          </div>
-          <div className="flex justify-end gap-2 pt-1">
-            <button type="button" onClick={() => setEmpModal(null)} className="btn-ghost">Cancel</button>
-            <button type="submit" className="btn-primary flex items-center gap-1"><Check className="w-3.5 h-3.5" /> Save</button>
-          </div>
-        </form>
-      </Modal>
-
-      {/* Shipment Modal */}
       <Modal open={!!shipModal} onClose={() => setShipModal(null)} title={shipModal === 'new' ? 'New shipment' : 'Edit shipment'}>
         <form onSubmit={saveShipForm} className="space-y-3">
-          <div>
-            <label className="block text-xs text-slate-400 mb-1">Purchase order</label>
-            <select className="input-field" value={shipForm.poId} onChange={(e) => setShipForm({ ...shipForm, poId: e.target.value })}>
-              {purchaseOrders.map((p) => <option key={p.id} value={p.id}>{p.id} · {p.status}</option>)}
-            </select>
+          <select className="input-field" value={shipForm.poId} onChange={(e) => setShipForm({ ...shipForm, poId: e.target.value })}>{purchaseOrders.map((p) => <option key={p.id} value={p.id}>{p.id}</option>)}</select>
+          <div className="grid grid-cols-2 gap-2">
+            <select className="input-field" value={shipForm.carrier} onChange={(e) => setShipForm({ ...shipForm, carrier: e.target.value })}><option>FedEx</option><option>UPS</option><option>DHL</option><option>Freight</option></select>
+            <input className="input-field" placeholder="Tracking" value={shipForm.tracking} onChange={(e) => setShipForm({ ...shipForm, tracking: e.target.value })} />
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Carrier</label>
-              <select className="input-field" value={shipForm.carrier} onChange={(e) => setShipForm({ ...shipForm, carrier: e.target.value })}>
-                <option>FedEx</option>
-                <option>UPS</option>
-                <option>DHL</option>
-                <option>USPS</option>
-                <option>Freight</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Tracking</label>
-              <input className="input-field" value={shipForm.tracking} onChange={(e) => setShipForm({ ...shipForm, tracking: e.target.value })} placeholder="Auto if empty" />
-            </div>
+          <div className="grid grid-cols-2 gap-2">
+            <input type="date" className="input-field" value={shipForm.shipDate} onChange={(e) => setShipForm({ ...shipForm, shipDate: e.target.value })} />
+            <input type="date" className="input-field" value={shipForm.eta} onChange={(e) => setShipForm({ ...shipForm, eta: e.target.value })} />
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Ship date</label>
-              <input type="date" className="input-field" value={shipForm.shipDate} onChange={(e) => setShipForm({ ...shipForm, shipDate: e.target.value })} />
-            </div>
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">ETA</label>
-              <input type="date" className="input-field" value={shipForm.eta} onChange={(e) => setShipForm({ ...shipForm, eta: e.target.value })} />
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Destination</label>
-              <select className="input-field" value={shipForm.destination} onChange={(e) => setShipForm({ ...shipForm, destination: e.target.value })}>
-                {WAREHOUSES.map((w) => <option key={w} value={w}>{w}</option>)}
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs text-slate-400 mb-1">Status</label>
-              <select className="input-field" value={shipForm.status} onChange={(e) => setShipForm({ ...shipForm, status: e.target.value })}>
-                {SHIP_STATUS.map((s) => <option key={s} value={s}>{s}</option>)}
-              </select>
-            </div>
-          </div>
-          <div className="flex justify-end gap-2 pt-1">
-            <button type="button" onClick={() => setShipModal(null)} className="btn-ghost">Cancel</button>
-            <button type="submit" className="btn-primary flex items-center gap-1"><Check className="w-3.5 h-3.5" /> Save</button>
-          </div>
+          <select className="input-field" value={shipForm.destination} onChange={(e) => setShipForm({ ...shipForm, destination: e.target.value })}>{WAREHOUSES.map((w) => <option key={w}>{w}</option>)}</select>
+          <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={() => setShipModal(null)}>Cancel</button><button type="submit" className="btn-primary">Save</button></div>
         </form>
+      </Modal>
+
+      <Modal open={!!empModal} onClose={() => setEmpModal(null)} title={empModal === 'new' ? 'Add employee' : 'Edit employee'}>
+        <form onSubmit={saveEmpForm} className="space-y-3">
+          <input className="input-field" placeholder="Name" value={empForm.name} onChange={(e) => setEmpForm({ ...empForm, name: e.target.value })} required />
+          <div className="grid grid-cols-2 gap-2">
+            <select className="input-field" value={empForm.department} onChange={(e) => setEmpForm({ ...empForm, department: e.target.value })}>{DEPTS.map((d) => <option key={d}>{d}</option>)}</select>
+            <input className="input-field" placeholder="Role" value={empForm.role} onChange={(e) => setEmpForm({ ...empForm, role: e.target.value })} />
+          </div>
+          <input type="email" className="input-field" placeholder="Email" value={empForm.email} onChange={(e) => setEmpForm({ ...empForm, email: e.target.value })} />
+          <select className="input-field" value={empForm.status} onChange={(e) => setEmpForm({ ...empForm, status: e.target.value })}><option>Active</option><option>On Leave</option><option>Inactive</option></select>
+          <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={() => setEmpModal(null)}>Cancel</button><button type="submit" className="btn-primary">Save</button></div>
+        </form>
+      </Modal>
+
+      <Modal open={!!tktModal} onClose={() => setTktModal(null)} title={tktModal === 'new' ? 'New ticket' : 'Edit ticket'}>
+        <form onSubmit={saveTktForm} className="space-y-3">
+          <input className="input-field" placeholder="Subject" value={tktForm.subject} onChange={(e) => setTktForm({ ...tktForm, subject: e.target.value })} required />
+          <select className="input-field" value={tktForm.customerId} onChange={(e) => setTktForm({ ...tktForm, customerId: e.target.value })}>{customers.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select>
+          <div className="grid grid-cols-2 gap-2">
+            <select className="input-field" value={tktForm.priority} onChange={(e) => setTktForm({ ...tktForm, priority: e.target.value })}><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select>
+            <select className="input-field" value={tktForm.status} onChange={(e) => setTktForm({ ...tktForm, status: e.target.value })}>{TICKET_STATUS.map((s) => <option key={s}>{s}</option>)}</select>
+          </div>
+          <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={() => setTktModal(null)}>Cancel</button><button type="submit" className="btn-primary">Save</button></div>
+        </form>
+      </Modal>
+
+      <Modal open={!!prjModal} onClose={() => setPrjModal(null)} title={prjModal === 'new' ? 'New project' : 'Edit project'}>
+        <form onSubmit={savePrjForm} className="space-y-3">
+          <input className="input-field" placeholder="Name" value={prjForm.name} onChange={(e) => setPrjForm({ ...prjForm, name: e.target.value })} required />
+          <div className="grid grid-cols-2 gap-2">
+            <select className="input-field" value={prjForm.status} onChange={(e) => setPrjForm({ ...prjForm, status: e.target.value })}>{PROJECT_STATUS.map((s) => <option key={s}>{s}</option>)}</select>
+            <input type="number" className="input-field" placeholder="Budget" value={prjForm.budget} onChange={(e) => setPrjForm({ ...prjForm, budget: e.target.value })} />
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <input type="date" className="input-field" value={prjForm.start} onChange={(e) => setPrjForm({ ...prjForm, start: e.target.value })} />
+            <input type="date" className="input-field" value={prjForm.end} onChange={(e) => setPrjForm({ ...prjForm, end: e.target.value })} />
+          </div>
+          <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={() => setPrjModal(null)}>Cancel</button><button type="submit" className="btn-primary">Save</button></div>
+        </form>
+      </Modal>
+
+      <Modal open={!!ctrModal} onClose={() => setCtrModal(null)} title={ctrModal === 'new' ? 'New contract' : 'Edit contract'}>
+        <form onSubmit={saveCtrForm} className="space-y-3">
+          <input className="input-field" placeholder="Name" value={ctrForm.name} onChange={(e) => setCtrForm({ ...ctrForm, name: e.target.value })} required />
+          <div className="grid grid-cols-2 gap-2">
+            <select className="input-field" value={ctrForm.type} onChange={(e) => setCtrForm({ ...ctrForm, type: e.target.value })}><option>Customer</option><option>Supplier</option><option>Employee</option></select>
+            <select className="input-field" value={ctrForm.status} onChange={(e) => setCtrForm({ ...ctrForm, status: e.target.value })}>{CONTRACT_STATUS.map((s) => <option key={s}>{s}</option>)}</select>
+          </div>
+          <input type="number" className="input-field" placeholder="Value" value={ctrForm.value} onChange={(e) => setCtrForm({ ...ctrForm, value: e.target.value })} />
+          <div className="grid grid-cols-2 gap-2">
+            <input type="date" className="input-field" value={ctrForm.start} onChange={(e) => setCtrForm({ ...ctrForm, start: e.target.value })} />
+            <input type="date" className="input-field" value={ctrForm.end} onChange={(e) => setCtrForm({ ...ctrForm, end: e.target.value })} />
+          </div>
+          <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={() => setCtrModal(null)}>Cancel</button><button type="submit" className="btn-primary">Save</button></div>
+        </form>
+      </Modal>
+
+      <Modal open={!!oppModal} onClose={() => setOppModal(null)} title="Add opportunity">
+        <form onSubmit={(e) => { e.preventDefault(); if (!oppForm.name.trim()) return; const row = { id: uid('opp'), ...oppForm, value: Number(oppForm.value), probability: Number(oppForm.probability) }; setOpportunities((p) => [row, ...p]); toast('Opportunity created', row.name); setOppModal(null); }} className="space-y-3">
+          <input className="input-field" placeholder="Name" value={oppForm.name} onChange={(e) => setOppForm({ ...oppForm, name: e.target.value })} required />
+          <select className="input-field" value={oppForm.customerId} onChange={(e) => setOppForm({ ...oppForm, customerId: e.target.value })}>{customers.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select>
+          <div className="grid grid-cols-2 gap-2">
+            <input type="number" className="input-field" placeholder="Value" value={oppForm.value} onChange={(e) => setOppForm({ ...oppForm, value: e.target.value })} />
+            <input type="number" className="input-field" placeholder="Probability %" value={oppForm.probability} onChange={(e) => setOppForm({ ...oppForm, probability: e.target.value })} />
+          </div>
+          <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={() => setOppModal(null)}>Cancel</button><button type="submit" className="btn-primary">Save</button></div>
+        </form>
+      </Modal>
+
+      <Modal open={profileOpen} onClose={() => setProfileOpen(false)} title="Profile">
+        <div className="space-y-3 text-sm">
+          <p className="text-white font-medium">{user.name}</p>
+          <p className="text-slate-400">{user.email}</p>
+          <p className="text-slate-500">Role: {ROLES.find((r) => r.id === role)?.name}</p>
+          <button type="button" className="btn-ghost" onClick={() => { setProfileOpen(false); setPwdModal(true); }}>Change password</button>
+        </div>
+      </Modal>
+
+      <Modal open={pwdModal} onClose={() => setPwdModal(false)} title="Change password">
+        <form onSubmit={changePassword} className="space-y-3">
+          <input type="password" className="input-field" placeholder="Current password" value={pwdForm.current} onChange={(e) => setPwdForm({ ...pwdForm, current: e.target.value })} required />
+          <input type="password" className="input-field" placeholder="New password" value={pwdForm.next} onChange={(e) => setPwdForm({ ...pwdForm, next: e.target.value })} required />
+          <input type="password" className="input-field" placeholder="Confirm new password" value={pwdForm.confirm} onChange={(e) => setPwdForm({ ...pwdForm, confirm: e.target.value })} required />
+          <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={() => setPwdModal(false)}>Cancel</button><button type="submit" className="btn-primary">Update</button></div>
+        </form>
+      </Modal>
+
+      {/* Command palette */}
+      <Modal open={cmdOpen} onClose={() => setCmdOpen(false)} title="Command palette">
+        <input className="input-field mb-3" placeholder="Type a command…" value={cmdQuery} onChange={(e) => setCmdQuery(e.target.value)} autoFocus />
+        <ul className="space-y-1 max-h-64 overflow-y-auto">
+          {cmdFiltered.map((a) => (
+            <li key={a.label}>
+              <button type="button" className="w-full text-left px-3 py-2 rounded-lg text-sm text-slate-300 hover:bg-slate-800 hover:text-white" onClick={() => { setCmdOpen(false); a.action(); }}>{a.label}</button>
+            </li>
+          ))}
+          {cmdFiltered.length === 0 && <li className="text-sm text-slate-500 px-3 py-4">No matches</li>}
+        </ul>
+      </Modal>
+
+      {/* Notification drawer */}
+      <Modal open={ntfOpen} onClose={() => setNtfOpen(false)} title="Notifications">
+        <div className="flex justify-end mb-2"><button type="button" className="btn-ghost text-xs" onClick={markAllRead}>Mark all read</button></div>
+        <ul className="space-y-2 max-h-80 overflow-y-auto">
+          {notifications.map((n) => (
+            <li key={n.id}>
+              <button type="button" className={`w-full text-left px-3 py-2 rounded-lg ${n.read ? 'opacity-50' : 'bg-slate-900/50'}`} onClick={() => markRead(n.id)}>
+                <p className="text-sm text-white">{n.title}</p>
+                <p className="text-xs text-slate-500">{n.body}</p>
+              </button>
+            </li>
+          ))}
+        </ul>
       </Modal>
 
       <ConfirmDialog open={!!confirm} title={confirm?.title} message={confirm?.message} onConfirm={confirm?.onConfirm} onCancel={() => setConfirm(null)} />

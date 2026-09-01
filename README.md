@@ -1,24 +1,30 @@
 # ForgeERP
 
-Multi-role ERP demo: admin & employee logins, products, inventory, purchase orders, shipping, employees.
+Enterprise resource planning platform with CRM, supply chain, operations, HR, and administration.
 
-## Demo logins
+## Sign in
 
-| Username   | Password   | Role     | Access                                      |
-|------------|------------|----------|---------------------------------------------|
-| `admin`    | `admin`    | Admin    | Full (products, HR, reset, all modules)     |
-| `employee` | `employee` | Employee | Dashboard, inventory, POs, shipping         |
-| `buyer`    | `buyer`    | Employee | Same as employee                            |
+Default administrator account is provisioned in seed data. Contact your system administrator for credentials.
 
-## Features
+## Modules
 
-- Role-based login and navigation
-- **Products** (admin): add / edit / delete
-- **Inventory**: receive / issue, warehouse filter, low-stock alerts
-- **Purchase orders**: create, edit (draft), advance workflow, cancel, receive → stock
-- **Shipping**: create, edit, advance (Pending → Picked → In Transit → Delivered), cancel
-- **Employees** (admin): add / edit / delete
-- Search, toasts, confirm dialogs, localStorage persistence
+- Dashboard & executive overview
+- CRM: leads, opportunities (pipeline), activities
+- Customers & suppliers
+- Product catalog & inventory
+- Purchase orders & shipping
+- Projects & tasks
+- Service desk tickets
+- Contracts
+- Approvals workflow
+- Documents & notifications
+- Employees
+- Administration: roles, users, login history
+- Command palette (Ctrl+K)
+
+## Role-based access
+
+Roles include Super Admin, Administrator, Manager, Sales, Procurement, Finance, HR, Warehouse, Manufacturing, Quality, Employee, and Viewer. Module and action permissions are enforced in the UI.
 
 ## Install
 
@@ -26,15 +32,13 @@ Multi-role ERP demo: admin & employee logins, products, inventory, purchase orde
 npm install
 ```
 
-Requires Node.js 18+.
-
 ## Run
 
 ```bash
 npm run dev
 ```
 
-Or: `npx vite` — then open http://localhost:3000/
+Open the URL shown by Vite (default http://localhost:3000/).
 
 ## Build
 
@@ -48,10 +52,6 @@ npm run preview
 ```bash
 npm test
 ```
-
-## Reset
-
-As **admin**, use **Reset demo data** in the sidebar (or clear site data for localhost).
 
 ## License
 
