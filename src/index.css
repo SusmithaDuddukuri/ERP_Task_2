@@ -175,3 +175,115 @@ table.data-table tr:hover td {
 .fade-in { animation: fadeIn 0.2s ease both; }
 
 button { font-family: inherit; }
+
+
+/* ForgeERP usability pass: larger type, stable grids, non-overlapping controls */
+:root { color-scheme: dark; }
+html, body, #root { min-height: 100%; }
+body { font-size: 15px; overflow-x: hidden; }
+button, input, select, textarea { font-size: inherit; }
+
+.panel-soft { background: rgba(255,255,255,.025); border: 1px solid #1e2633; }
+.login-hero { background: radial-gradient(circle at 85% 10%, rgba(232,93,4,.12), transparent 35%), #12161e; }
+.role-card {
+  min-height: 76px; width: 100%; display: flex; align-items: flex-start; gap: 10px; padding: 12px;
+  border: 1px solid #263142; border-radius: 12px; background: #0e131b; color: #94a3b8; cursor: pointer;
+  text-align: left; transition: border-color .15s, background .15s, transform .15s;
+}
+.role-card:hover { background: #151b24; border-color: #475569; transform: translateY(-1px); }
+.role-card.selected { border-color: #e85d04; background: rgba(124,45,18,.22); color: #fdba74; box-shadow: 0 0 0 1px rgba(232,93,4,.12); }
+.role-card strong { display:block; color:#e2e8f0; font-size: .9rem; line-height: 1.25; }
+.role-card small { display:block; color:#64748b; font-size:.75rem; line-height:1.35; margin-top:4px; }
+.role-card.selected small { color:#a8a29e; }
+.form-label { display:block; font-size:.85rem; font-weight:600; color:#cbd5e1; margin-bottom:6px; }
+.form-hint { color:#64748b; font-size:.75rem; margin-top:5px; line-height:1.35; }
+
+.page-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+.page-heading h1 { margin:0; font-size:1.6rem; line-height:1.2; font-weight:700; color:#fff; }
+.page-heading p { margin:6px 0 0; font-size:.92rem; color:#64748b; }
+.eyebrow { margin:0 0 5px !important; font-size:.7rem !important; font-weight:700; text-transform:uppercase; letter-spacing:.14em; color:#fb923c !important; }
+.section-head { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:16px 18px; border-bottom:1px solid #1e2633; }
+.section-head h2 { margin:0; font-size:1rem; font-weight:650; color:#f8fafc; }
+.section-head p { margin:4px 0 0; font-size:.8rem; color:#64748b; }
+.kpi-top { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; color:#94a3b8; font-size:.76rem; text-transform:uppercase; letter-spacing:.04em; }
+.kpi-top svg { width:18px; height:18px; color:#fb923c; flex:none; }
+.kpi-card > strong { display:block; margin-top:9px; color:#fff; font-size:1.65rem; line-height:1.1; font-variant-numeric:tabular-nums; }
+.kpi-card > small { display:block; margin-top:7px; color:#64748b; font-size:.75rem; }
+.quick-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; padding:16px; }
+.quick-action, .attention-row, .list-action, .stock-row { width:100%; border:1px solid #202a39; background:#0e131b; color:#cbd5e1; border-radius:10px; }
+.quick-action { min-height:72px; display:flex; align-items:center; gap:11px; padding:12px; text-align:left; cursor:pointer; }
+.quick-action:hover, .attention-row:hover, .list-action:hover { background:#151b24; border-color:#3b4659; }
+.quick-action > svg:first-child { width:19px; height:19px; color:#fb923c; flex:none; }
+.quick-action span, .list-action span, .attention-row span, .stock-row span { min-width:0; flex:1; }
+.quick-action b, .list-action b, .attention-row b, .stock-row b { display:block; color:#e2e8f0; font-size:.9rem; line-height:1.35; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.quick-action small, .list-action small, .attention-row small, .stock-row small { display:block; color:#64748b; font-size:.76rem; line-height:1.35; margin-top:3px; }
+.quick-action > svg:last-child, .list-action > svg { width:16px; height:16px; color:#64748b; flex:none; }
+.list-action { display:flex; align-items:center; gap:12px; padding:13px 16px; border-width:0 0 1px; border-radius:0; text-align:left; cursor:pointer; }
+.attention-row { display:flex; align-items:center; gap:12px; padding:13px; margin-top:10px; text-align:left; cursor:pointer; }
+.attention-row > svg { width:19px; height:19px; color:#fbbf24; flex:none; }
+.stock-row { display:flex; align-items:center; gap:12px; padding:12px 16px; border-width:0 0 1px; border-radius:0; }
+.metric-line { display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-bottom:1px solid #1e2633; color:#94a3b8; font-size:.9rem; }
+.metric-line b { color:#f8fafc; }
+.count-badge { display:inline-flex; min-width:20px; height:20px; align-items:center; justify-content:center; padding:0 5px; border-radius:10px; background:#7c2d12; color:#fdba74; font-size:.72rem; font-weight:700; }
+
+.btn-primary, .btn-ghost, .btn-danger { min-height:38px; white-space:nowrap; }
+.input-field { min-height:42px; font-size:.92rem; }
+.nav-item { min-height:40px; font-size:.9rem; }
+.status-pill { font-size:12px; }
+table.data-table { min-width:640px; }
+table.data-table th { font-size:.78rem; padding:.8rem .85rem; }
+table.data-table td { font-size:.9rem; padding:.8rem .85rem; line-height:1.35; }
+.data-table-wrap { width:100%; overflow-x:auto; }
+.modal-backdrop { overscroll-behavior:contain; }
+
+@media (max-width: 900px) {
+  .quick-grid { grid-template-columns:1fr; }
+  .page-heading h1 { font-size:1.4rem; }
+}
+@media (max-width: 640px) {
+  body { font-size:14px; }
+  .quick-grid { padding:12px; }
+  .page-heading { align-items:stretch; }
+  .page-heading > div:last-child { width:100%; }
+  .page-heading > div:last-child > button { flex:1; }
+  .role-card { min-height:70px; padding:10px; }
+  .role-card strong { font-size:.82rem; }
+  .role-card small { font-size:.68rem; }
+}
+
+/* ForgeERP theme refresh: calm blue-teal enterprise palette */
+:root { color-scheme: dark; --accent:#38bdf8; --accent-strong:#0ea5e9; --accent-soft:rgba(14,165,233,.16); --surface:#0f1722; --surface-2:#111c2a; --border:#26384d; }
+body { background:#08111c; color:#dbeafe; }
+::-webkit-scrollbar-track { background:#08111c; }
+::-webkit-scrollbar-thumb { background:#29445d; }
+::-webkit-scrollbar-thumb:hover { background:#3b607e; }
+.panel { background:#0f1926; border-color:#26384d; box-shadow:0 8px 24px rgba(2,8,23,.18); }
+.btn-primary { background:#0ea5e9; color:#f8fafc; box-shadow:0 4px 12px rgba(14,165,233,.16); }
+.btn-primary:hover { background:#38bdf8; }
+.btn-primary:active { background:#0284c7; }
+.btn-ghost { background:rgba(30,58,82,.42); border-color:#2a435b; color:#c7d9ea; }
+.btn-ghost:hover { background:rgba(43,76,103,.65); border-color:#41627f; color:#f8fafc; }
+.input-field { background:#09131f; border-color:#2a435b; }
+.input-field:focus { border-color:#38bdf8; box-shadow:0 0 0 2px rgba(56,189,248,.18); }
+.nav-item:hover { background:rgba(30,58,82,.55); color:#e0f2fe; }
+.nav-item.active { background:rgba(14,165,233,.14); color:#7dd3fc; border-color:rgba(56,189,248,.28); box-shadow:inset 3px 0 0 #38bdf8; }
+.kpi-card { background:#0f1926; border-color:#26384d; }
+.kpi-card:hover { background:#132234; border-color:#3b5872; }
+.kpi-top svg { color:#38bdf8; }
+.eyebrow { color:#38bdf8 !important; }
+.quick-action > svg:first-child { color:#38bdf8; }
+.quick-action, .attention-row, .list-action, .stock-row { background:#0c1724; border-color:#26384d; }
+.quick-action:hover, .attention-row:hover, .list-action:hover { background:#132234; border-color:#3b5872; }
+.count-badge { background:rgba(14,165,233,.18); color:#7dd3fc; }
+.login-hero { background:radial-gradient(circle at 85% 10%,rgba(56,189,248,.14),transparent 35%), #0f1926; }
+.role-card { background:#0b1622; border-color:#294157; }
+.role-card:hover { background:#122131; border-color:#41627f; }
+.role-card.selected { border-color:#38bdf8; background:rgba(14,165,233,.13); color:#7dd3fc; box-shadow:0 0 0 1px rgba(56,189,248,.12); }
+.page-heading h1, .section-head h2 { letter-spacing:-.01em; }
+.status-pill { border:1px solid rgba(71,102,128,.3); }
+table.data-table th { background:#0b1420; color:#7f9ab2; }
+table.data-table td { border-top-color:rgba(38,56,77,.8); }
+table.data-table tr:hover td { background:rgba(30,58,82,.25); }
+.modal-backdrop { background:rgba(2,8,23,.72); }
+.sidebar-brand, header { background:#0b1420 !important; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; } }

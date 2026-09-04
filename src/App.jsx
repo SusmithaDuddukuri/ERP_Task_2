@@ -27,16 +27,13 @@ import { nextPoStatus, advancePo, poTotal } from './engine/purchaseEngine';
 import { canAccessModule, canPerform, isAdminRole } from './auth/rbac';
 
 const NAV_GROUPS = [
-  { label: 'Overview', items: [
-    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, module: 'dashboard' },
-    { id: 'executive', label: 'Executive', icon: Briefcase, module: 'reports' },
-  ]},
-  { label: 'CRM & Sales', items: [
+  { label: 'Workspace', items: [{ id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, module: 'dashboard' }]},
+  { label: 'Sales', items: [
     { id: 'leads', label: 'Leads', icon: Handshake, module: 'crm' },
     { id: 'opportunities', label: 'Opportunities', icon: FolderKanban, module: 'crm' },
     { id: 'customers', label: 'Customers', icon: Building2, module: 'customers' },
   ]},
-  { label: 'Catalog & Stock', items: [
+  { label: 'Inventory', items: [
     { id: 'products', label: 'Products', icon: Box, module: 'products' },
     { id: 'inventory', label: 'Inventory', icon: Package, module: 'inventory' },
   ]},
@@ -46,19 +43,11 @@ const NAV_GROUPS = [
     { id: 'shipping', label: 'Shipping', icon: Truck, module: 'shipping' },
   ]},
   { label: 'Operations', items: [
-    { id: 'projects', label: 'Projects', icon: FolderKanban, module: 'projects' },
     { id: 'tickets', label: 'Service Desk', icon: Headset, module: 'tickets' },
-    { id: 'contracts', label: 'Contracts', icon: FileText, module: 'contracts' },
     { id: 'approvals', label: 'Approvals', icon: CheckSquare, module: 'approvals' },
-    { id: 'documents', label: 'Documents', icon: FileText, module: 'documents' },
   ]},
-  { label: 'People', items: [
-    { id: 'hr', label: 'Employees', icon: Users, module: 'hr' },
-  ]},
-  { label: 'System', items: [
-    { id: 'notifications', label: 'Notifications', icon: Bell, module: 'notifications' },
-    { id: 'admin', label: 'Administration', icon: Settings, module: 'admin' },
-  ]},
+  { label: 'People', items: [{ id: 'hr', label: 'Employees', icon: Users, module: 'hr' }]},
+  { label: 'System', items: [{ id: 'admin', label: 'Administration', icon: Settings, module: 'admin' }]},
 ];
 
 const poColor = { Draft: 'bg-slate-700/60 text-slate-300', Submitted: 'bg-blue-900/50 text-blue-300', Approved: 'bg-amber-900/40 text-amber-300', Received: 'bg-emerald-900/40 text-emerald-300', Cancelled: 'bg-rose-900/40 text-rose-300' };
@@ -69,7 +58,7 @@ function Toast({ toasts, onDismiss }) {
   return (
     <div className="fixed bottom-4 right-4 z-50 space-y-2 w-80 max-w-[calc(100vw-2rem)]">
       {toasts.map((t) => (
-        <div key={t.id} className="panel rounded-lg px-3.5 py-3 flex gap-3 shadow-lg border-l-4 border-l-orange-500 fade-in">
+        <div key={t.id} className="panel rounded-lg px-3.5 py-3 flex gap-3 shadow-lg border-l-4 border-l-sky-500 fade-in">
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-white">{t.title}</p>
             {t.message && <p className="text-xs text-slate-400 mt-0.5 truncate">{t.message}</p>}
@@ -119,50 +108,108 @@ function LoginScreen({ onLogin, toast }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(true);
+  const [selectedRole, setSelectedRole] = useState('');
+
+  const loginRoles = [
+    { id: 'super_admin', label: 'Super Admin', description: 'Full ERP control', icon: Shield },
+    { id: 'manager', label: 'Operations Manager', description: 'Operations & approvals', icon: Briefcase },
+    { id: 'sales', label: 'Sales', description: 'CRM & customer pipeline', icon: Handshake },
+    { id: 'warehouse', label: 'Warehouse', description: 'Inventory & shipping', icon: Warehouse },
+    { id: 'finance', label: 'Finance', description: 'Purchasing & approvals', icon: Building2 },
+  ];
 
   const submit = (e) => {
     e.preventDefault();
+    const normalized = username.trim().toLowerCase();
     const users = loadUsers() || SEED_USERS;
-    const user = users.find((u) => u.username === username.trim().toLowerCase() && u.password === password && u.status !== 'Inactive');
+    if (!selectedRole) {
+      toast('Select a role', 'Choose the workspace you want to enter');
+      return;
+    }
+    if (!/^[a-z0-9._-]{3,30}$/.test(normalized)) {
+      toast('Invalid username', 'Use 3–30 letters, numbers, dot, underscore or hyphen');
+      return;
+    }
+    if (password.length < 6) {
+      toast('Invalid password', 'Password must contain at least 6 characters');
+      return;
+    }
+    const user = users.find((u) => u.username === normalized && u.password === password && u.role === selectedRole && u.status !== 'Inactive');
+    const lh = loadLh() || SEED_LOGIN_HISTORY;
     if (!user) {
-      toast('Sign in failed', 'Invalid credentials or inactive account');
-      const lh = loadLh() || SEED_LOGIN_HISTORY;
-      saveLh([{ id: uid('lh'), username: username.trim(), at: new Date().toISOString(), success: false, ip: 'local' }, ...lh].slice(0, 50));
+      toast('Sign in failed', 'Check the selected role and your credentials');
+      saveLh([{ id: uid('lh'), username: normalized, at: new Date().toISOString(), success: false, ip: 'local' }, ...lh].slice(0, 50));
       return;
     }
     onLogin(user, remember);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-[#0c0f14]">
-      <div className="panel rounded-xl w-full max-w-sm p-6 shadow-xl">
-        <div className="flex items-center gap-2.5 mb-6">
-          <div className="w-10 h-10 rounded-lg bg-orange-600 flex items-center justify-center font-bold text-white">F</div>
+    <div className="min-h-screen bg-[#0c0f14] text-slate-200 flex items-center justify-center p-4 overflow-y-auto">
+      <div className="w-full max-w-5xl grid lg:grid-cols-[1.05fr_.95fr] gap-6 items-stretch py-6">
+        <section className="panel rounded-2xl p-7 md:p-9 flex flex-col justify-between min-h-[520px] login-hero">
           <div>
-            <div className="font-semibold text-white">ForgeERP</div>
-            <div className="text-xs text-slate-500">Enterprise Resource Planning</div>
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-12 h-12 rounded-xl bg-sky-600 flex items-center justify-center font-bold text-xl text-white shadow-lg shadow-sky-950/30">F</div>
+              <div>
+                <div className="font-bold text-white text-xl tracking-tight">ForgeERP</div>
+                <div className="text-sm text-slate-500">Enterprise Resource Planning</div>
+              </div>
+            </div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-400 mb-3">Unified operations workspace</p>
+            <h1 className="text-3xl md:text-4xl font-semibold leading-tight text-white max-w-xl">Run sales, inventory, procurement and finance from one place.</h1>
+            <p className="text-base leading-7 text-slate-400 mt-5 max-w-xl">Sign in to your role-specific workspace. Your navigation and available actions are automatically limited to the responsibilities of your role.</p>
           </div>
-        </div>
-        <form onSubmit={submit} className="space-y-3">
-          <div>
-            <label className="block text-xs text-slate-400 mb-1">Username</label>
-            <input className="input-field" value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="username" autoFocus required />
+          <div className="grid grid-cols-3 gap-3 mt-8">
+            {[['12', 'ERP modules'], ['5', 'workspaces'], ['100%', 'local data']].map(([value, label]) => (
+              <div key={label} className="panel-soft rounded-xl p-4">
+                <p className="text-xl font-semibold text-white">{value}</p>
+                <p className="text-xs text-slate-500 mt-1">{label}</p>
+              </div>
+            ))}
           </div>
-          <div>
-            <label className="block text-xs text-slate-400 mb-1">Password</label>
-            <input type="password" className="input-field" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" required />
+        </section>
+
+        <section className="panel rounded-2xl p-6 md:p-8 self-center">
+          <div className="mb-6">
+            <p className="text-xs uppercase tracking-wider text-slate-500">Secure sign in</p>
+            <h2 className="text-2xl font-semibold text-white mt-1">Choose your workspace</h2>
+            <p className="text-sm text-slate-500 mt-1">Credentials are never prefilled.</p>
           </div>
-          <label className="flex items-center gap-2 text-xs text-slate-400 cursor-pointer">
-            <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="rounded border-slate-600" />
-            Remember me
-          </label>
-          <button type="submit" className="btn-primary w-full mt-1">Sign in</button>
-        </form>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-2.5 mb-6">
+            {loginRoles.map((item) => {
+              const Icon = item.icon;
+              const active = selectedRole === item.id;
+              return (
+                <button key={item.id} type="button" onClick={() => { setSelectedRole(item.id); setUsername(''); setPassword(''); }} className={`role-card ${active ? 'selected' : ''}`} aria-pressed={active}>
+                  <Icon className="w-5 h-5 shrink-0" />
+                  <span className="min-w-0 text-left"><strong>{item.label}</strong><small>{item.description}</small></span>
+                </button>
+              );
+            })}
+          </div>
+          <form onSubmit={submit} className="space-y-4">
+            <div>
+              <label className="form-label">Username</label>
+              <input className="input-field" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter your username" autoComplete="username" autoFocus required />
+              <p className="form-hint">3–30 characters · letters, numbers, . _ - · no spaces</p>
+            </div>
+            <div>
+              <label className="form-label">Password</label>
+              <input type="password" className="input-field" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" autoComplete="current-password" required />
+              <p className="form-hint">Minimum 6 characters</p>
+            </div>
+            <label className="flex items-center gap-2 text-sm text-slate-400 cursor-pointer select-none">
+              <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="rounded border-slate-600" />
+              Remember this session
+            </label>
+            <button type="submit" className="btn-primary w-full text-base py-3">Sign in to ForgeERP</button>
+          </form>
+        </section>
       </div>
     </div>
   );
 }
-
 function EmptyState({ message, actionLabel, onAction }) {
   return (
     <div className="p-12 text-center">
@@ -267,21 +314,8 @@ export default function App() {
   useEffect(() => {
     setMobileNav(false);
     if (mainRef.current) mainRef.current.scrollTop = 0;
-    window.scrollTo(0, 0);
   }, [view]);
 
-  // Ctrl+K command palette
-  useEffect(() => {
-    const onKey = (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        setCmdOpen(true);
-        setCmdQuery('');
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
 
   // Session timeout 8h
   useEffect(() => {
@@ -384,11 +418,8 @@ export default function App() {
     }
     setView(id);
     setQuery('');
-    // ensure content visible immediately
-    requestAnimationFrame(() => {
-      if (mainRef.current) mainRef.current.scrollTop = 0;
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    });
+    // Reset only the application content pane; do not move the browser window.
+    requestAnimationFrame(() => { if (mainRef.current) mainRef.current.scrollTop = 0; });
   };
 
   const receiveStock = (row, amount = 10) => {
@@ -638,19 +669,6 @@ export default function App() {
     });
   };
 
-  const cmdActions = [
-    { label: 'Dashboard', action: () => go('dashboard') },
-    { label: 'Create customer', action: () => { go('customers'); setCusForm({ name: '', company: '', email: '', phone: '', city: '', state: '', country: 'US', creditLimit: 10000, paymentTerms: 'Net 30', type: 'Wholesale', status: 'Active' }); setCusModal('new'); } },
-    { label: 'Create purchase order', action: () => { go('orders'); setPoForm({ supplierId: suppliers[0]?.id || '', productId: products[0]?.id || '', qty: 10, unitCost: products[0]?.unitCost || 10, notes: '' }); setPoModal('new'); } },
-    { label: 'Create lead', action: () => { go('leads'); setLeadForm({ name: '', company: '', email: '', phone: '', source: 'Website', industry: '', status: 'New', score: 50, value: 0, owner: user?.name || '' }); setLeadModal('new'); } },
-    { label: 'Open inventory', action: () => go('inventory') },
-    { label: 'Open products', action: () => go('products') },
-    { label: 'Open approvals', action: () => go('approvals') },
-    { label: 'Open notifications', action: () => go('notifications') },
-    { label: 'Service desk', action: () => go('tickets') },
-    { label: 'Projects', action: () => go('projects') },
-  ];
-  const cmdFiltered = cmdActions.filter((a) => a.label.toLowerCase().includes(cmdQuery.toLowerCase()));
 
   if (!user) {
     return (
@@ -672,7 +690,7 @@ export default function App() {
   const SidebarContent = ({ compact }) => (
     <>
       <div className="h-14 flex items-center gap-2.5 px-3 border-b border-slate-800 shrink-0">
-        <div className="w-8 h-8 rounded-lg bg-orange-600 flex items-center justify-center font-bold text-sm text-white">F</div>
+        <div className="w-8 h-8 rounded-lg bg-sky-600 flex items-center justify-center font-bold text-sm text-white">F</div>
         {!compact && (
           <div className="min-w-0">
             <div className="font-semibold text-white text-sm">ForgeERP</div>
@@ -730,81 +748,76 @@ export default function App() {
           </button>
           <div className="flex-1 max-w-sm relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none z-10" />
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search" className="w-full rounded-lg bg-[#0a0d12] border border-slate-700 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-orange-500/40 py-1.5 pl-10 pr-9" />
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search" className="w-full rounded-lg bg-[#0a0d12] border border-slate-700 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-400/40 py-1.5 pl-10 pr-9" />
             {query && <button type="button" onClick={() => setQuery('')} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white z-10"><X className="w-3.5 h-3.5" /></button>}
           </div>
-          <button type="button" onClick={() => setCmdOpen(true)} className="hidden sm:flex items-center gap-1 px-2 py-1 rounded-lg border border-slate-700 text-xs text-slate-500 hover:text-white" title="Command palette (Ctrl+K)">
-            <Command className="w-3.5 h-3.5" /> Ctrl+K
-          </button>
-          <button type="button" onClick={() => setNtfOpen(true)} className="p-2 rounded-lg hover:bg-slate-800 text-slate-400 relative" aria-label="Notifications">
-            <Bell className="w-5 h-5" />
-            {unreadNtf > 0 && <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-orange-500" />}
-          </button>
         </header>
 
         <main ref={mainRef} className="flex-1 min-h-0 overflow-y-auto p-4 md:p-5">
           {view === 'dashboard' && (
             <div className="space-y-5 fade-in">
-              <div>
-                <h1 className="text-xl font-semibold text-white">Dashboard</h1>
-                <p className="text-sm text-slate-500 mt-0.5">{user.name} · {ROLES.find((r) => r.id === role)?.name}</p>
-              </div>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                {[
-                  { label: 'Available units', value: totalUnits.toLocaleString(), icon: Warehouse, go: 'inventory' },
-                  { label: 'Open POs', value: openPos, icon: ShoppingCart, go: 'orders' },
-                  { label: 'Shipments', value: openShips, icon: Truck, go: 'shipping' },
-                  { label: 'Pending approvals', value: pendingApr, icon: CheckSquare, go: 'approvals' },
-                ].map((k) => (
-                  <button key={k.label} type="button" onClick={() => go(k.go)} className="kpi-card">
-                    <div className="flex justify-between mb-1"><span className="text-xs text-slate-500 uppercase">{k.label}</span><k.icon className="w-4 h-4 text-orange-400" /></div>
-                    <p className="text-2xl font-semibold text-white tabular-nums">{k.value}</p>
-                  </button>
-                ))}
-              </div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-                <div className="panel rounded-xl overflow-hidden">
-                  <div className="px-4 py-3 border-b border-slate-800 flex items-center gap-2"><AlertTriangle className="w-4 h-4 text-amber-400" /><h2 className="text-sm font-medium text-white">Low stock</h2></div>
-                  {low.length === 0 ? <p className="p-6 text-center text-sm text-slate-500">All items above reorder point.</p> : (
-                    <ul className="divide-y divide-slate-800/80 max-h-64 overflow-y-auto">
-                      {low.map((r) => (
-                        <li key={r.id} className="flex items-center justify-between px-4 py-2.5">
-                          <div><p className="text-sm text-white">{productMap[r.productId]?.name || r.productId}</p><p className="text-xs text-slate-500">avail {availableQty(r)}</p></div>
-                          <button type="button" className="btn-ghost text-xs" onClick={() => receiveStock(r, 25)}>Receive +25</button>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+              <div className="page-heading">
+                <div>
+                  <p className="eyebrow">ForgeERP workspace</p>
+                  <h1>{ROLES.find((r) => r.id === role)?.name || 'Workspace'} Dashboard</h1>
+                  <p>{user.name} · {user.department || 'Enterprise Operations'}</p>
                 </div>
-                <div className="panel rounded-xl overflow-hidden">
-                  <div className="px-4 py-3 border-b border-slate-800"><h2 className="text-sm font-medium text-white">Open opportunities</h2></div>
-                  <ul className="divide-y divide-slate-800/80 max-h-64 overflow-y-auto">
-                    {opportunities.filter((o) => !['Won', 'Lost'].includes(o.stage)).slice(0, 6).map((o) => (
-                      <li key={o.id} className="px-4 py-2.5 flex justify-between gap-2">
-                        <div><p className="text-sm text-white">{o.name}</p><p className="text-xs text-slate-500">{o.stage} · {formatMoney(o.value)}</p></div>
-                      </li>
-                    ))}
-                    {opportunities.filter((o) => !['Won', 'Lost'].includes(o.stage)).length === 0 && <li className="p-6 text-center text-sm text-slate-500">No open opportunities</li>}
-                  </ul>
+                <div className="flex gap-2 flex-wrap">
+                  {admin && <button type="button" className="btn-primary" onClick={() => go('admin')}><Settings className="w-4 h-4" /> Administration</button>}
                 </div>
               </div>
-            </div>
-          )}
 
-          {view === 'executive' && (
-            <div className="space-y-5 fade-in">
-              <h1 className="text-xl font-semibold text-white">Executive overview</h1>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                <div className="kpi-card cursor-default"><p className="text-xs text-slate-500 uppercase">Inventory value</p><p className="text-2xl font-semibold text-white">{formatMoney(invValue)}</p></div>
-                <div className="kpi-card cursor-default"><p className="text-xs text-slate-500 uppercase">Customers</p><p className="text-2xl font-semibold text-white">{customers.length}</p></div>
-                <div className="kpi-card cursor-default"><p className="text-xs text-slate-500 uppercase">Open tickets</p><p className="text-2xl font-semibold text-white">{tickets.filter((t) => !['Resolved', 'Closed'].includes(t.status)).length}</p></div>
-                <div className="kpi-card cursor-default"><p className="text-xs text-slate-500 uppercase">Active projects</p><p className="text-2xl font-semibold text-white">{projects.filter((p) => p.status === 'Active').length}</p></div>
-              </div>
-              <div className="panel rounded-xl p-4">
-                <h2 className="text-sm font-medium text-white mb-2">Pipeline value</h2>
-                <p className="text-3xl font-semibold text-white">{formatMoney(opportunities.filter((o) => !['Won', 'Lost'].includes(o.stage)).reduce((s, o) => s + (o.value || 0) * ((o.probability || 0) / 100), 0))}</p>
-                <p className="text-xs text-slate-500 mt-1">Weighted by stage probability</p>
-              </div>
+              {role === 'super_admin' && (
+                <>
+                  <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
+                    {[
+                      ['Inventory units', totalUnits.toLocaleString(), 'inventory', Package],
+                      ['Open purchase orders', openPos, 'orders', ShoppingCart],
+                      ['Active shipments', openShips, 'shipping', Truck],
+                      ['Pending approvals', pendingApr, 'approvals', CheckSquare],
+                    ].map(([label, value, target, Icon]) => <button key={label} type="button" className="kpi-card" onClick={() => go(target)}><div className="kpi-top"><span>{label}</span><Icon /></div><strong>{value}</strong><small>Open {target}</small></button>)}
+                  </div>
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+                    <div className="panel rounded-xl p-5 lg:col-span-2">
+                      <div className="section-head"><div><h2>Business command center</h2><p>Jump directly into the areas requiring attention.</p></div></div>
+                      <div className="quick-grid">
+                        {[['Sales pipeline','leads',Handshake,'Review leads & opportunities'],['Inventory health','inventory',Package,'Check low stock and quantities'],['Procurement','orders',ShoppingCart,'Review purchase orders'],['People','hr',Users,'Manage employees']].map(([label,target,Icon,desc]) => <button key={label} type="button" className="quick-action" onClick={() => go(target)}><Icon/><span><b>{label}</b><small>{desc}</small></span><ChevronRight/></button>)}
+                      </div>
+                    </div>
+                    <div className="panel rounded-xl overflow-hidden"><div className="section-head"><div><h2>Low stock</h2><p>{low.length} items need review</p></div></div>{low.slice(0,5).map((r)=><button type="button" key={r.id} className="list-action" onClick={() => go('inventory')}><span><b>{productMap[r.productId]?.name || r.productId}</b><small>Available {availableQty(r)}</small></span><ChevronRight/></button>)}{!low.length && <EmptyState message="All stock levels are healthy."/>}</div>
+                  </div>
+                </>
+              )}
+
+              {role === 'manager' && (
+                <>
+                  <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
+                    {[["Open tickets", tickets.filter(t=>!['Resolved','Closed'].includes(t.status)).length, 'tickets', Headset],["Open orders", openPos, 'orders', ShoppingCart],["Pending approvals", pendingApr, 'approvals', CheckSquare],["Inventory value", formatMoney(invValue), 'inventory', Package]].map(([label,value,target,Icon])=><button type="button" key={label} className="kpi-card" onClick={()=>go(target)}><div className="kpi-top"><span>{label}</span><Icon/></div><strong>{value}</strong><small>Open {target}</small></button>)}
+                  </div>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-3"><div className="panel rounded-xl p-5"><div className="section-head"><div><h2>Operations focus</h2><p>Management shortcuts for today's work.</p></div></div><div className="quick-grid">{[['Approvals','approvals',CheckSquare],['Service desk','tickets',Headset],['Inventory','inventory',Package],['Purchase orders','orders',ShoppingCart]].map(([label,target,Icon])=><button type="button" key={label} className="quick-action" onClick={()=>go(target)}><Icon/><span><b>{label}</b><small>Open workspace</small></span><ChevronRight/></button>)}</div></div><div className="panel rounded-xl p-5"><div className="section-head"><div><h2>Attention required</h2><p>Items that may affect operations.</p></div></div><button type="button" className="attention-row" onClick={()=>go('inventory')}><AlertTriangle/><span><b>{low.length} low-stock items</b><small>Review inventory replenishment</small></span></button><button type="button" className="attention-row" onClick={()=>go('approvals')}><CheckSquare/><span><b>{pendingApr} pending approvals</b><small>Review manager approvals</small></span></button></div></div>
+                </>
+              )}
+
+              {role === 'sales' && (
+                <>
+                  <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">{[["New leads", leads.filter(l=>l.status==='New').length, 'leads', Handshake],["Open opportunities", opportunities.filter(o=>!['Won','Lost'].includes(o.stage)).length, 'opportunities', FolderKanban],["Customers", customers.length, 'customers', Building2],["Purchase orders", openPos, 'orders', ShoppingCart]].map(([label,value,target,Icon])=><button type="button" key={label} className="kpi-card" onClick={()=>go(target)}><div className="kpi-top"><span>{label}</span><Icon/></div><strong>{value}</strong><small>Open {target}</small></button>)}</div>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-3"><div className="panel rounded-xl p-5"><div className="section-head"><div><h2>Sales workspace</h2><p>Keep the customer pipeline moving.</p></div></div><div className="quick-grid">{[['Leads','leads',Handshake],['Opportunities','opportunities',FolderKanban],['Customers','customers',Building2],['Products','products',Box]].map(([label,target,Icon])=><button type="button" key={label} className="quick-action" onClick={()=>go(target)}><Icon/><span><b>{label}</b><small>Open {label.toLowerCase()}</small></span><ChevronRight/></button>)}</div></div><div className="panel rounded-xl overflow-hidden"><div className="section-head"><div><h2>Open opportunities</h2><p>Prioritize active deals.</p></div></div>{opportunities.filter(o=>!['Won','Lost'].includes(o.stage)).slice(0,6).map(o=><button type="button" key={o.id} className="list-action" onClick={()=>go('opportunities')}><span><b>{o.name}</b><small>{o.stage} · {formatMoney(o.value)}</small></span><ChevronRight/></button>)}{!opportunities.filter(o=>!['Won','Lost'].includes(o.stage)).length&&<EmptyState message="No open opportunities."/>}</div></div>
+                </>
+              )}
+
+              {role === 'warehouse' && (
+                <>
+                  <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">{[["Available units", totalUnits.toLocaleString(), 'inventory', Package],["Low stock", low.length, 'inventory', AlertTriangle],["Active shipments", openShips, 'shipping', Truck],["Open POs", openPos, 'orders', ShoppingCart]].map(([label,value,target,Icon])=><button type="button" key={label} className="kpi-card" onClick={()=>go(target)}><div className="kpi-top"><span>{label}</span><Icon/></div><strong>{value}</strong><small>Open {target}</small></button>)}</div>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-3"><div className="panel rounded-xl p-5"><div className="section-head"><div><h2>Warehouse actions</h2><p>Move stock and shipments without leaving the dashboard.</p></div></div><div className="quick-grid">{[['Inventory','inventory',Package],['Shipping','shipping',Truck],['Products','products',Box],['Purchase orders','orders',ShoppingCart]].map(([label,target,Icon])=><button type="button" key={label} className="quick-action" onClick={()=>go(target)}><Icon/><span><b>{label}</b><small>Open workspace</small></span><ChevronRight/></button>)}</div></div><div className="panel rounded-xl overflow-hidden"><div className="section-head"><div><h2>Low stock queue</h2><p>Receive stock directly from Inventory.</p></div></div>{low.slice(0,6).map(r=><div key={r.id} className="stock-row"><span><b>{productMap[r.productId]?.name || r.productId}</b><small>Available {availableQty(r)}</small></span><button type="button" className="btn-ghost" onClick={()=>receiveStock(r,25)}>Receive +25</button></div>)}{!low.length&&<EmptyState message="No replenishment required."/>}</div></div>
+                </>
+              )}
+
+              {role === 'finance' && (
+                <>
+                  <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">{[["Pending approvals", pendingApr, 'approvals', CheckSquare],["Open POs", openPos, 'orders', ShoppingCart],["Customers", customers.length, 'customers', Building2],["Suppliers", suppliers.length, 'suppliers', Factory]].map(([label,value,target,Icon])=><button type="button" key={label} className="kpi-card" onClick={()=>go(target)}><div className="kpi-top"><span>{label}</span><Icon/></div><strong>{value}</strong><small>Open {target}</small></button>)}</div>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-3"><div className="panel rounded-xl p-5"><div className="section-head"><div><h2>Finance workspace</h2><p>Review purchasing and approval workflows.</p></div></div><div className="quick-grid">{[['Approvals','approvals',CheckSquare],['Purchase orders','orders',ShoppingCart],['Customers','customers',Building2],['Suppliers','suppliers',Factory]].map(([label,target,Icon])=><button type="button" key={label} className="quick-action" onClick={()=>go(target)}><Icon/><span><b>{label}</b><small>Open workspace</small></span><ChevronRight/></button>)}</div></div><div className="panel rounded-xl p-5"><div className="section-head"><div><h2>Financial snapshot</h2><p>Current inventory and supplier exposure.</p></div></div><div className="metric-line"><span>Inventory value</span><b>{formatMoney(invValue)}</b></div><div className="metric-line"><span>Purchase orders</span><b>{purchaseOrders.length}</b></div><div className="metric-line"><span>Suppliers</span><b>{suppliers.length}</b></div><button type="button" className="btn-primary mt-4" onClick={()=>go('approvals')}>Open approvals <ChevronRight className="w-4 h-4"/></button></div></div>
+                </>
+              )}
             </div>
           )}
 
@@ -1144,24 +1157,6 @@ export default function App() {
           )}
 
           {/* DOCUMENTS */}
-          {view === 'documents' && (
-            <div className="space-y-4 fade-in">
-              <h1 className="text-xl font-semibold text-white">Documents</h1>
-              <div className="panel rounded-xl overflow-hidden">
-                <table className="w-full data-table">
-                  <thead><tr><th>Name</th><th>Category</th><th className="hidden sm:table-cell">Owner</th><th>Size</th><th>Uploaded</th></tr></thead>
-                  <tbody>
-                    {documents.map((d) => (
-                      <tr key={d.id}><td className="text-white">{d.name}</td><td className="text-slate-400">{d.category}</td><td className="hidden sm:table-cell text-slate-400">{d.owner}</td><td>{d.size}</td><td className="text-slate-500">{d.uploadedAt}</td></tr>
-                    ))}
-                  </tbody>
-                </table>
-                {documents.length === 0 && <EmptyState message="No documents" />}
-              </div>
-            </div>
-          )}
-
-          {/* HR */}
           {view === 'hr' && (
             <div className="space-y-4 fade-in">
               <div className="flex flex-wrap items-center justify-between gap-3">
@@ -1185,24 +1180,6 @@ export default function App() {
             </div>
           )}
 
-          {/* NOTIFICATIONS */}
-          {view === 'notifications' && (
-            <div className="space-y-4 fade-in">
-              <div className="flex items-center justify-between">
-                <h1 className="text-xl font-semibold text-white">Notifications</h1>
-                <button type="button" className="btn-ghost text-xs" onClick={markAllRead}>Mark all read</button>
-              </div>
-              <div className="space-y-2">
-                {notifications.map((n) => (
-                  <button key={n.id} type="button" onClick={() => markRead(n.id)} className={`panel rounded-xl px-4 py-3 text-left w-full ${n.read ? 'opacity-60' : 'border-l-2 border-l-orange-500'}`}>
-                    <p className="text-sm text-white">{n.title}</p>
-                    <p className="text-xs text-slate-500 mt-0.5">{n.body}</p>
-                    <p className="text-[10px] text-slate-600 mt-1">{n.category} · {n.priority}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
 
           {/* ADMIN */}
           {view === 'admin' && admin && (
@@ -1244,7 +1221,7 @@ export default function App() {
           )}
 
           {/* Fallback if view has no panel */}
-          {!['dashboard','executive','leads','opportunities','customers','suppliers','products','inventory','orders','shipping','projects','tickets','contracts','approvals','documents','hr','notifications','admin'].includes(view) && (
+          {!['dashboard','leads','opportunities','customers','suppliers','products','inventory','orders','shipping','tickets','approvals','hr','admin'].includes(view) && (
             <div className="fade-in p-8 text-center">
               <p className="text-slate-400">This section is not available.</p>
               <button type="button" className="btn-primary mt-4" onClick={() => go('dashboard')}>Back to dashboard</button>
@@ -1440,34 +1417,6 @@ export default function App() {
           <input type="password" className="input-field" placeholder="Confirm new password" value={pwdForm.confirm} onChange={(e) => setPwdForm({ ...pwdForm, confirm: e.target.value })} required />
           <div className="flex justify-end gap-2"><button type="button" className="btn-ghost" onClick={() => setPwdModal(false)}>Cancel</button><button type="submit" className="btn-primary">Update</button></div>
         </form>
-      </Modal>
-
-      {/* Command palette */}
-      <Modal open={cmdOpen} onClose={() => setCmdOpen(false)} title="Command palette">
-        <input className="input-field mb-3" placeholder="Type a command…" value={cmdQuery} onChange={(e) => setCmdQuery(e.target.value)} autoFocus />
-        <ul className="space-y-1 max-h-64 overflow-y-auto">
-          {cmdFiltered.map((a) => (
-            <li key={a.label}>
-              <button type="button" className="w-full text-left px-3 py-2 rounded-lg text-sm text-slate-300 hover:bg-slate-800 hover:text-white" onClick={() => { setCmdOpen(false); a.action(); }}>{a.label}</button>
-            </li>
-          ))}
-          {cmdFiltered.length === 0 && <li className="text-sm text-slate-500 px-3 py-4">No matches</li>}
-        </ul>
-      </Modal>
-
-      {/* Notification drawer */}
-      <Modal open={ntfOpen} onClose={() => setNtfOpen(false)} title="Notifications">
-        <div className="flex justify-end mb-2"><button type="button" className="btn-ghost text-xs" onClick={markAllRead}>Mark all read</button></div>
-        <ul className="space-y-2 max-h-80 overflow-y-auto">
-          {notifications.map((n) => (
-            <li key={n.id}>
-              <button type="button" className={`w-full text-left px-3 py-2 rounded-lg ${n.read ? 'opacity-50' : 'bg-slate-900/50'}`} onClick={() => markRead(n.id)}>
-                <p className="text-sm text-white">{n.title}</p>
-                <p className="text-xs text-slate-500">{n.body}</p>
-              </button>
-            </li>
-          ))}
-        </ul>
       </Modal>
 
       <ConfirmDialog open={!!confirm} title={confirm?.title} message={confirm?.message} onConfirm={confirm?.onConfirm} onCancel={() => setConfirm(null)} />
