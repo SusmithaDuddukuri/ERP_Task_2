@@ -53,6 +53,8 @@ npm run preview
 npm test
 ```
 
+Unit tests cover domain models, business engines, service pipelines, role access control, and storage utilities.
+
 ## License
 
 Proprietary — see `LICENSE`.
