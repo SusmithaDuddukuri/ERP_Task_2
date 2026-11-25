@@ -14,7 +14,7 @@ export const EMPLOYEE_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consum
 export function createEmployee0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -82,7 +82,7 @@ export function deriveEmployee0(record) {
 export function createEmployee1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -150,7 +150,7 @@ export function deriveEmployee1(record) {
 export function createEmployee2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -218,7 +218,7 @@ export function deriveEmployee2(record) {
 export function createEmployee3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -286,7 +286,7 @@ export function deriveEmployee3(record) {
 export function createEmployee4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -354,7 +354,7 @@ export function deriveEmployee4(record) {
 export function createEmployee5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -422,7 +422,7 @@ export function deriveEmployee5(record) {
 export function createEmployee6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -490,7 +490,7 @@ export function deriveEmployee6(record) {
 export function createEmployee7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -558,7 +558,7 @@ export function deriveEmployee7(record) {
 export function createEmployee8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -626,7 +626,7 @@ export function deriveEmployee8(record) {
 export function createEmployee9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -694,7 +694,7 @@ export function deriveEmployee9(record) {
 export function createEmployee10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -762,7 +762,7 @@ export function deriveEmployee10(record) {
 export function createEmployee11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -830,7 +830,7 @@ export function deriveEmployee11(record) {
 export function createEmployee12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -898,7 +898,7 @@ export function deriveEmployee12(record) {
 export function createEmployee13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -966,7 +966,7 @@ export function deriveEmployee13(record) {
 export function createEmployee14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1034,7 +1034,7 @@ export function deriveEmployee14(record) {
 export function createEmployee15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1102,7 +1102,7 @@ export function deriveEmployee15(record) {
 export function createEmployee16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1170,7 +1170,7 @@ export function deriveEmployee16(record) {
 export function createEmployee17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1238,7 +1238,7 @@ export function deriveEmployee17(record) {
 export function createEmployee18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1306,7 +1306,7 @@ export function deriveEmployee18(record) {
 export function createEmployee19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1374,7 +1374,7 @@ export function deriveEmployee19(record) {
 export function createEmployee20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1442,7 +1442,7 @@ export function deriveEmployee20(record) {
 export function createEmployee21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1510,7 +1510,7 @@ export function deriveEmployee21(record) {
 export function createEmployee22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1578,7 +1578,7 @@ export function deriveEmployee22(record) {
 export function createEmployee23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1646,7 +1646,7 @@ export function deriveEmployee23(record) {
 export function createEmployee24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1714,7 +1714,7 @@ export function deriveEmployee24(record) {
 export function createEmployee25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1782,7 +1782,7 @@ export function deriveEmployee25(record) {
 export function createEmployee26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1850,7 +1850,7 @@ export function deriveEmployee26(record) {
 export function createEmployee27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `employee_${Date.now().toString(36)}_${i}`,
+    id: input.id || `employee_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Employee Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
