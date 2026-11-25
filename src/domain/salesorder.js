@@ -14,7 +14,7 @@ export const SALESORDER_CATEGORIES = ["Raw","Finished","Packaging","Spare","Cons
 export function createSalesOrder0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -82,7 +82,7 @@ export function deriveSalesOrder0(record) {
 export function createSalesOrder1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -150,7 +150,7 @@ export function deriveSalesOrder1(record) {
 export function createSalesOrder2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -218,7 +218,7 @@ export function deriveSalesOrder2(record) {
 export function createSalesOrder3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -286,7 +286,7 @@ export function deriveSalesOrder3(record) {
 export function createSalesOrder4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -354,7 +354,7 @@ export function deriveSalesOrder4(record) {
 export function createSalesOrder5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -422,7 +422,7 @@ export function deriveSalesOrder5(record) {
 export function createSalesOrder6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -490,7 +490,7 @@ export function deriveSalesOrder6(record) {
 export function createSalesOrder7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -558,7 +558,7 @@ export function deriveSalesOrder7(record) {
 export function createSalesOrder8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -626,7 +626,7 @@ export function deriveSalesOrder8(record) {
 export function createSalesOrder9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -694,7 +694,7 @@ export function deriveSalesOrder9(record) {
 export function createSalesOrder10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -762,7 +762,7 @@ export function deriveSalesOrder10(record) {
 export function createSalesOrder11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -830,7 +830,7 @@ export function deriveSalesOrder11(record) {
 export function createSalesOrder12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -898,7 +898,7 @@ export function deriveSalesOrder12(record) {
 export function createSalesOrder13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -966,7 +966,7 @@ export function deriveSalesOrder13(record) {
 export function createSalesOrder14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1034,7 +1034,7 @@ export function deriveSalesOrder14(record) {
 export function createSalesOrder15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1102,7 +1102,7 @@ export function deriveSalesOrder15(record) {
 export function createSalesOrder16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1170,7 +1170,7 @@ export function deriveSalesOrder16(record) {
 export function createSalesOrder17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1238,7 +1238,7 @@ export function deriveSalesOrder17(record) {
 export function createSalesOrder18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1306,7 +1306,7 @@ export function deriveSalesOrder18(record) {
 export function createSalesOrder19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1374,7 +1374,7 @@ export function deriveSalesOrder19(record) {
 export function createSalesOrder20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1442,7 +1442,7 @@ export function deriveSalesOrder20(record) {
 export function createSalesOrder21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1510,7 +1510,7 @@ export function deriveSalesOrder21(record) {
 export function createSalesOrder22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1578,7 +1578,7 @@ export function deriveSalesOrder22(record) {
 export function createSalesOrder23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1646,7 +1646,7 @@ export function deriveSalesOrder23(record) {
 export function createSalesOrder24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1714,7 +1714,7 @@ export function deriveSalesOrder24(record) {
 export function createSalesOrder25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1782,7 +1782,7 @@ export function deriveSalesOrder25(record) {
 export function createSalesOrder26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1850,7 +1850,7 @@ export function deriveSalesOrder26(record) {
 export function createSalesOrder27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `salesorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `salesorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `SalesOrder Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
