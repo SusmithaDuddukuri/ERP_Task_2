@@ -14,7 +14,7 @@ export const CUSTOMER_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consum
 export function createCustomer0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -82,7 +82,7 @@ export function deriveCustomer0(record) {
 export function createCustomer1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -150,7 +150,7 @@ export function deriveCustomer1(record) {
 export function createCustomer2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -218,7 +218,7 @@ export function deriveCustomer2(record) {
 export function createCustomer3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -286,7 +286,7 @@ export function deriveCustomer3(record) {
 export function createCustomer4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -354,7 +354,7 @@ export function deriveCustomer4(record) {
 export function createCustomer5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -422,7 +422,7 @@ export function deriveCustomer5(record) {
 export function createCustomer6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -490,7 +490,7 @@ export function deriveCustomer6(record) {
 export function createCustomer7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -558,7 +558,7 @@ export function deriveCustomer7(record) {
 export function createCustomer8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -626,7 +626,7 @@ export function deriveCustomer8(record) {
 export function createCustomer9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -694,7 +694,7 @@ export function deriveCustomer9(record) {
 export function createCustomer10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -762,7 +762,7 @@ export function deriveCustomer10(record) {
 export function createCustomer11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -830,7 +830,7 @@ export function deriveCustomer11(record) {
 export function createCustomer12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -898,7 +898,7 @@ export function deriveCustomer12(record) {
 export function createCustomer13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -966,7 +966,7 @@ export function deriveCustomer13(record) {
 export function createCustomer14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1034,7 +1034,7 @@ export function deriveCustomer14(record) {
 export function createCustomer15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1102,7 +1102,7 @@ export function deriveCustomer15(record) {
 export function createCustomer16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1170,7 +1170,7 @@ export function deriveCustomer16(record) {
 export function createCustomer17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1238,7 +1238,7 @@ export function deriveCustomer17(record) {
 export function createCustomer18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1306,7 +1306,7 @@ export function deriveCustomer18(record) {
 export function createCustomer19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1374,7 +1374,7 @@ export function deriveCustomer19(record) {
 export function createCustomer20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1442,7 +1442,7 @@ export function deriveCustomer20(record) {
 export function createCustomer21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1510,7 +1510,7 @@ export function deriveCustomer21(record) {
 export function createCustomer22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1578,7 +1578,7 @@ export function deriveCustomer22(record) {
 export function createCustomer23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1646,7 +1646,7 @@ export function deriveCustomer23(record) {
 export function createCustomer24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1714,7 +1714,7 @@ export function deriveCustomer24(record) {
 export function createCustomer25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1782,7 +1782,7 @@ export function deriveCustomer25(record) {
 export function createCustomer26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1850,7 +1850,7 @@ export function deriveCustomer26(record) {
 export function createCustomer27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `customer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `customer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Customer Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
