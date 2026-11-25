@@ -22,7 +22,7 @@ export function QualityPanel0({ title = 'Quality 0', items = [], onSelect, onAct
   return (
     <div className="panel rounded-xl overflow-hidden">
       <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between gap-2">
-        <button type="button" className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
+        <button type="button" aria-expanded={open} className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
           {title}
           <ChevronRight className={`w-3.5 h-3.5 transition ${open ? 'rotate-90' : ''}`} />
         </button>
@@ -31,7 +31,7 @@ export function QualityPanel0({ title = 'Quality 0', items = [], onSelect, onAct
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Filter…"
+            placeholder="Filter…" aria-label="Filter items"
             className="input-field pl-7 py-1 text-xs w-36"
           />
         </div>
@@ -74,7 +74,7 @@ export function QualityPanel1({ title = 'Quality 1', items = [], onSelect, onAct
   return (
     <div className="panel rounded-xl overflow-hidden">
       <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between gap-2">
-        <button type="button" className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
+        <button type="button" aria-expanded={open} className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
           {title}
           <ChevronRight className={`w-3.5 h-3.5 transition ${open ? 'rotate-90' : ''}`} />
         </button>
@@ -83,7 +83,7 @@ export function QualityPanel1({ title = 'Quality 1', items = [], onSelect, onAct
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Filter…"
+            placeholder="Filter…" aria-label="Filter items"
             className="input-field pl-7 py-1 text-xs w-36"
           />
         </div>
@@ -126,7 +126,7 @@ export function QualityPanel2({ title = 'Quality 2', items = [], onSelect, onAct
   return (
     <div className="panel rounded-xl overflow-hidden">
       <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between gap-2">
-        <button type="button" className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
+        <button type="button" aria-expanded={open} className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
           {title}
           <ChevronRight className={`w-3.5 h-3.5 transition ${open ? 'rotate-90' : ''}`} />
         </button>
@@ -135,7 +135,7 @@ export function QualityPanel2({ title = 'Quality 2', items = [], onSelect, onAct
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Filter…"
+            placeholder="Filter…" aria-label="Filter items"
             className="input-field pl-7 py-1 text-xs w-36"
           />
         </div>
@@ -178,7 +178,7 @@ export function QualityPanel3({ title = 'Quality 3', items = [], onSelect, onAct
   return (
     <div className="panel rounded-xl overflow-hidden">
       <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between gap-2">
-        <button type="button" className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
+        <button type="button" aria-expanded={open} className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
           {title}
           <ChevronRight className={`w-3.5 h-3.5 transition ${open ? 'rotate-90' : ''}`} />
         </button>
@@ -187,7 +187,7 @@ export function QualityPanel3({ title = 'Quality 3', items = [], onSelect, onAct
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Filter…"
+            placeholder="Filter…" aria-label="Filter items"
             className="input-field pl-7 py-1 text-xs w-36"
           />
         </div>
@@ -230,7 +230,7 @@ export function QualityPanel4({ title = 'Quality 4', items = [], onSelect, onAct
   return (
     <div className="panel rounded-xl overflow-hidden">
       <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between gap-2">
-        <button type="button" className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
+        <button type="button" aria-expanded={open} className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
           {title}
           <ChevronRight className={`w-3.5 h-3.5 transition ${open ? 'rotate-90' : ''}`} />
         </button>
@@ -239,7 +239,7 @@ export function QualityPanel4({ title = 'Quality 4', items = [], onSelect, onAct
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Filter…"
+            placeholder="Filter…" aria-label="Filter items"
             className="input-field pl-7 py-1 text-xs w-36"
           />
         </div>
@@ -282,7 +282,7 @@ export function QualityPanel5({ title = 'Quality 5', items = [], onSelect, onAct
   return (
     <div className="panel rounded-xl overflow-hidden">
       <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between gap-2">
-        <button type="button" className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
+        <button type="button" aria-expanded={open} className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
           {title}
           <ChevronRight className={`w-3.5 h-3.5 transition ${open ? 'rotate-90' : ''}`} />
         </button>
@@ -291,7 +291,7 @@ export function QualityPanel5({ title = 'Quality 5', items = [], onSelect, onAct
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Filter…"
+            placeholder="Filter…" aria-label="Filter items"
             className="input-field pl-7 py-1 text-xs w-36"
           />
         </div>
@@ -334,7 +334,7 @@ export function QualityPanel6({ title = 'Quality 6', items = [], onSelect, onAct
   return (
     <div className="panel rounded-xl overflow-hidden">
       <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between gap-2">
-        <button type="button" className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
+        <button type="button" aria-expanded={open} className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
           {title}
           <ChevronRight className={`w-3.5 h-3.5 transition ${open ? 'rotate-90' : ''}`} />
         </button>
@@ -343,7 +343,7 @@ export function QualityPanel6({ title = 'Quality 6', items = [], onSelect, onAct
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Filter…"
+            placeholder="Filter…" aria-label="Filter items"
             className="input-field pl-7 py-1 text-xs w-36"
           />
         </div>
@@ -386,7 +386,7 @@ export function QualityPanel7({ title = 'Quality 7', items = [], onSelect, onAct
   return (
     <div className="panel rounded-xl overflow-hidden">
       <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between gap-2">
-        <button type="button" className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
+        <button type="button" aria-expanded={open} className="font-medium text-sm text-white flex items-center gap-1" onClick={() => setOpen((o) => !o)}>
           {title}
           <ChevronRight className={`w-3.5 h-3.5 transition ${open ? 'rotate-90' : ''}`} />
         </button>
@@ -395,7 +395,7 @@ export function QualityPanel7({ title = 'Quality 7', items = [], onSelect, onAct
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Filter…"
+            placeholder="Filter…" aria-label="Filter items"
             className="input-field pl-7 py-1 text-xs w-36"
           />
         </div>
