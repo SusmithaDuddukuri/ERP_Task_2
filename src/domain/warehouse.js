@@ -14,7 +14,7 @@ export const WAREHOUSE_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consu
 export function createWarehouse0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -82,7 +82,7 @@ export function deriveWarehouse0(record) {
 export function createWarehouse1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -150,7 +150,7 @@ export function deriveWarehouse1(record) {
 export function createWarehouse2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -218,7 +218,7 @@ export function deriveWarehouse2(record) {
 export function createWarehouse3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -286,7 +286,7 @@ export function deriveWarehouse3(record) {
 export function createWarehouse4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -354,7 +354,7 @@ export function deriveWarehouse4(record) {
 export function createWarehouse5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -422,7 +422,7 @@ export function deriveWarehouse5(record) {
 export function createWarehouse6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -490,7 +490,7 @@ export function deriveWarehouse6(record) {
 export function createWarehouse7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -558,7 +558,7 @@ export function deriveWarehouse7(record) {
 export function createWarehouse8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -626,7 +626,7 @@ export function deriveWarehouse8(record) {
 export function createWarehouse9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -694,7 +694,7 @@ export function deriveWarehouse9(record) {
 export function createWarehouse10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -762,7 +762,7 @@ export function deriveWarehouse10(record) {
 export function createWarehouse11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -830,7 +830,7 @@ export function deriveWarehouse11(record) {
 export function createWarehouse12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -898,7 +898,7 @@ export function deriveWarehouse12(record) {
 export function createWarehouse13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -966,7 +966,7 @@ export function deriveWarehouse13(record) {
 export function createWarehouse14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1034,7 +1034,7 @@ export function deriveWarehouse14(record) {
 export function createWarehouse15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1102,7 +1102,7 @@ export function deriveWarehouse15(record) {
 export function createWarehouse16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1170,7 +1170,7 @@ export function deriveWarehouse16(record) {
 export function createWarehouse17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1238,7 +1238,7 @@ export function deriveWarehouse17(record) {
 export function createWarehouse18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1306,7 +1306,7 @@ export function deriveWarehouse18(record) {
 export function createWarehouse19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1374,7 +1374,7 @@ export function deriveWarehouse19(record) {
 export function createWarehouse20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1442,7 +1442,7 @@ export function deriveWarehouse20(record) {
 export function createWarehouse21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1510,7 +1510,7 @@ export function deriveWarehouse21(record) {
 export function createWarehouse22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1578,7 +1578,7 @@ export function deriveWarehouse22(record) {
 export function createWarehouse23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1646,7 +1646,7 @@ export function deriveWarehouse23(record) {
 export function createWarehouse24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1714,7 +1714,7 @@ export function deriveWarehouse24(record) {
 export function createWarehouse25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1782,7 +1782,7 @@ export function deriveWarehouse25(record) {
 export function createWarehouse26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1850,7 +1850,7 @@ export function deriveWarehouse26(record) {
 export function createWarehouse27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `warehouse_${Date.now().toString(36)}_${i}`,
+    id: input.id || `warehouse_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Warehouse Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
