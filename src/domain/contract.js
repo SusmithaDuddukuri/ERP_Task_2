@@ -14,7 +14,7 @@ export const CONTRACT_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consum
 export function createContract0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -82,7 +82,7 @@ export function deriveContract0(record) {
 export function createContract1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -150,7 +150,7 @@ export function deriveContract1(record) {
 export function createContract2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -218,7 +218,7 @@ export function deriveContract2(record) {
 export function createContract3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -286,7 +286,7 @@ export function deriveContract3(record) {
 export function createContract4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -354,7 +354,7 @@ export function deriveContract4(record) {
 export function createContract5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -422,7 +422,7 @@ export function deriveContract5(record) {
 export function createContract6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -490,7 +490,7 @@ export function deriveContract6(record) {
 export function createContract7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -558,7 +558,7 @@ export function deriveContract7(record) {
 export function createContract8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -626,7 +626,7 @@ export function deriveContract8(record) {
 export function createContract9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -694,7 +694,7 @@ export function deriveContract9(record) {
 export function createContract10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -762,7 +762,7 @@ export function deriveContract10(record) {
 export function createContract11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -830,7 +830,7 @@ export function deriveContract11(record) {
 export function createContract12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -898,7 +898,7 @@ export function deriveContract12(record) {
 export function createContract13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -966,7 +966,7 @@ export function deriveContract13(record) {
 export function createContract14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1034,7 +1034,7 @@ export function deriveContract14(record) {
 export function createContract15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1102,7 +1102,7 @@ export function deriveContract15(record) {
 export function createContract16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1170,7 +1170,7 @@ export function deriveContract16(record) {
 export function createContract17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1238,7 +1238,7 @@ export function deriveContract17(record) {
 export function createContract18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1306,7 +1306,7 @@ export function deriveContract18(record) {
 export function createContract19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1374,7 +1374,7 @@ export function deriveContract19(record) {
 export function createContract20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1442,7 +1442,7 @@ export function deriveContract20(record) {
 export function createContract21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1510,7 +1510,7 @@ export function deriveContract21(record) {
 export function createContract22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1578,7 +1578,7 @@ export function deriveContract22(record) {
 export function createContract23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1646,7 +1646,7 @@ export function deriveContract23(record) {
 export function createContract24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1714,7 +1714,7 @@ export function deriveContract24(record) {
 export function createContract25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1782,7 +1782,7 @@ export function deriveContract25(record) {
 export function createContract26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1850,7 +1850,7 @@ export function deriveContract26(record) {
 export function createContract27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `contract_${Date.now().toString(36)}_${i}`,
+    id: input.id || `contract_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Contract Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
