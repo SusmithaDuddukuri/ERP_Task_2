@@ -14,7 +14,7 @@ export const INVOICE_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consuma
 export function createInvoice0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -82,7 +82,7 @@ export function deriveInvoice0(record) {
 export function createInvoice1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -150,7 +150,7 @@ export function deriveInvoice1(record) {
 export function createInvoice2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -218,7 +218,7 @@ export function deriveInvoice2(record) {
 export function createInvoice3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -286,7 +286,7 @@ export function deriveInvoice3(record) {
 export function createInvoice4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -354,7 +354,7 @@ export function deriveInvoice4(record) {
 export function createInvoice5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -422,7 +422,7 @@ export function deriveInvoice5(record) {
 export function createInvoice6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -490,7 +490,7 @@ export function deriveInvoice6(record) {
 export function createInvoice7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -558,7 +558,7 @@ export function deriveInvoice7(record) {
 export function createInvoice8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -626,7 +626,7 @@ export function deriveInvoice8(record) {
 export function createInvoice9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -694,7 +694,7 @@ export function deriveInvoice9(record) {
 export function createInvoice10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -762,7 +762,7 @@ export function deriveInvoice10(record) {
 export function createInvoice11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -830,7 +830,7 @@ export function deriveInvoice11(record) {
 export function createInvoice12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -898,7 +898,7 @@ export function deriveInvoice12(record) {
 export function createInvoice13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -966,7 +966,7 @@ export function deriveInvoice13(record) {
 export function createInvoice14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1034,7 +1034,7 @@ export function deriveInvoice14(record) {
 export function createInvoice15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1102,7 +1102,7 @@ export function deriveInvoice15(record) {
 export function createInvoice16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1170,7 +1170,7 @@ export function deriveInvoice16(record) {
 export function createInvoice17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1238,7 +1238,7 @@ export function deriveInvoice17(record) {
 export function createInvoice18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1306,7 +1306,7 @@ export function deriveInvoice18(record) {
 export function createInvoice19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1374,7 +1374,7 @@ export function deriveInvoice19(record) {
 export function createInvoice20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1442,7 +1442,7 @@ export function deriveInvoice20(record) {
 export function createInvoice21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1510,7 +1510,7 @@ export function deriveInvoice21(record) {
 export function createInvoice22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1578,7 +1578,7 @@ export function deriveInvoice22(record) {
 export function createInvoice23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1646,7 +1646,7 @@ export function deriveInvoice23(record) {
 export function createInvoice24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1714,7 +1714,7 @@ export function deriveInvoice24(record) {
 export function createInvoice25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1782,7 +1782,7 @@ export function deriveInvoice25(record) {
 export function createInvoice26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1850,7 +1850,7 @@ export function deriveInvoice26(record) {
 export function createInvoice27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `invoice_${Date.now().toString(36)}_${i}`,
+    id: input.id || `invoice_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Invoice Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
