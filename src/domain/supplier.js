@@ -14,7 +14,7 @@ export const SUPPLIER_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consum
 export function createSupplier0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -82,7 +82,7 @@ export function deriveSupplier0(record) {
 export function createSupplier1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -150,7 +150,7 @@ export function deriveSupplier1(record) {
 export function createSupplier2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -218,7 +218,7 @@ export function deriveSupplier2(record) {
 export function createSupplier3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -286,7 +286,7 @@ export function deriveSupplier3(record) {
 export function createSupplier4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -354,7 +354,7 @@ export function deriveSupplier4(record) {
 export function createSupplier5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -422,7 +422,7 @@ export function deriveSupplier5(record) {
 export function createSupplier6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -490,7 +490,7 @@ export function deriveSupplier6(record) {
 export function createSupplier7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -558,7 +558,7 @@ export function deriveSupplier7(record) {
 export function createSupplier8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -626,7 +626,7 @@ export function deriveSupplier8(record) {
 export function createSupplier9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -694,7 +694,7 @@ export function deriveSupplier9(record) {
 export function createSupplier10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -762,7 +762,7 @@ export function deriveSupplier10(record) {
 export function createSupplier11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -830,7 +830,7 @@ export function deriveSupplier11(record) {
 export function createSupplier12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -898,7 +898,7 @@ export function deriveSupplier12(record) {
 export function createSupplier13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -966,7 +966,7 @@ export function deriveSupplier13(record) {
 export function createSupplier14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1034,7 +1034,7 @@ export function deriveSupplier14(record) {
 export function createSupplier15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1102,7 +1102,7 @@ export function deriveSupplier15(record) {
 export function createSupplier16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1170,7 +1170,7 @@ export function deriveSupplier16(record) {
 export function createSupplier17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1238,7 +1238,7 @@ export function deriveSupplier17(record) {
 export function createSupplier18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1306,7 +1306,7 @@ export function deriveSupplier18(record) {
 export function createSupplier19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1374,7 +1374,7 @@ export function deriveSupplier19(record) {
 export function createSupplier20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1442,7 +1442,7 @@ export function deriveSupplier20(record) {
 export function createSupplier21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1510,7 +1510,7 @@ export function deriveSupplier21(record) {
 export function createSupplier22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1578,7 +1578,7 @@ export function deriveSupplier22(record) {
 export function createSupplier23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1646,7 +1646,7 @@ export function deriveSupplier23(record) {
 export function createSupplier24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1714,7 +1714,7 @@ export function deriveSupplier24(record) {
 export function createSupplier25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1782,7 +1782,7 @@ export function deriveSupplier25(record) {
 export function createSupplier26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1850,7 +1850,7 @@ export function deriveSupplier26(record) {
 export function createSupplier27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `supplier_${Date.now().toString(36)}_${i}`,
+    id: input.id || `supplier_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Supplier Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
