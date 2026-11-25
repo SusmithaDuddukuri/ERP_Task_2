@@ -14,7 +14,7 @@ export const TRANSFER_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consum
 export function createTransfer0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -82,7 +82,7 @@ export function deriveTransfer0(record) {
 export function createTransfer1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -150,7 +150,7 @@ export function deriveTransfer1(record) {
 export function createTransfer2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -218,7 +218,7 @@ export function deriveTransfer2(record) {
 export function createTransfer3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -286,7 +286,7 @@ export function deriveTransfer3(record) {
 export function createTransfer4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -354,7 +354,7 @@ export function deriveTransfer4(record) {
 export function createTransfer5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -422,7 +422,7 @@ export function deriveTransfer5(record) {
 export function createTransfer6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -490,7 +490,7 @@ export function deriveTransfer6(record) {
 export function createTransfer7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -558,7 +558,7 @@ export function deriveTransfer7(record) {
 export function createTransfer8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -626,7 +626,7 @@ export function deriveTransfer8(record) {
 export function createTransfer9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -694,7 +694,7 @@ export function deriveTransfer9(record) {
 export function createTransfer10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -762,7 +762,7 @@ export function deriveTransfer10(record) {
 export function createTransfer11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -830,7 +830,7 @@ export function deriveTransfer11(record) {
 export function createTransfer12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -898,7 +898,7 @@ export function deriveTransfer12(record) {
 export function createTransfer13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -966,7 +966,7 @@ export function deriveTransfer13(record) {
 export function createTransfer14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1034,7 +1034,7 @@ export function deriveTransfer14(record) {
 export function createTransfer15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1102,7 +1102,7 @@ export function deriveTransfer15(record) {
 export function createTransfer16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1170,7 +1170,7 @@ export function deriveTransfer16(record) {
 export function createTransfer17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1238,7 +1238,7 @@ export function deriveTransfer17(record) {
 export function createTransfer18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1306,7 +1306,7 @@ export function deriveTransfer18(record) {
 export function createTransfer19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1374,7 +1374,7 @@ export function deriveTransfer19(record) {
 export function createTransfer20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1442,7 +1442,7 @@ export function deriveTransfer20(record) {
 export function createTransfer21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1510,7 +1510,7 @@ export function deriveTransfer21(record) {
 export function createTransfer22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1578,7 +1578,7 @@ export function deriveTransfer22(record) {
 export function createTransfer23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1646,7 +1646,7 @@ export function deriveTransfer23(record) {
 export function createTransfer24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1714,7 +1714,7 @@ export function deriveTransfer24(record) {
 export function createTransfer25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1782,7 +1782,7 @@ export function deriveTransfer25(record) {
 export function createTransfer26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1850,7 +1850,7 @@ export function deriveTransfer26(record) {
 export function createTransfer27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `transfer_${Date.now().toString(36)}_${i}`,
+    id: input.id || `transfer_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Transfer Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
