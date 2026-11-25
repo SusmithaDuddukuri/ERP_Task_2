@@ -14,7 +14,7 @@ export const ASSET_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consumabl
 export function createAsset0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -82,7 +82,7 @@ export function deriveAsset0(record) {
 export function createAsset1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -150,7 +150,7 @@ export function deriveAsset1(record) {
 export function createAsset2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -218,7 +218,7 @@ export function deriveAsset2(record) {
 export function createAsset3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -286,7 +286,7 @@ export function deriveAsset3(record) {
 export function createAsset4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -354,7 +354,7 @@ export function deriveAsset4(record) {
 export function createAsset5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -422,7 +422,7 @@ export function deriveAsset5(record) {
 export function createAsset6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -490,7 +490,7 @@ export function deriveAsset6(record) {
 export function createAsset7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -558,7 +558,7 @@ export function deriveAsset7(record) {
 export function createAsset8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -626,7 +626,7 @@ export function deriveAsset8(record) {
 export function createAsset9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -694,7 +694,7 @@ export function deriveAsset9(record) {
 export function createAsset10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -762,7 +762,7 @@ export function deriveAsset10(record) {
 export function createAsset11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -830,7 +830,7 @@ export function deriveAsset11(record) {
 export function createAsset12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -898,7 +898,7 @@ export function deriveAsset12(record) {
 export function createAsset13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -966,7 +966,7 @@ export function deriveAsset13(record) {
 export function createAsset14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1034,7 +1034,7 @@ export function deriveAsset14(record) {
 export function createAsset15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1102,7 +1102,7 @@ export function deriveAsset15(record) {
 export function createAsset16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1170,7 +1170,7 @@ export function deriveAsset16(record) {
 export function createAsset17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1238,7 +1238,7 @@ export function deriveAsset17(record) {
 export function createAsset18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1306,7 +1306,7 @@ export function deriveAsset18(record) {
 export function createAsset19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1374,7 +1374,7 @@ export function deriveAsset19(record) {
 export function createAsset20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1442,7 +1442,7 @@ export function deriveAsset20(record) {
 export function createAsset21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1510,7 +1510,7 @@ export function deriveAsset21(record) {
 export function createAsset22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1578,7 +1578,7 @@ export function deriveAsset22(record) {
 export function createAsset23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1646,7 +1646,7 @@ export function deriveAsset23(record) {
 export function createAsset24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1714,7 +1714,7 @@ export function deriveAsset24(record) {
 export function createAsset25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1782,7 +1782,7 @@ export function deriveAsset25(record) {
 export function createAsset26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1850,7 +1850,7 @@ export function deriveAsset26(record) {
 export function createAsset27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `asset_${Date.now().toString(36)}_${i}`,
+    id: input.id || `asset_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Asset Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
