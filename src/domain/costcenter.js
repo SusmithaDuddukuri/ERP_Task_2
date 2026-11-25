@@ -14,7 +14,7 @@ export const COSTCENTER_CATEGORIES = ["Raw","Finished","Packaging","Spare","Cons
 export function createCostCenter0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -82,7 +82,7 @@ export function deriveCostCenter0(record) {
 export function createCostCenter1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -150,7 +150,7 @@ export function deriveCostCenter1(record) {
 export function createCostCenter2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -218,7 +218,7 @@ export function deriveCostCenter2(record) {
 export function createCostCenter3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -286,7 +286,7 @@ export function deriveCostCenter3(record) {
 export function createCostCenter4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -354,7 +354,7 @@ export function deriveCostCenter4(record) {
 export function createCostCenter5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -422,7 +422,7 @@ export function deriveCostCenter5(record) {
 export function createCostCenter6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -490,7 +490,7 @@ export function deriveCostCenter6(record) {
 export function createCostCenter7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -558,7 +558,7 @@ export function deriveCostCenter7(record) {
 export function createCostCenter8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -626,7 +626,7 @@ export function deriveCostCenter8(record) {
 export function createCostCenter9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -694,7 +694,7 @@ export function deriveCostCenter9(record) {
 export function createCostCenter10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -762,7 +762,7 @@ export function deriveCostCenter10(record) {
 export function createCostCenter11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -830,7 +830,7 @@ export function deriveCostCenter11(record) {
 export function createCostCenter12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -898,7 +898,7 @@ export function deriveCostCenter12(record) {
 export function createCostCenter13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -966,7 +966,7 @@ export function deriveCostCenter13(record) {
 export function createCostCenter14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1034,7 +1034,7 @@ export function deriveCostCenter14(record) {
 export function createCostCenter15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1102,7 +1102,7 @@ export function deriveCostCenter15(record) {
 export function createCostCenter16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1170,7 +1170,7 @@ export function deriveCostCenter16(record) {
 export function createCostCenter17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1238,7 +1238,7 @@ export function deriveCostCenter17(record) {
 export function createCostCenter18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1306,7 +1306,7 @@ export function deriveCostCenter18(record) {
 export function createCostCenter19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1374,7 +1374,7 @@ export function deriveCostCenter19(record) {
 export function createCostCenter20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1442,7 +1442,7 @@ export function deriveCostCenter20(record) {
 export function createCostCenter21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1510,7 +1510,7 @@ export function deriveCostCenter21(record) {
 export function createCostCenter22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1578,7 +1578,7 @@ export function deriveCostCenter22(record) {
 export function createCostCenter23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1646,7 +1646,7 @@ export function deriveCostCenter23(record) {
 export function createCostCenter24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1714,7 +1714,7 @@ export function deriveCostCenter24(record) {
 export function createCostCenter25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1782,7 +1782,7 @@ export function deriveCostCenter25(record) {
 export function createCostCenter26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1850,7 +1850,7 @@ export function deriveCostCenter26(record) {
 export function createCostCenter27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `costcenter_${Date.now().toString(36)}_${i}`,
+    id: input.id || `costcenter_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `CostCenter Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
