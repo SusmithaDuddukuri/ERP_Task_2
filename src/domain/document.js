@@ -14,7 +14,7 @@ export const DOCUMENT_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consum
 export function createDocument0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -82,7 +82,7 @@ export function deriveDocument0(record) {
 export function createDocument1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -150,7 +150,7 @@ export function deriveDocument1(record) {
 export function createDocument2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -218,7 +218,7 @@ export function deriveDocument2(record) {
 export function createDocument3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -286,7 +286,7 @@ export function deriveDocument3(record) {
 export function createDocument4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -354,7 +354,7 @@ export function deriveDocument4(record) {
 export function createDocument5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -422,7 +422,7 @@ export function deriveDocument5(record) {
 export function createDocument6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -490,7 +490,7 @@ export function deriveDocument6(record) {
 export function createDocument7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -558,7 +558,7 @@ export function deriveDocument7(record) {
 export function createDocument8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -626,7 +626,7 @@ export function deriveDocument8(record) {
 export function createDocument9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -694,7 +694,7 @@ export function deriveDocument9(record) {
 export function createDocument10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -762,7 +762,7 @@ export function deriveDocument10(record) {
 export function createDocument11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -830,7 +830,7 @@ export function deriveDocument11(record) {
 export function createDocument12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -898,7 +898,7 @@ export function deriveDocument12(record) {
 export function createDocument13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -966,7 +966,7 @@ export function deriveDocument13(record) {
 export function createDocument14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1034,7 +1034,7 @@ export function deriveDocument14(record) {
 export function createDocument15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1102,7 +1102,7 @@ export function deriveDocument15(record) {
 export function createDocument16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1170,7 +1170,7 @@ export function deriveDocument16(record) {
 export function createDocument17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1238,7 +1238,7 @@ export function deriveDocument17(record) {
 export function createDocument18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1306,7 +1306,7 @@ export function deriveDocument18(record) {
 export function createDocument19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1374,7 +1374,7 @@ export function deriveDocument19(record) {
 export function createDocument20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1442,7 +1442,7 @@ export function deriveDocument20(record) {
 export function createDocument21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1510,7 +1510,7 @@ export function deriveDocument21(record) {
 export function createDocument22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1578,7 +1578,7 @@ export function deriveDocument22(record) {
 export function createDocument23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1646,7 +1646,7 @@ export function deriveDocument23(record) {
 export function createDocument24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1714,7 +1714,7 @@ export function deriveDocument24(record) {
 export function createDocument25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1782,7 +1782,7 @@ export function deriveDocument25(record) {
 export function createDocument26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1850,7 +1850,7 @@ export function deriveDocument26(record) {
 export function createDocument27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `document_${Date.now().toString(36)}_${i}`,
+    id: input.id || `document_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Document Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
