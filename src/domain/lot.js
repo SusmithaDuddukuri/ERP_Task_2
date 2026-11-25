@@ -14,7 +14,7 @@ export const LOT_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consumable"
 export function createLot0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -82,7 +82,7 @@ export function deriveLot0(record) {
 export function createLot1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -150,7 +150,7 @@ export function deriveLot1(record) {
 export function createLot2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -218,7 +218,7 @@ export function deriveLot2(record) {
 export function createLot3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -286,7 +286,7 @@ export function deriveLot3(record) {
 export function createLot4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -354,7 +354,7 @@ export function deriveLot4(record) {
 export function createLot5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -422,7 +422,7 @@ export function deriveLot5(record) {
 export function createLot6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -490,7 +490,7 @@ export function deriveLot6(record) {
 export function createLot7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -558,7 +558,7 @@ export function deriveLot7(record) {
 export function createLot8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -626,7 +626,7 @@ export function deriveLot8(record) {
 export function createLot9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -694,7 +694,7 @@ export function deriveLot9(record) {
 export function createLot10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -762,7 +762,7 @@ export function deriveLot10(record) {
 export function createLot11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -830,7 +830,7 @@ export function deriveLot11(record) {
 export function createLot12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -898,7 +898,7 @@ export function deriveLot12(record) {
 export function createLot13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -966,7 +966,7 @@ export function deriveLot13(record) {
 export function createLot14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1034,7 +1034,7 @@ export function deriveLot14(record) {
 export function createLot15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1102,7 +1102,7 @@ export function deriveLot15(record) {
 export function createLot16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1170,7 +1170,7 @@ export function deriveLot16(record) {
 export function createLot17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1238,7 +1238,7 @@ export function deriveLot17(record) {
 export function createLot18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1306,7 +1306,7 @@ export function deriveLot18(record) {
 export function createLot19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1374,7 +1374,7 @@ export function deriveLot19(record) {
 export function createLot20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1442,7 +1442,7 @@ export function deriveLot20(record) {
 export function createLot21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1510,7 +1510,7 @@ export function deriveLot21(record) {
 export function createLot22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1578,7 +1578,7 @@ export function deriveLot22(record) {
 export function createLot23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1646,7 +1646,7 @@ export function deriveLot23(record) {
 export function createLot24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1714,7 +1714,7 @@ export function deriveLot24(record) {
 export function createLot25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1782,7 +1782,7 @@ export function deriveLot25(record) {
 export function createLot26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1850,7 +1850,7 @@ export function deriveLot26(record) {
 export function createLot27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `lot_${Date.now().toString(36)}_${i}`,
+    id: input.id || `lot_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Lot Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
