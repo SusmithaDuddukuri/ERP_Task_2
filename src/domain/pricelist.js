@@ -14,7 +14,7 @@ export const PRICELIST_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consu
 export function createPriceList0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -82,7 +82,7 @@ export function derivePriceList0(record) {
 export function createPriceList1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -150,7 +150,7 @@ export function derivePriceList1(record) {
 export function createPriceList2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -218,7 +218,7 @@ export function derivePriceList2(record) {
 export function createPriceList3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -286,7 +286,7 @@ export function derivePriceList3(record) {
 export function createPriceList4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -354,7 +354,7 @@ export function derivePriceList4(record) {
 export function createPriceList5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -422,7 +422,7 @@ export function derivePriceList5(record) {
 export function createPriceList6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -490,7 +490,7 @@ export function derivePriceList6(record) {
 export function createPriceList7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -558,7 +558,7 @@ export function derivePriceList7(record) {
 export function createPriceList8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -626,7 +626,7 @@ export function derivePriceList8(record) {
 export function createPriceList9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -694,7 +694,7 @@ export function derivePriceList9(record) {
 export function createPriceList10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -762,7 +762,7 @@ export function derivePriceList10(record) {
 export function createPriceList11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -830,7 +830,7 @@ export function derivePriceList11(record) {
 export function createPriceList12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -898,7 +898,7 @@ export function derivePriceList12(record) {
 export function createPriceList13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -966,7 +966,7 @@ export function derivePriceList13(record) {
 export function createPriceList14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1034,7 +1034,7 @@ export function derivePriceList14(record) {
 export function createPriceList15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1102,7 +1102,7 @@ export function derivePriceList15(record) {
 export function createPriceList16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1170,7 +1170,7 @@ export function derivePriceList16(record) {
 export function createPriceList17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1238,7 +1238,7 @@ export function derivePriceList17(record) {
 export function createPriceList18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1306,7 +1306,7 @@ export function derivePriceList18(record) {
 export function createPriceList19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1374,7 +1374,7 @@ export function derivePriceList19(record) {
 export function createPriceList20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1442,7 +1442,7 @@ export function derivePriceList20(record) {
 export function createPriceList21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1510,7 +1510,7 @@ export function derivePriceList21(record) {
 export function createPriceList22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1578,7 +1578,7 @@ export function derivePriceList22(record) {
 export function createPriceList23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1646,7 +1646,7 @@ export function derivePriceList23(record) {
 export function createPriceList24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1714,7 +1714,7 @@ export function derivePriceList24(record) {
 export function createPriceList25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1782,7 +1782,7 @@ export function derivePriceList25(record) {
 export function createPriceList26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1850,7 +1850,7 @@ export function derivePriceList26(record) {
 export function createPriceList27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `pricelist_${Date.now().toString(36)}_${i}`,
+    id: input.id || `pricelist_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `PriceList Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
