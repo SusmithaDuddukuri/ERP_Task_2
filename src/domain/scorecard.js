@@ -14,7 +14,7 @@ export const SCORECARD_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consu
 export function createScorecard0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -82,7 +82,7 @@ export function deriveScorecard0(record) {
 export function createScorecard1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -150,7 +150,7 @@ export function deriveScorecard1(record) {
 export function createScorecard2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -218,7 +218,7 @@ export function deriveScorecard2(record) {
 export function createScorecard3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -286,7 +286,7 @@ export function deriveScorecard3(record) {
 export function createScorecard4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -354,7 +354,7 @@ export function deriveScorecard4(record) {
 export function createScorecard5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -422,7 +422,7 @@ export function deriveScorecard5(record) {
 export function createScorecard6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -490,7 +490,7 @@ export function deriveScorecard6(record) {
 export function createScorecard7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -558,7 +558,7 @@ export function deriveScorecard7(record) {
 export function createScorecard8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -626,7 +626,7 @@ export function deriveScorecard8(record) {
 export function createScorecard9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -694,7 +694,7 @@ export function deriveScorecard9(record) {
 export function createScorecard10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -762,7 +762,7 @@ export function deriveScorecard10(record) {
 export function createScorecard11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -830,7 +830,7 @@ export function deriveScorecard11(record) {
 export function createScorecard12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -898,7 +898,7 @@ export function deriveScorecard12(record) {
 export function createScorecard13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -966,7 +966,7 @@ export function deriveScorecard13(record) {
 export function createScorecard14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1034,7 +1034,7 @@ export function deriveScorecard14(record) {
 export function createScorecard15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1102,7 +1102,7 @@ export function deriveScorecard15(record) {
 export function createScorecard16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1170,7 +1170,7 @@ export function deriveScorecard16(record) {
 export function createScorecard17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1238,7 +1238,7 @@ export function deriveScorecard17(record) {
 export function createScorecard18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1306,7 +1306,7 @@ export function deriveScorecard18(record) {
 export function createScorecard19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1374,7 +1374,7 @@ export function deriveScorecard19(record) {
 export function createScorecard20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1442,7 +1442,7 @@ export function deriveScorecard20(record) {
 export function createScorecard21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1510,7 +1510,7 @@ export function deriveScorecard21(record) {
 export function createScorecard22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1578,7 +1578,7 @@ export function deriveScorecard22(record) {
 export function createScorecard23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1646,7 +1646,7 @@ export function deriveScorecard23(record) {
 export function createScorecard24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1714,7 +1714,7 @@ export function deriveScorecard24(record) {
 export function createScorecard25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1782,7 +1782,7 @@ export function deriveScorecard25(record) {
 export function createScorecard26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1850,7 +1850,7 @@ export function deriveScorecard26(record) {
 export function createScorecard27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `scorecard_${Date.now().toString(36)}_${i}`,
+    id: input.id || `scorecard_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Scorecard Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
