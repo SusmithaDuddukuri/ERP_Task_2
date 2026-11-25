@@ -37,7 +37,7 @@ export function useDashboard0(initial = [], options = {}) {
     return { qty, value: Math.round(value * 100) / 100, count: items.length };
   }, [items]);
   const add = useCallback((row) => {
-    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${i}` }]);
+    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${Math.random().toString(36).slice(2, 7)}` }]);
   }, []);
   const remove = useCallback((id) => {
     setItems((prev) => prev.filter((x) => x.id !== id));
@@ -80,7 +80,7 @@ export function useDashboard1(initial = [], options = {}) {
     return { qty, value: Math.round(value * 100) / 100, count: items.length };
   }, [items]);
   const add = useCallback((row) => {
-    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${i}` }]);
+    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${Math.random().toString(36).slice(2, 7)}` }]);
   }, []);
   const remove = useCallback((id) => {
     setItems((prev) => prev.filter((x) => x.id !== id));
@@ -123,7 +123,7 @@ export function useDashboard2(initial = [], options = {}) {
     return { qty, value: Math.round(value * 100) / 100, count: items.length };
   }, [items]);
   const add = useCallback((row) => {
-    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${i}` }]);
+    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${Math.random().toString(36).slice(2, 7)}` }]);
   }, []);
   const remove = useCallback((id) => {
     setItems((prev) => prev.filter((x) => x.id !== id));
@@ -166,7 +166,7 @@ export function useDashboard3(initial = [], options = {}) {
     return { qty, value: Math.round(value * 100) / 100, count: items.length };
   }, [items]);
   const add = useCallback((row) => {
-    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${i}` }]);
+    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${Math.random().toString(36).slice(2, 7)}` }]);
   }, []);
   const remove = useCallback((id) => {
     setItems((prev) => prev.filter((x) => x.id !== id));
@@ -209,7 +209,7 @@ export function useDashboard4(initial = [], options = {}) {
     return { qty, value: Math.round(value * 100) / 100, count: items.length };
   }, [items]);
   const add = useCallback((row) => {
-    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${i}` }]);
+    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${Math.random().toString(36).slice(2, 7)}` }]);
   }, []);
   const remove = useCallback((id) => {
     setItems((prev) => prev.filter((x) => x.id !== id));
@@ -252,7 +252,7 @@ export function useDashboard5(initial = [], options = {}) {
     return { qty, value: Math.round(value * 100) / 100, count: items.length };
   }, [items]);
   const add = useCallback((row) => {
-    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${i}` }]);
+    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${Math.random().toString(36).slice(2, 7)}` }]);
   }, []);
   const remove = useCallback((id) => {
     setItems((prev) => prev.filter((x) => x.id !== id));
@@ -295,7 +295,7 @@ export function useDashboard6(initial = [], options = {}) {
     return { qty, value: Math.round(value * 100) / 100, count: items.length };
   }, [items]);
   const add = useCallback((row) => {
-    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${i}` }]);
+    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${Math.random().toString(36).slice(2, 7)}` }]);
   }, []);
   const remove = useCallback((id) => {
     setItems((prev) => prev.filter((x) => x.id !== id));
@@ -338,7 +338,7 @@ export function useDashboard7(initial = [], options = {}) {
     return { qty, value: Math.round(value * 100) / 100, count: items.length };
   }, [items]);
   const add = useCallback((row) => {
-    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${i}` }]);
+    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${Math.random().toString(36).slice(2, 7)}` }]);
   }, []);
   const remove = useCallback((id) => {
     setItems((prev) => prev.filter((x) => x.id !== id));
@@ -381,7 +381,7 @@ export function useDashboard8(initial = [], options = {}) {
     return { qty, value: Math.round(value * 100) / 100, count: items.length };
   }, [items]);
   const add = useCallback((row) => {
-    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${i}` }]);
+    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${Math.random().toString(36).slice(2, 7)}` }]);
   }, []);
   const remove = useCallback((id) => {
     setItems((prev) => prev.filter((x) => x.id !== id));
@@ -424,7 +424,7 @@ export function useDashboard9(initial = [], options = {}) {
     return { qty, value: Math.round(value * 100) / 100, count: items.length };
   }, [items]);
   const add = useCallback((row) => {
-    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${i}` }]);
+    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${Math.random().toString(36).slice(2, 7)}` }]);
   }, []);
   const remove = useCallback((id) => {
     setItems((prev) => prev.filter((x) => x.id !== id));
@@ -467,7 +467,7 @@ export function useDashboard10(initial = [], options = {}) {
     return { qty, value: Math.round(value * 100) / 100, count: items.length };
   }, [items]);
   const add = useCallback((row) => {
-    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${i}` }]);
+    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${Math.random().toString(36).slice(2, 7)}` }]);
   }, []);
   const remove = useCallback((id) => {
     setItems((prev) => prev.filter((x) => x.id !== id));
@@ -510,7 +510,7 @@ export function useDashboard11(initial = [], options = {}) {
     return { qty, value: Math.round(value * 100) / 100, count: items.length };
   }, [items]);
   const add = useCallback((row) => {
-    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${i}` }]);
+    setItems((prev) => [...prev, { ...row, id: row.id || `h_${Date.now()}_${Math.random().toString(36).slice(2, 7)}` }]);
   }, []);
   const remove = useCallback((id) => {
     setItems((prev) => prev.filter((x) => x.id !== id));
