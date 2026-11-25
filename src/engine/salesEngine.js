@@ -1933,7 +1933,7 @@ export function applyWorkflow(current, transitions, actor = 'system') {
 export function movingAverage(series, window = 3) {
   const arr = (series || []).map(Number).filter((n) => !Number.isNaN(n));
   if (arr.length === 0) return [];
-  const w = Math.max(1, window);
+  const w = Math.max(1, Number.isFinite(Number(window)) ? Math.floor(Number(window)) : 1);
   const result = [];
   for (let i = 0; i < arr.length; i++) {
     const start = Math.max(0, i - w + 1);
