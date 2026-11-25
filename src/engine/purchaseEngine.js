@@ -11,10 +11,11 @@ export function advancePo(po) {
   return { ...po, status: next };
 }
 
+/** Compute total cost across purchase order line items. */
 export function poTotal(po) {
   if (!po) return 0;
   if (typeof po.total === "number") return po.total;
-  return (po.lines || []).reduce((s, l) => s + (Number(l.qty) || 0) * (Number(l.unitCost) || 0), 0);
+  return (po.lines || []).reduce((s, l) => s + Math.max(0, Number(l?.qty) || 0) * Math.max(0, Number(l?.unitCost) || 0), 0);
 }
 
 export function purchaseRule0(ctx = {}, opts = {}) {
