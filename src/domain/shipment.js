@@ -14,7 +14,7 @@ export const SHIPMENT_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consum
 export function createShipment0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -82,7 +82,7 @@ export function deriveShipment0(record) {
 export function createShipment1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -150,7 +150,7 @@ export function deriveShipment1(record) {
 export function createShipment2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -218,7 +218,7 @@ export function deriveShipment2(record) {
 export function createShipment3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -286,7 +286,7 @@ export function deriveShipment3(record) {
 export function createShipment4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -354,7 +354,7 @@ export function deriveShipment4(record) {
 export function createShipment5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -422,7 +422,7 @@ export function deriveShipment5(record) {
 export function createShipment6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -490,7 +490,7 @@ export function deriveShipment6(record) {
 export function createShipment7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -558,7 +558,7 @@ export function deriveShipment7(record) {
 export function createShipment8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -626,7 +626,7 @@ export function deriveShipment8(record) {
 export function createShipment9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -694,7 +694,7 @@ export function deriveShipment9(record) {
 export function createShipment10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -762,7 +762,7 @@ export function deriveShipment10(record) {
 export function createShipment11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -830,7 +830,7 @@ export function deriveShipment11(record) {
 export function createShipment12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -898,7 +898,7 @@ export function deriveShipment12(record) {
 export function createShipment13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -966,7 +966,7 @@ export function deriveShipment13(record) {
 export function createShipment14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1034,7 +1034,7 @@ export function deriveShipment14(record) {
 export function createShipment15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1102,7 +1102,7 @@ export function deriveShipment15(record) {
 export function createShipment16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1170,7 +1170,7 @@ export function deriveShipment16(record) {
 export function createShipment17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1238,7 +1238,7 @@ export function deriveShipment17(record) {
 export function createShipment18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1306,7 +1306,7 @@ export function deriveShipment18(record) {
 export function createShipment19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1374,7 +1374,7 @@ export function deriveShipment19(record) {
 export function createShipment20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1442,7 +1442,7 @@ export function deriveShipment20(record) {
 export function createShipment21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1510,7 +1510,7 @@ export function deriveShipment21(record) {
 export function createShipment22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1578,7 +1578,7 @@ export function deriveShipment22(record) {
 export function createShipment23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1646,7 +1646,7 @@ export function deriveShipment23(record) {
 export function createShipment24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1714,7 +1714,7 @@ export function deriveShipment24(record) {
 export function createShipment25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1782,7 +1782,7 @@ export function deriveShipment25(record) {
 export function createShipment26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1850,7 +1850,7 @@ export function deriveShipment26(record) {
 export function createShipment27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `shipment_${Date.now().toString(36)}_${i}`,
+    id: input.id || `shipment_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Shipment Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
