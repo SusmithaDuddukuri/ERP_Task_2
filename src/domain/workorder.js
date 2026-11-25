@@ -14,7 +14,7 @@ export const WORKORDER_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consu
 export function createWorkOrder0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -82,7 +82,7 @@ export function deriveWorkOrder0(record) {
 export function createWorkOrder1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -150,7 +150,7 @@ export function deriveWorkOrder1(record) {
 export function createWorkOrder2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -218,7 +218,7 @@ export function deriveWorkOrder2(record) {
 export function createWorkOrder3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -286,7 +286,7 @@ export function deriveWorkOrder3(record) {
 export function createWorkOrder4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -354,7 +354,7 @@ export function deriveWorkOrder4(record) {
 export function createWorkOrder5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -422,7 +422,7 @@ export function deriveWorkOrder5(record) {
 export function createWorkOrder6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -490,7 +490,7 @@ export function deriveWorkOrder6(record) {
 export function createWorkOrder7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -558,7 +558,7 @@ export function deriveWorkOrder7(record) {
 export function createWorkOrder8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -626,7 +626,7 @@ export function deriveWorkOrder8(record) {
 export function createWorkOrder9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -694,7 +694,7 @@ export function deriveWorkOrder9(record) {
 export function createWorkOrder10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -762,7 +762,7 @@ export function deriveWorkOrder10(record) {
 export function createWorkOrder11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -830,7 +830,7 @@ export function deriveWorkOrder11(record) {
 export function createWorkOrder12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -898,7 +898,7 @@ export function deriveWorkOrder12(record) {
 export function createWorkOrder13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -966,7 +966,7 @@ export function deriveWorkOrder13(record) {
 export function createWorkOrder14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1034,7 +1034,7 @@ export function deriveWorkOrder14(record) {
 export function createWorkOrder15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1102,7 +1102,7 @@ export function deriveWorkOrder15(record) {
 export function createWorkOrder16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1170,7 +1170,7 @@ export function deriveWorkOrder16(record) {
 export function createWorkOrder17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1238,7 +1238,7 @@ export function deriveWorkOrder17(record) {
 export function createWorkOrder18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1306,7 +1306,7 @@ export function deriveWorkOrder18(record) {
 export function createWorkOrder19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1374,7 +1374,7 @@ export function deriveWorkOrder19(record) {
 export function createWorkOrder20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1442,7 +1442,7 @@ export function deriveWorkOrder20(record) {
 export function createWorkOrder21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1510,7 +1510,7 @@ export function deriveWorkOrder21(record) {
 export function createWorkOrder22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1578,7 +1578,7 @@ export function deriveWorkOrder22(record) {
 export function createWorkOrder23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1646,7 +1646,7 @@ export function deriveWorkOrder23(record) {
 export function createWorkOrder24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1714,7 +1714,7 @@ export function deriveWorkOrder24(record) {
 export function createWorkOrder25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1782,7 +1782,7 @@ export function deriveWorkOrder25(record) {
 export function createWorkOrder26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1850,7 +1850,7 @@ export function deriveWorkOrder26(record) {
 export function createWorkOrder27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `workorder_${Date.now().toString(36)}_${i}`,
+    id: input.id || `workorder_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `WorkOrder Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
