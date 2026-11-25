@@ -14,7 +14,7 @@ export const TAXCODE_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consuma
 export function createTaxCode0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -82,7 +82,7 @@ export function deriveTaxCode0(record) {
 export function createTaxCode1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -150,7 +150,7 @@ export function deriveTaxCode1(record) {
 export function createTaxCode2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -218,7 +218,7 @@ export function deriveTaxCode2(record) {
 export function createTaxCode3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -286,7 +286,7 @@ export function deriveTaxCode3(record) {
 export function createTaxCode4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -354,7 +354,7 @@ export function deriveTaxCode4(record) {
 export function createTaxCode5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -422,7 +422,7 @@ export function deriveTaxCode5(record) {
 export function createTaxCode6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -490,7 +490,7 @@ export function deriveTaxCode6(record) {
 export function createTaxCode7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -558,7 +558,7 @@ export function deriveTaxCode7(record) {
 export function createTaxCode8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -626,7 +626,7 @@ export function deriveTaxCode8(record) {
 export function createTaxCode9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -694,7 +694,7 @@ export function deriveTaxCode9(record) {
 export function createTaxCode10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -762,7 +762,7 @@ export function deriveTaxCode10(record) {
 export function createTaxCode11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -830,7 +830,7 @@ export function deriveTaxCode11(record) {
 export function createTaxCode12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -898,7 +898,7 @@ export function deriveTaxCode12(record) {
 export function createTaxCode13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -966,7 +966,7 @@ export function deriveTaxCode13(record) {
 export function createTaxCode14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1034,7 +1034,7 @@ export function deriveTaxCode14(record) {
 export function createTaxCode15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1102,7 +1102,7 @@ export function deriveTaxCode15(record) {
 export function createTaxCode16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1170,7 +1170,7 @@ export function deriveTaxCode16(record) {
 export function createTaxCode17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -1238,7 +1238,7 @@ export function deriveTaxCode17(record) {
 export function createTaxCode18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1306,7 +1306,7 @@ export function deriveTaxCode18(record) {
 export function createTaxCode19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1374,7 +1374,7 @@ export function deriveTaxCode19(record) {
 export function createTaxCode20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1442,7 +1442,7 @@ export function deriveTaxCode20(record) {
 export function createTaxCode21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1510,7 +1510,7 @@ export function deriveTaxCode21(record) {
 export function createTaxCode22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1578,7 +1578,7 @@ export function deriveTaxCode22(record) {
 export function createTaxCode23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1646,7 +1646,7 @@ export function deriveTaxCode23(record) {
 export function createTaxCode24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -1714,7 +1714,7 @@ export function deriveTaxCode24(record) {
 export function createTaxCode25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1782,7 +1782,7 @@ export function deriveTaxCode25(record) {
 export function createTaxCode26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1850,7 +1850,7 @@ export function deriveTaxCode26(record) {
 export function createTaxCode27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `taxcode_${Date.now().toString(36)}_${i}`,
+    id: input.id || `taxcode_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `TaxCode Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
