@@ -4,6 +4,7 @@ export const APP_VERSION = '1.0.0';
 export const WAREHOUSES = ["Main DC","East Hub","West Hub","Overflow","Returns Dock"];
 export const DEPARTMENTS = ["Operations","Finance","HR","Sales","Procurement","IT","Quality","Maintenance"];
 export const PO_STATUS_FLOW = { Draft: 'Submitted', Submitted: 'Approved', Approved: 'Received' };
+/** Default number of rows per paginated table view. */
 export const DEFAULT_PAGE_SIZE = 50;
 export const LOW_STOCK_DEFAULT = 15;
 export const POLICY_RULE_0 = { id: 0, code: 'PR0', threshold: 10, enabled: false };
