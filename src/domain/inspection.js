@@ -14,7 +14,7 @@ export const INSPECTION_CATEGORIES = ["Raw","Finished","Packaging","Spare","Cons
 export function createInspection0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -82,7 +82,7 @@ export function deriveInspection0(record) {
 export function createInspection1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -150,7 +150,7 @@ export function deriveInspection1(record) {
 export function createInspection2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -218,7 +218,7 @@ export function deriveInspection2(record) {
 export function createInspection3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -286,7 +286,7 @@ export function deriveInspection3(record) {
 export function createInspection4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -354,7 +354,7 @@ export function deriveInspection4(record) {
 export function createInspection5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -422,7 +422,7 @@ export function deriveInspection5(record) {
 export function createInspection6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -490,7 +490,7 @@ export function deriveInspection6(record) {
 export function createInspection7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -558,7 +558,7 @@ export function deriveInspection7(record) {
 export function createInspection8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -626,7 +626,7 @@ export function deriveInspection8(record) {
 export function createInspection9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -694,7 +694,7 @@ export function deriveInspection9(record) {
 export function createInspection10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -762,7 +762,7 @@ export function deriveInspection10(record) {
 export function createInspection11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -830,7 +830,7 @@ export function deriveInspection11(record) {
 export function createInspection12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -898,7 +898,7 @@ export function deriveInspection12(record) {
 export function createInspection13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -966,7 +966,7 @@ export function deriveInspection13(record) {
 export function createInspection14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1034,7 +1034,7 @@ export function deriveInspection14(record) {
 export function createInspection15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1102,7 +1102,7 @@ export function deriveInspection15(record) {
 export function createInspection16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1170,7 +1170,7 @@ export function deriveInspection16(record) {
 export function createInspection17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1238,7 +1238,7 @@ export function deriveInspection17(record) {
 export function createInspection18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1306,7 +1306,7 @@ export function deriveInspection18(record) {
 export function createInspection19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1374,7 +1374,7 @@ export function deriveInspection19(record) {
 export function createInspection20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1442,7 +1442,7 @@ export function deriveInspection20(record) {
 export function createInspection21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1510,7 +1510,7 @@ export function deriveInspection21(record) {
 export function createInspection22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1578,7 +1578,7 @@ export function deriveInspection22(record) {
 export function createInspection23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1646,7 +1646,7 @@ export function deriveInspection23(record) {
 export function createInspection24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1714,7 +1714,7 @@ export function deriveInspection24(record) {
 export function createInspection25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1782,7 +1782,7 @@ export function deriveInspection25(record) {
 export function createInspection26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1850,7 +1850,7 @@ export function deriveInspection26(record) {
 export function createInspection27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `inspection_${Date.now().toString(36)}_${i}`,
+    id: input.id || `inspection_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Inspection Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
