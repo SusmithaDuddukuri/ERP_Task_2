@@ -1,7 +1,9 @@
 /** Inventory stock movements and policy rules */
 
+/** Compute unreserved available inventory quantity for a stock row. */
 export function availableQty(row) {
-  return Math.max(0, (row.qty || 0) - (row.reserved || 0));
+  if (!row) return 0;
+  return Math.max(0, (Number(row.qty) || 0) - (Number(row.reserved) || 0));
 }
 
 export function adjustStock(rows, id, delta) {
