@@ -1,5 +1,7 @@
+/** Format a numeric amount as United States dollars. */
 export function formatMoney(n) {
-  try { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(Number(n) || 0); }
+  const amount = Number.isFinite(Number(n)) ? Number(n) : 0;
+  try { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount); }
   catch { return `$${(Number(n) || 0).toFixed(2)}`; }
 }
 export function formatDate(iso) {
