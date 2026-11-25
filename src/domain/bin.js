@@ -14,7 +14,7 @@ export const BIN_CATEGORIES = ["Raw","Finished","Packaging","Spare","Consumable"
 export function createBin0(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 0`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -82,7 +82,7 @@ export function deriveBin0(record) {
 export function createBin1(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 1`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -150,7 +150,7 @@ export function deriveBin1(record) {
 export function createBin2(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 2`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -218,7 +218,7 @@ export function deriveBin2(record) {
 export function createBin3(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 3`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -286,7 +286,7 @@ export function deriveBin3(record) {
 export function createBin4(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 4`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -354,7 +354,7 @@ export function deriveBin4(record) {
 export function createBin5(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 5`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -422,7 +422,7 @@ export function deriveBin5(record) {
 export function createBin6(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 6`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -490,7 +490,7 @@ export function deriveBin6(record) {
 export function createBin7(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 7`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -558,7 +558,7 @@ export function deriveBin7(record) {
 export function createBin8(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 8`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
@@ -626,7 +626,7 @@ export function deriveBin8(record) {
 export function createBin9(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 9`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -694,7 +694,7 @@ export function deriveBin9(record) {
 export function createBin10(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 10`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -762,7 +762,7 @@ export function deriveBin10(record) {
 export function createBin11(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 11`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -830,7 +830,7 @@ export function deriveBin11(record) {
 export function createBin12(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 12`,
     status: input.status || 'Draft',
     category: input.category || 'Spare',
@@ -898,7 +898,7 @@ export function deriveBin12(record) {
 export function createBin13(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 13`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -966,7 +966,7 @@ export function deriveBin13(record) {
 export function createBin14(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 14`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1034,7 +1034,7 @@ export function deriveBin14(record) {
 export function createBin15(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 15`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1102,7 +1102,7 @@ export function deriveBin15(record) {
 export function createBin16(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 16`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1170,7 +1170,7 @@ export function deriveBin16(record) {
 export function createBin17(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 17`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1238,7 +1238,7 @@ export function deriveBin17(record) {
 export function createBin18(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 18`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1306,7 +1306,7 @@ export function deriveBin18(record) {
 export function createBin19(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 19`,
     status: input.status || 'Draft',
     category: input.category || 'Consumable',
@@ -1374,7 +1374,7 @@ export function deriveBin19(record) {
 export function createBin20(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 20`,
     status: input.status || 'Draft',
     category: input.category || 'Electronic',
@@ -1442,7 +1442,7 @@ export function deriveBin20(record) {
 export function createBin21(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 21`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1510,7 +1510,7 @@ export function deriveBin21(record) {
 export function createBin22(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 22`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1578,7 +1578,7 @@ export function deriveBin22(record) {
 export function createBin23(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 23`,
     status: input.status || 'Draft',
     category: input.category || 'Mechanical',
@@ -1646,7 +1646,7 @@ export function deriveBin23(record) {
 export function createBin24(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 24`,
     status: input.status || 'Draft',
     category: input.category || 'Raw',
@@ -1714,7 +1714,7 @@ export function deriveBin24(record) {
 export function createBin25(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 25`,
     status: input.status || 'Draft',
     category: input.category || 'Tooling',
@@ -1782,7 +1782,7 @@ export function deriveBin25(record) {
 export function createBin26(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 26`,
     status: input.status || 'Draft',
     category: input.category || 'Packaging',
@@ -1850,7 +1850,7 @@ export function deriveBin26(record) {
 export function createBin27(input = {}) {
   const now = new Date().toISOString();
   return {
-    id: input.id || `bin_${Date.now().toString(36)}_${i}`,
+    id: input.id || `bin_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
     name: input.name || `Bin Item 27`,
     status: input.status || 'Draft',
     category: input.category || 'Finished',
