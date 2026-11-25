@@ -6,8 +6,14 @@ const KEYS = {
 };
 
 function safe(r, fb) { try { return r ? JSON.parse(r) : fb; } catch { return fb; } }
-function load(k) { return safe(localStorage.getItem(k), null); }
-function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+function load(k) {
+  if (typeof localStorage === 'undefined') return null;
+  return safe(localStorage.getItem(k), null);
+}
+function save(k, v) {
+  if (typeof localStorage === 'undefined') return;
+  try { localStorage.setItem(k, JSON.stringify(v)); } catch {}
+}
 
 export const loadInv = () => load(KEYS.INV);
 export const saveInv = (v) => save(KEYS.INV, v);
