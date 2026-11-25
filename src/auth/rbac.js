@@ -22,7 +22,9 @@ export function getRoleDef(roleId) {
   return ROLES.find((r) => r.id === roleId) || ROLES.find((r) => r.id === 'viewer');
 }
 
+/** Determine whether a role has access to the requested application module. */
 export function canAccessModule(roleId, moduleId) {
+  if (!moduleId) return false;
   const list = MODULE_ACCESS[roleId] || MODULE_ACCESS.viewer;
   return list.includes('*') || list.includes(moduleId);
 }
